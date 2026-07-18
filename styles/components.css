@@ -663,11 +663,15 @@
   background:
     linear-gradient(
       90deg,
-      color-mix(in srgb, var(--color-deep-charcoal) 92%, transparent) 0%,
-      color-mix(in srgb, var(--color-deep-charcoal) 50%, transparent) 48%,
-      transparent 82%
+      color-mix(in srgb, var(--color-deep-charcoal) 86%, transparent) 0%,
+      color-mix(in srgb, var(--color-deep-charcoal) 28%, transparent) 34%,
+      transparent 62%
     ),
-    linear-gradient(0deg, var(--color-deep-charcoal) 0%, transparent 34%);
+    linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--color-deep-charcoal) 78%, transparent) 0%,
+      transparent 28%
+    );
   content: "";
   pointer-events: none;
 }
@@ -686,7 +690,7 @@
 .hero__media .responsive-asset__image {
   object-fit: contain;
   object-position: right top;
-  opacity: 0.94;
+  opacity: 1;
 }
 
 .hero__copy {
@@ -1030,9 +1034,9 @@
       linear-gradient(
         90deg,
         var(--color-deep-charcoal) 0%,
-        color-mix(in srgb, var(--color-deep-charcoal) 92%, transparent) 34%,
-        color-mix(in srgb, var(--color-deep-charcoal) 36%, transparent) 68%,
-        transparent 100%
+        color-mix(in srgb, var(--color-deep-charcoal) 80%, transparent) 34%,
+        color-mix(in srgb, var(--color-deep-charcoal) 18%, transparent) 50%,
+        transparent 62%
       ),
       linear-gradient(
         0deg,
@@ -1063,7 +1067,7 @@
   .hero__media .responsive-asset__image {
     object-fit: contain;
     object-position: right center;
-    opacity: 0.94;
+    opacity: 1;
   }
 
   .story-block__media {
