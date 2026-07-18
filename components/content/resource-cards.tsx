@@ -20,11 +20,13 @@ export function ResourceCards({ items }: ResourceCardsProps) {
             <Heading level={3} variant="card">
               {item.title}
             </Heading>
-            <Text muted>{item.description}</Text>
-            <Link className="card__link" href={item.href}>
-              View resource
-              <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.75} />
-            </Link>
+            {item.description ? <Text muted>{item.description}</Text> : null}
+            {item.href && item.actionLabel ? (
+              <Link className="card__link" href={item.href}>
+                {item.actionLabel}
+                <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.75} />
+              </Link>
+            ) : null}
           </Card>
         </HoverLift>
       ))}

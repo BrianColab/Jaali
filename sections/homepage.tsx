@@ -22,7 +22,7 @@ type HomepageProps = Readonly<{
   content?: HomepageContent;
 }>;
 
-function FrameworkAction({ action }: Readonly<{ action: ContentAction }>) {
+function ContentActionLink({ action }: Readonly<{ action: ContentAction }>) {
   return (
     <ButtonLink href={action.href} variant="secondary">
       {action.label}
@@ -84,7 +84,7 @@ export function Homepage({
             <CtaBanner
               title={content.rights.cta.title}
               body={content.rights.cta.body}
-              actions={<FrameworkAction action={content.rights.cta.action} />}
+              actions={<ContentActionLink action={content.rights.cta.action} />}
             />
           </div>
         </SectionReveal>
@@ -116,7 +116,9 @@ export function Homepage({
           <CtaBanner
             title={content.shareStory.cta.title}
             body={content.shareStory.cta.body}
-            actions={<FrameworkAction action={content.shareStory.cta.action} />}
+            actions={
+              <ContentActionLink action={content.shareStory.cta.action} />
+            }
           />
         </SectionReveal>
       </Section>
@@ -131,7 +133,7 @@ export function Homepage({
               title={content.donate.banner.title}
               body={content.donate.banner.body}
               actions={
-                <FrameworkAction action={content.donate.banner.action} />
+                <ContentActionLink action={content.donate.banner.action} />
               }
             />
           </SectionReveal>

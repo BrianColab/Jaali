@@ -1,5 +1,6 @@
+import { rightsPageContent } from "@/data/pages";
 import { createPageMetadata } from "@/lib/seo";
-import { PlaceholderPage } from "@/sections/placeholder-page";
+import { ContentPage } from "@/sections/content-page";
 
 export const metadata = createPageMetadata(
   "Know Your Rights",
@@ -7,5 +8,5 @@ export const metadata = createPageMetadata(
 );
 
 export default function KnowYourRightsPage() {
-  return <PlaceholderPage title="Know Your Rights" />;
+  return <ContentPage content={rightsPageContent} />;
 }

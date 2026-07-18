@@ -9,6 +9,16 @@ const projectRoot = path.resolve(
   "..",
 );
 const outputRoot = path.join(projectRoot, "artifacts", "homepage-screenshots");
+const routeArgument = process.argv.find((argument) =>
+  argument.startsWith("--route="),
+);
+const nameArgument = process.argv.find((argument) =>
+  argument.startsWith("--name="),
+);
+const captureRoute = routeArgument?.slice("--route=".length) || "/";
+const captureName = (nameArgument?.slice("--name=".length) || "homepage")
+  .toLowerCase()
+  .replaceAll(/[^a-z0-9-]/g, "-");
 const edgePath =
   "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
 const debuggingPort = 9223;
@@ -135,7 +145,9 @@ async function capture(viewport) {
     await send("Emulation.setEmulatedMedia", {
       features: [{ name: "prefers-reduced-motion", value: "reduce" }],
     });
-    await send("Page.navigate", { url: "http://127.0.0.1:3210/" });
+    await send("Page.navigate", {
+      url: new URL(captureRoute, "http://127.0.0.1:3210").href,
+    });
     await send("Runtime.evaluate", {
       awaitPromise: true,
       expression: `new Promise((resolve) => {
@@ -181,7 +193,7 @@ async function capture(viewport) {
     });
 
     await writeFile(
-      path.join(outputRoot, `homepage-${viewport.name}.png`),
+      path.join(outputRoot, `${captureName}-${viewport.name}.png`),
       Buffer.from(screenshot.data, "base64"),
     );
   } finally {
@@ -209,7 +221,7 @@ try {
   await waitForEdge();
   for (const viewport of viewports) await capture(viewport);
   console.log(
-    `Captured ${viewports.length} homepage screenshots in ${outputRoot}.`,
+    `Captured ${viewports.length} ${captureName} screenshots in ${outputRoot}.`,
   );
 } finally {
   edge.kill();

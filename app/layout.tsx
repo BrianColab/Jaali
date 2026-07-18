@@ -14,6 +14,7 @@ const openGraphImages = getOpenGraphImages(metadataAssets.openGraph);
 
 export const metadata: Metadata = {
   applicationName: siteConfig.name,
+  description: siteConfig.description,
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
   },
   ...(faviconMetadata ? { icons: faviconMetadata } : {}),
   openGraph: {
+    description: siteConfig.description,
     title: siteConfig.name,
     siteName: siteConfig.name,
     type: "website",

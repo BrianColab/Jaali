@@ -1,5 +1,6 @@
+import { shareExperiencePageContent } from "@/data/pages";
 import { createPageMetadata } from "@/lib/seo";
-import { PlaceholderPage } from "@/sections/placeholder-page";
+import { ContentPage } from "@/sections/content-page";
 
 export const metadata = createPageMetadata(
   "Share Your Experience",
@@ -7,5 +8,5 @@ export const metadata = createPageMetadata(
 );
 
 export default function ShareYourExperiencePage() {
-  return <PlaceholderPage title="Share Your Experience" />;
+  return <ContentPage content={shareExperiencePageContent} />;
 }

@@ -12,6 +12,8 @@ function getSiteUrl(): URL {
 }
 
 export const siteConfig = {
+  description:
+    "This site exists in Jaali’s memory—and because what happened to her must never happen again.",
   name: "Justice for Jaali",
   url: getSiteUrl(),
   themeColor: "#F7F5F2",

@@ -1,5 +1,6 @@
+import { maternalHealthPageContent } from "@/data/pages";
 import { createPageMetadata } from "@/lib/seo";
-import { PlaceholderPage } from "@/sections/placeholder-page";
+import { ContentPage } from "@/sections/content-page";
 
 export const metadata = createPageMetadata(
   "Maternal Health",
@@ -7,5 +8,5 @@ export const metadata = createPageMetadata(
 );
 
 export default function MaternalHealthPage() {
-  return <PlaceholderPage title="Maternal Health" />;
+  return <ContentPage content={maternalHealthPageContent} />;
 }

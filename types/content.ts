@@ -8,7 +8,7 @@ export type TimelineItem = Readonly<{
 }>;
 
 export type FeatureCardItem = Readonly<{
-  description: string;
+  description?: string;
   icon?: LucideIcon;
   id: string;
   title: string;
@@ -21,9 +21,10 @@ export type AccordionItem = Readonly<{
 }>;
 
 export type ResourceCardItem = Readonly<{
+  actionLabel?: string;
   category?: string;
-  description: string;
-  href: string;
+  description?: string;
+  href?: string;
   id: string;
   title: string;
 }>;

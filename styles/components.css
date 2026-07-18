@@ -214,7 +214,7 @@
 }
 
 .site-footer__identity,
-.site-footer__newsletter,
+.site-footer__commitment,
 .site-footer__navigation {
   grid-column: 1 / -1;
 }
@@ -234,13 +234,22 @@
 }
 
 .site-footer__navigation,
-.site-footer__newsletter {
+.site-footer__commitment {
   margin-top: var(--space-7);
 }
 
 .site-footer__nav-list {
   align-items: flex-start;
   flex-direction: column;
+}
+
+.site-footer__commitment-heading {
+  max-width: 24ch;
+  margin: 0 0 var(--space-5);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.08;
 }
 
 .site-footer__legal {
@@ -1139,7 +1148,7 @@
     margin-top: 0;
   }
 
-  .site-footer__newsletter {
+  .site-footer__commitment {
     grid-column: 9 / -1;
     margin-top: 0;
   }
@@ -1210,6 +1219,170 @@
 
   .section-media-layout--media-end .section-media-layout__content {
     grid-column: 1 / span 6;
+  }
+}
+
+.content-page__hero {
+  padding-block: clamp(6rem, 11vw, 10rem);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--color-copper) 36%, transparent);
+  background:
+    radial-gradient(
+      circle at 82% 30%,
+      color-mix(in srgb, var(--color-copper) 22%, transparent),
+      transparent 36%
+    ),
+    var(--color-deep-charcoal);
+  color: var(--color-soft-white);
+}
+
+.content-page__hero .eyebrow {
+  color: var(--color-copper);
+}
+
+.content-page__hero .heading {
+  max-width: 18ch;
+}
+
+.content-page__intro {
+  max-width: 62ch;
+  margin-top: var(--space-6);
+  color: color-mix(in srgb, var(--color-soft-white) 82%, transparent);
+}
+
+.content-page__emergency {
+  max-width: 68rem;
+  padding: var(--space-5);
+  border-left: 0.25rem solid var(--color-copper);
+  margin: var(--space-7) 0 0;
+  background: color-mix(in srgb, var(--color-soft-white) 7%, transparent);
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.content-page__section {
+  padding-block: var(--space-section);
+  background: var(--color-soft-white);
+}
+
+.content-page__section:nth-child(even) {
+  background: var(--color-warm-ivory);
+}
+
+.content-page__section-grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.content-page__index {
+  padding-top: 0.4rem;
+  margin: 0;
+  color: var(--color-copper);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.content-page__section-content {
+  max-width: var(--container-reading);
+}
+
+.content-page__section-content .heading {
+  margin-bottom: var(--space-6);
+}
+
+.content-page__section-content .text + .text {
+  margin-top: var(--space-5);
+}
+
+.content-page__list {
+  display: grid;
+  gap: 0;
+  padding: 0;
+  margin: var(--space-6) 0 0;
+  list-style: none;
+}
+
+.content-page__list li {
+  position: relative;
+  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-6);
+  border-top: 1px solid var(--border-subtle);
+  line-height: 1.6;
+}
+
+.content-page__list li::before {
+  position: absolute;
+  top: 1.55rem;
+  left: 0.25rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  background: var(--color-copper);
+  content: "";
+}
+
+.donation-page__body {
+  padding-block: var(--space-section);
+  background: var(--color-warm-ivory);
+}
+
+.donation-page__grid {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.donation-page__copy {
+  max-width: var(--container-reading);
+}
+
+.donation-page__copy .heading {
+  margin-bottom: var(--space-6);
+}
+
+.donation-page__copy .text + .text {
+  margin-top: var(--space-5);
+}
+
+.donation-form {
+  display: grid;
+  align-content: start;
+  gap: var(--space-5);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border-top: 0.25rem solid var(--color-copper);
+  background: var(--color-deep-charcoal);
+  color: var(--color-soft-white);
+}
+
+.donation-form .heading {
+  margin-bottom: var(--space-2);
+}
+
+.donation-form .button {
+  justify-self: start;
+  border-color: var(--color-copper);
+  border-radius: var(--radius-none);
+  background: var(--color-copper);
+  color: var(--color-deep-charcoal);
+}
+
+.donation-form .button:hover {
+  border-color: var(--color-soft-white);
+  background: var(--color-soft-white);
+}
+
+@media (min-width: 48rem) {
+  .content-page__section-grid {
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: var(--space-7);
+  }
+
+  .content-page__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-6);
+  }
+
+  .donation-page__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.8fr);
+    align-items: start;
   }
 }
 

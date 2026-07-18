@@ -1,12 +1,10 @@
 import Link from "next/link";
 
-import { Newsletter } from "@/components/content/newsletter";
 import { Container } from "@/components/ui/container";
 import { siteRoutes } from "@/data/site-routes";
 import { siteConfig } from "@/lib/site-config";
 
 export function SiteFooter() {
-  // TODO(assets): Keep the approved media-free footer until missingSectionAssets.footer is resolved.
   return (
     <footer className="site-footer">
       <Container>
@@ -14,7 +12,8 @@ export function SiteFooter() {
           <div className="site-footer__identity">
             <p className="site-footer__brand">{siteConfig.name}</p>
             <p className="site-footer__status">
-              Approved footer statement pending.
+              We will speak her name. We will listen when Indigenous patients
+              say something is wrong.
             </p>
           </div>
 
@@ -33,16 +32,24 @@ export function SiteFooter() {
             </ul>
           </nav>
 
-          <div className="site-footer__newsletter">
-            <Newsletter
-              heading="Newsletter"
-              description="Approved newsletter description and provider integration pending."
-            />
+          <div className="site-footer__commitment">
+            <p className="site-footer__commitment-heading">
+              For Jaali. For Her Daughter. For Every Mother Still Fighting to Be
+              Heard.
+            </p>
+            <p className="site-footer__status">
+              We will work so that no mother is left waiting, unheard and
+              unprotected.
+            </p>
           </div>
         </div>
 
         <div className="site-footer__legal">
-          <p>Approved legal, privacy, and emergency notices pending review.</p>
+          <p>
+            This website is not an emergency or clinical service. If you or your
+            baby may be in immediate danger, call 911 or seek emergency medical
+            care now.
+          </p>
         </div>
       </Container>
     </footer>

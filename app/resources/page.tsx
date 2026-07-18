@@ -1,8 +1,9 @@
+import { resourcesPageContent } from "@/data/pages";
 import { createPageMetadata } from "@/lib/seo";
-import { PlaceholderPage } from "@/sections/placeholder-page";
+import { ContentPage } from "@/sections/content-page";
 
 export const metadata = createPageMetadata("Resources", "/resources");
 
 export default function ResourcesPage() {
-  return <PlaceholderPage title="Resources" />;
+  return <ContentPage content={resourcesPageContent} />;
 }

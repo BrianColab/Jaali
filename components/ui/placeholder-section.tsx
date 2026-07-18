@@ -11,7 +11,10 @@ export function PlaceholderSection({ title }: PlaceholderSectionProps) {
         <h1 id="page-title" className="placeholder-section__title">
           {title}
         </h1>
-        <p className="placeholder-section__status">Content pending approval.</p>
+        <p className="placeholder-section__status">
+          This site exists in Jaali’s memory—and because what happened to her
+          must never happen again.
+        </p>
       </Container>
     </section>
   );

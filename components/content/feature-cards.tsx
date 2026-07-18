@@ -27,7 +27,7 @@ export function FeatureCards({
             <Heading level={3} variant="card">
               {title}
             </Heading>
-            <Text muted>{description}</Text>
+            {description ? <Text muted>{description}</Text> : null}
           </Card>
         </HoverLift>
       ))}
