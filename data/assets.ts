@@ -22,17 +22,17 @@ const jaaliUpdatedBannerSources = {
   desktop: {
     src: "/assets/images/hero/jaali-update-banner-desktop.webp",
     width: 1440,
-    height: 960,
+    height: 958,
   },
   tablet: {
     src: "/assets/images/hero/jaali-update-banner-tablet.webp",
     width: 1200,
-    height: 900,
+    height: 799,
   },
   mobile: {
     src: "/assets/images/hero/jaali-update-banner-mobile.webp",
     width: 720,
-    height: 900,
+    height: 479,
   },
 } as const;
 
@@ -61,7 +61,7 @@ export const assetManifest = {
       // TODO(content): Confirm final alternative text with the family/editorial team.
       alt: "Jaali smiling at the camera in warm sunset light.",
       decorative: false,
-      fallbackAspectRatio: "3/2",
+      fallbackAspectRatio: "1537/1023",
       fallbackLabel: "Portrait of Jaali at sunset",
       quality: 88,
       sizes: "(min-width: 1200px) 60vw, (min-width: 768px) 58vw, 100vw",

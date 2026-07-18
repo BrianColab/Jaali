@@ -25,13 +25,23 @@ export function SiteHeader() {
       </div>
       <Container className="site-header__inner">
         <Link className="site-header__brand" href="/">
-          <Image
-            className="site-header__logo"
-            src={brandAssets.officialLogo}
-            alt={siteConfig.name}
-            quality={92}
-            sizes="(min-width: 1200px) 11rem, 8.5rem"
-          />
+          <span className="site-header__logo-lockup">
+            <Image
+              className="site-header__logo site-header__logo--base"
+              src={brandAssets.officialLogo}
+              alt={siteConfig.name}
+              quality={92}
+              sizes="(min-width: 1200px) 11rem, 8.5rem"
+            />
+            <Image
+              className="site-header__logo site-header__logo--white-wordmark"
+              src={brandAssets.officialLogo}
+              alt=""
+              aria-hidden="true"
+              quality={92}
+              sizes="(min-width: 1200px) 11rem, 8.5rem"
+            />
+          </span>
         </Link>
 
         <nav
