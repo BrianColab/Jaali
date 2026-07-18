@@ -26,6 +26,7 @@ pnpm-debug.log*
 Thumbs.db
 *.tsbuildinfo
 next-env.d.ts
+~$*.docx
 
 # deployment
 .vercel
