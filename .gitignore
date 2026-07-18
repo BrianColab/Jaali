@@ -1,0 +1,38 @@
+# dependencies
+/node_modules
+
+# Next.js
+/.next
+/out
+
+# production
+/build
+
+# local environment files
+.env*
+!.env.example
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# testing and coverage
+/coverage
+
+# system and editor files
+.DS_Store
+Thumbs.db
+*.tsbuildinfo
+next-env.d.ts
+
+# deployment
+.vercel
+
+# local review output and source-package backups
+/artifacts/
+/justice-for-jaali-phase-1/
+/justice-for-jaali-phase-1.zip
+/justice-for-jaali-phase-3-assets.zip
+/JAALIUPDATEBANNER PIC.png

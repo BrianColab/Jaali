@@ -1,0 +1,42 @@
+{
+  "name": "justice-for-jaali",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "assets:build": "node scripts/process-approved-assets.mjs",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run build"
+  },
+  "dependencies": {
+    "framer-motion": "12.42.2",
+    "lucide-react": "1.25.0",
+    "next": "16.2.10",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.2.10",
+    "prettier": "3.9.5",
+    "prettier-plugin-tailwindcss": "0.8.1",
+    "sharp": "0.34.5",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3"
+  },
+  "overrides": {
+    "postcss": "8.5.19"
+  }
+}

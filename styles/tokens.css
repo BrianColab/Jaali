@@ -1,0 +1,97 @@
+@theme {
+  --color-deep-charcoal: #171717;
+  --color-warm-ivory: #f7f5f2;
+  --color-soft-white: #fcfbf9;
+  --color-cedar-brown: #8b5e3c;
+  --color-copper: #b87333;
+  --color-sage: #6b7b5c;
+  --color-forest-green: #43523d;
+
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), Georgia, serif;
+
+  --breakpoint-md: 48rem;
+  --breakpoint-xl: 75rem;
+
+  --container-site: 90rem;
+  --container-content: 72rem;
+  --container-reading: 48rem;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  --page-gutter: 1rem;
+  --focus-ring-color: var(--color-copper);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --space-section: clamp(6.5rem, 10vw, 10rem);
+  --space-section-header: clamp(4rem, 7vw, 6.5rem);
+  --space-component: clamp(1.5rem, 3vw, 3rem);
+
+  --radius-none: 0;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-pill: 999rem;
+
+  --elevation-hairline: 0 1px 0 rgb(23 23 23 / 10%);
+  --elevation-raised: 0 1rem 3rem rgb(23 23 23 / 8%);
+
+  --duration-fast: 160ms;
+  --duration-base: 280ms;
+  --duration-slow: 600ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --container-site: 90rem;
+  --container-content: 72rem;
+  --container-reading: 48rem;
+  --measure-body: 68ch;
+  --header-height: 4.75rem;
+  --notice-height: 2.125rem;
+
+  --border-subtle: color-mix(
+    in srgb,
+    var(--color-deep-charcoal) 14%,
+    transparent
+  );
+  --border-inverse: color-mix(
+    in srgb,
+    var(--color-soft-white) 24%,
+    transparent
+  );
+  --surface-muted: color-mix(
+    in srgb,
+    var(--color-warm-ivory) 78%,
+    var(--color-sage)
+  );
+  --color-critical: var(--color-cedar-brown);
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --page-gutter: 2rem;
+    --header-height: 5rem;
+  }
+}
+
+@media (min-width: 75rem) {
+  :root {
+    --page-gutter: 3rem;
+    --header-height: 5.25rem;
+  }
+}
