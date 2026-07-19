@@ -8,7 +8,21 @@ import { DonationForm } from "@/components/donation/donation-form";
 import { Eyebrow, Heading, Text } from "@/components/ui/typography";
 import { donatePageContent } from "@/data/pages";
 
-const closeDuration = 600;
+const closeDurationFallback = 280;
+
+// Read the close animation duration from CSS so the unmount timer stays in
+// sync with `--drawer-close-duration` no matter how the token is tuned.
+function readCloseDuration(panel: HTMLElement | null) {
+  if (!panel) return closeDurationFallback;
+  const raw = getComputedStyle(panel)
+    .getPropertyValue("--drawer-close-duration")
+    .trim();
+  if (raw.endsWith("ms")) return Number.parseFloat(raw) || closeDurationFallback;
+  if (raw.endsWith("s")) {
+    return Number.parseFloat(raw) * 1000 || closeDurationFallback;
+  }
+  return closeDurationFallback;
+}
 
 export function DonationDrawer() {
   const [mounted, setMounted] = useState(false);
@@ -58,7 +72,7 @@ export function DonationDrawer() {
         setMounted(false);
         returnFocusRef.current?.focus();
       },
-      reduceMotion ? 0 : closeDuration,
+      reduceMotion ? 0 : readCloseDuration(drawerRef.current),
     );
   }, []);
 

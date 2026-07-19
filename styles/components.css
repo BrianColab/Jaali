@@ -1740,6 +1740,9 @@
   display: grid;
   justify-items: end;
   overflow: hidden;
+
+  /* Close is quicker than open — read by the drawer to time its unmount. */
+  --drawer-close-duration: var(--duration-base);
 }
 
 .donation-drawer__backdrop {
@@ -1753,7 +1756,7 @@
   cursor: pointer;
   opacity: 0;
   backdrop-filter: blur(0.25rem);
-  transition: opacity var(--duration-slow) var(--ease-editorial);
+  transition: opacity var(--drawer-close-duration) var(--ease-editorial);
 }
 
 .donation-drawer__panel {
@@ -1767,16 +1770,19 @@
   box-shadow: -1.5rem 0 5rem rgb(0 0 0 / 22%);
   color: var(--color-deep-charcoal);
   transform: translate3d(100%, 0, 0);
-  transition: transform var(--duration-slow) var(--ease-editorial);
+  transition: transform var(--drawer-close-duration) var(--ease-editorial);
   overscroll-behavior: contain;
 }
 
 .donation-drawer[data-open="true"] .donation-drawer__backdrop {
   opacity: 1;
+  /* Dim settles before the panel arrives, so it slides in over the backdrop. */
+  transition-duration: var(--duration-base);
 }
 
 .donation-drawer[data-open="true"] .donation-drawer__panel {
   transform: translate3d(0, 0, 0);
+  transition-duration: var(--duration-slow);
 }
 
 .donation-drawer__header {
