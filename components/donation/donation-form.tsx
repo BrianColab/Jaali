@@ -32,7 +32,7 @@ export function DonationForm({
         min="1"
         name="support"
         prefix="$"
-        step="0.01"
+        step="1"
         type="number"
       />
       <SelectField
