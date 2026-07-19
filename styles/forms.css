@@ -24,6 +24,26 @@
   color: color-mix(in srgb, var(--color-deep-charcoal) 48%, transparent);
 }
 
+.form-control-affix {
+  position: relative;
+}
+
+.form-control-affix__prefix {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 1rem;
+  color: color-mix(in srgb, var(--color-deep-charcoal) 72%, transparent);
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.form-control-affix .form-control {
+  padding-left: 2.25rem;
+}
+
 .form-control[aria-invalid="true"] {
   border-color: var(--color-critical);
 }

@@ -26,9 +26,13 @@ export function DonationForm({
       </Heading>
       <TextField
         id={`${idPrefix}-support`}
+        aria-label="Your support in Canadian dollars"
+        inputMode="decimal"
         label="Your support"
         min="1"
         name="support"
+        prefix="$"
+        step="0.01"
         type="number"
       />
       <SelectField

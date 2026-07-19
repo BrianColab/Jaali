@@ -38,6 +38,7 @@ type TextFieldProps = Readonly<{
   hint?: string;
   id: string;
   label: string;
+  prefix?: string;
 }> &
   Omit<
     ComponentPropsWithoutRef<"input">,
@@ -49,24 +50,37 @@ export function TextField({
   hint,
   id,
   label,
+  prefix,
   type = "text",
   ...props
 }: TextFieldProps) {
   const describedBy = getDescribedBy({ error, hint, id });
+  const input = (
+    <input
+      id={id}
+      type={type}
+      className="form-control"
+      aria-describedby={describedBy || undefined}
+      aria-invalid={error ? true : undefined}
+      {...props}
+    />
+  );
 
   return (
     <div className="form-field">
       <label className="form-label" htmlFor={id}>
         {label}
       </label>
-      <input
-        id={id}
-        type={type}
-        className="form-control"
-        aria-describedby={describedBy || undefined}
-        aria-invalid={error ? true : undefined}
-        {...props}
-      />
+      {prefix ? (
+        <div className="form-control-affix">
+          <span className="form-control-affix__prefix" aria-hidden="true">
+            {prefix}
+          </span>
+          {input}
+        </div>
+      ) : (
+        input
+      )}
       <FieldMessages id={id} hint={hint} error={error} />
     </div>
   );
