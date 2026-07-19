@@ -13,9 +13,12 @@ type ResourceCardsProps = Readonly<{
 export function ResourceCards({ items }: ResourceCardsProps) {
   return (
     <CardGrid className="resource-cards" columns={3}>
-      {items.map((item) => (
+      {items.map((item, index) => (
         <HoverLift key={item.id}>
           <Card className="resource-card">
+            <span className="resource-card__number" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")}
+            </span>
             {item.category ? <Eyebrow>{item.category}</Eyebrow> : null}
             <Heading level={3} variant="card">
               {item.title}

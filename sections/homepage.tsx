@@ -124,13 +124,15 @@ export function Homepage({
         </SectionReveal>
       </Section>
 
-      <Section {...content.resources.header}>
-        <ImageReveal className="section-supporting-media">
-          <ResponsiveAsset asset={assets.resources} />
-        </ImageReveal>
-        <SectionReveal delay={0.08}>
-          <ResourceCards items={content.resources.items} />
-        </SectionReveal>
+      <Section {...content.resources.header} className="section--resources">
+        <div className="resources-layout editorial-grid">
+          <ImageReveal className="resources-layout__media">
+            <ResponsiveAsset asset={assets.resources} />
+          </ImageReveal>
+          <SectionReveal className="resources-layout__cards" delay={0.08}>
+            <ResourceCards items={content.resources.items} />
+          </SectionReveal>
+        </div>
       </Section>
 
       <Section {...content.shareStory.header}>
