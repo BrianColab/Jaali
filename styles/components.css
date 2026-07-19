@@ -1607,7 +1607,7 @@
 .content-page__hero {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(1.8rem, 3.3vw, 3rem);
+  padding-block: clamp(2.35rem, 3.8vw, 3.5rem) clamp(1.8rem, 3.3vw, 3rem);
   border-bottom: 1px solid
     color-mix(in srgb, var(--color-copper) 36%, transparent);
   background:
@@ -1678,6 +1678,7 @@
 
 .content-page__hero .heading {
   max-width: 18ch;
+  padding-top: 0.08em;
 }
 
 .content-page__intro {
