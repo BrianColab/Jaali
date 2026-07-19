@@ -17,15 +17,37 @@ export function DonationDrawer() {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const openFrameRef = useRef<number | null>(null);
 
   const openDrawer = useCallback(() => {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    if (openFrameRef.current !== null) {
+      window.cancelAnimationFrame(openFrameRef.current);
+    }
     returnFocusRef.current = document.activeElement as HTMLElement | null;
     setMounted(true);
-    window.requestAnimationFrame(() => setOpen(true));
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduceMotion) {
+      setOpen(true);
+      return;
+    }
+
+    openFrameRef.current = window.requestAnimationFrame(() => {
+      openFrameRef.current = window.requestAnimationFrame(() => {
+        openFrameRef.current = null;
+        setOpen(true);
+      });
+    });
   }, []);
 
   const closeDrawer = useCallback(() => {
+    if (openFrameRef.current !== null) {
+      window.cancelAnimationFrame(openFrameRef.current);
+      openFrameRef.current = null;
+    }
     setOpen(false);
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
@@ -75,6 +97,9 @@ export function DonationDrawer() {
         window.cancelAnimationFrame(initialOpenFrame);
       }
       if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+      if (openFrameRef.current !== null) {
+        window.cancelAnimationFrame(openFrameRef.current);
+      }
     };
   }, [openDrawer]);
 
