@@ -31,7 +31,8 @@ export function HeaderMotifs({ seed }: HeaderMotifsProps) {
   const h = hash(seed);
   const order = seedOrder.indexOf(seed);
   const src = motifs[(order >= 0 ? order : h) % motifs.length];
-  const angle = ((h >> 3) % 2 === 0 ? 1 : -1) * (7 + ((h >> 5) % 9));
+  // Always a clear tilt — never straight: ±(10°–22°).
+  const angle = ((h >> 3) % 2 === 0 ? 1 : -1) * (10 + ((h >> 5) % 13));
 
   return (
     <span className="header-motifs" aria-hidden="true">
