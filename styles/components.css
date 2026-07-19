@@ -1832,7 +1832,8 @@
 
 .donation-drawer__body {
   min-height: calc(100% - 6.5rem);
-  padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 5vw, 3rem) var(--space-7);
+  padding: clamp(1.5rem, 3.5vw, 2.25rem) clamp(1.25rem, 5vw, 3rem)
+    var(--space-7);
   background:
     radial-gradient(
       circle at 100% 0,
@@ -1843,13 +1844,13 @@
 }
 
 .donation-drawer__introduction {
-  padding-bottom: clamp(2rem, 5vw, 3rem);
+  padding-bottom: clamp(1.5rem, 3vw, 2rem);
 }
 
 .donation-drawer__introduction .heading {
-  max-width: 12ch;
-  margin-bottom: var(--space-5);
-  font-size: clamp(2.5rem, 7vw, 4.75rem);
+  max-width: 16ch;
+  margin-bottom: var(--space-4);
+  font-size: clamp(1.85rem, 4.5vw, 3rem);
 }
 
 .donation-drawer__introduction .text {
