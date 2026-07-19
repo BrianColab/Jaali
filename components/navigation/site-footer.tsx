@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/ui/container";
 import { siteRoutes } from "@/data/site-routes";
 import { siteConfig } from "@/lib/site-config";
@@ -10,7 +11,16 @@ export function SiteFooter() {
       <Container>
         <div className="site-footer__grid editorial-grid">
           <div className="site-footer__identity">
-            <p className="site-footer__brand">{siteConfig.name}</p>
+            <Link
+              className="site-footer__brand"
+              href="/"
+              aria-label={siteConfig.name}
+            >
+              <BrandLogo
+                className="site-footer__logo-lockup"
+                sizes="(min-width: 48rem) 10rem, 8.5rem"
+              />
+            </Link>
             <p className="site-footer__status">
               We will speak her name. We will listen when Indigenous patients
               say something is wrong.

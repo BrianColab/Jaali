@@ -223,12 +223,13 @@
 }
 
 .site-footer__brand {
-  max-width: 12ch;
+  display: block;
+  width: fit-content;
   margin-bottom: var(--space-5);
-  font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(2.25rem, 5vw, 4.5rem);
-  font-weight: 500;
-  line-height: 0.95;
+}
+
+.site-footer__logo-lockup {
+  width: clamp(8.4rem, 9.6vw, 10.2rem);
 }
 
 .site-footer__status {
