@@ -62,7 +62,11 @@ export function Homepage({
         </SectionReveal>
       </Section>
 
-      <Section {...content.timeline.header} chapter="02">
+      <Section
+        {...content.timeline.header}
+        chapter="02"
+        className="section--timeline-feature"
+      >
         <div className="section-media-layout editorial-grid">
           <ImageReveal className="section-media-layout__media">
             <ResponsiveAsset asset={assets.timeline} />
