@@ -29,7 +29,7 @@ export const storyPageContent = {
     {
       id: "for-jaali",
       title:
-        "For Jaali. For Her Daughter. For Every Mother Still Fighting to Be Heard.",
+        "For Jaali.\nFor Her Daughter.\nFor Every Mother Still Fighting to Be Heard.",
       paragraphs: [
         "Jaali’s life was more than the circumstances of her death.",
         "We remember the young woman who loved her family, completed her education, prepared for motherhood and offered others a listening ear. We honour the future she was building and the daughter who will grow up knowing how deeply her mother was loved.",

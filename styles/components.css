@@ -1775,6 +1775,8 @@
 
 .content-page__section-content .heading {
   margin-bottom: var(--space-6);
+  /* Honour hard line breaks authored in the title, still wraps normally. */
+  white-space: pre-line;
 }
 
 .content-page__section-content .text + .text {
