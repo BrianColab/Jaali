@@ -112,7 +112,10 @@ export function Homepage({
         </SectionReveal>
       </Section>
 
-      <Section {...content.warningSigns.header}>
+      <Section
+        {...content.warningSigns.header}
+        className="section--warning-signs"
+      >
         <SectionReveal>
           <WarningSigns items={content.warningSigns.items} />
         </SectionReveal>
