@@ -62,24 +62,27 @@
   text-decoration: none;
 }
 
-.site-header__logo-lockup {
+.brand-logo {
   position: relative;
   display: block;
-  width: clamp(7rem, 8vw, 8.5rem);
   aspect-ratio: 711 / 358;
 }
 
-.site-header__logo {
+.brand-logo__image {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.site-header__logo--white-wordmark {
+.brand-logo__image--white-wordmark {
   position: absolute;
   inset: 0;
   clip-path: inset(0 0 0 31.5%);
   filter: brightness(0) invert(1);
+}
+
+.site-header__logo-lockup {
+  width: clamp(7rem, 8vw, 8.5rem);
 }
 
 .site-header__desktop-nav {
@@ -1404,6 +1407,143 @@
   background: var(--color-soft-white);
 }
 
+[data-scroll-text] {
+  opacity: 0;
+  transform: translate3d(0, 0.875rem, 0);
+  transition:
+    opacity var(--duration-slow) var(--ease-editorial)
+      var(--text-reveal-delay, 0ms),
+    transform var(--duration-slow) var(--ease-editorial)
+      var(--text-reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-scroll-text][data-scroll-text-visible] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
+}
+
+.donation-drawer {
+  position: fixed;
+  z-index: 300;
+  inset: 0;
+  display: grid;
+  justify-items: end;
+  overflow: hidden;
+}
+
+.donation-drawer__backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: rgb(10 10 10 / 68%);
+  cursor: pointer;
+  opacity: 0;
+  backdrop-filter: blur(0.25rem);
+  transition: opacity var(--duration-slow) var(--ease-editorial);
+}
+
+.donation-drawer__panel {
+  position: relative;
+  width: min(100%, 38rem);
+  height: 100%;
+  overflow-y: auto;
+  border-left: 1px solid
+    color-mix(in srgb, var(--color-copper) 55%, transparent);
+  background: var(--color-warm-ivory);
+  box-shadow: -1.5rem 0 5rem rgb(0 0 0 / 22%);
+  color: var(--color-deep-charcoal);
+  transform: translate3d(100%, 0, 0);
+  transition: transform var(--duration-slow) var(--ease-editorial);
+  overscroll-behavior: contain;
+}
+
+.donation-drawer[data-open="true"] .donation-drawer__backdrop {
+  opacity: 1;
+}
+
+.donation-drawer[data-open="true"] .donation-drawer__panel {
+  transform: translate3d(0, 0, 0);
+}
+
+.donation-drawer__header {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  display: flex;
+  min-height: 6.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: var(--space-4) clamp(1.25rem, 4vw, 2.5rem);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--color-copper) 38%, transparent);
+  background:
+    linear-gradient(100deg, rgb(184 115 51 / 12%), transparent 52%),
+    var(--color-deep-charcoal);
+}
+
+.donation-drawer__logo {
+  width: clamp(8.25rem, 24vw, 10rem);
+}
+
+.donation-drawer__close {
+  display: inline-grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 auto;
+  cursor: pointer;
+  place-items: center;
+  border: 1px solid var(--border-inverse);
+  border-radius: var(--radius-none);
+  background: transparent;
+  color: var(--color-soft-white);
+  transition:
+    border-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard);
+}
+
+.donation-drawer__close:hover {
+  border-color: var(--color-copper);
+  background: var(--color-copper);
+  color: var(--color-deep-charcoal);
+}
+
+.donation-drawer__body {
+  min-height: calc(100% - 6.5rem);
+  padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 5vw, 3rem) var(--space-7);
+  background:
+    radial-gradient(
+      circle at 100% 0,
+      color-mix(in srgb, var(--color-copper) 10%, transparent),
+      transparent 34%
+    ),
+    var(--color-warm-ivory);
+}
+
+.donation-drawer__introduction {
+  padding-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.donation-drawer__introduction .heading {
+  max-width: 12ch;
+  margin-bottom: var(--space-5);
+  font-size: clamp(2.5rem, 7vw, 4.75rem);
+}
+
+.donation-drawer__introduction .text {
+  max-width: 42ch;
+}
+
+.donation-form--drawer {
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+}
+
 @media (min-width: 48rem) {
   .content-page__section-grid {
     grid-template-columns: 4rem minmax(0, 1fr);
@@ -1423,7 +1563,15 @@
 
 @media (prefers-reduced-motion: reduce) {
   .button,
-  .accordion__icon {
+  .accordion__icon,
+  .donation-drawer__backdrop,
+  .donation-drawer__panel,
+  [data-scroll-text] {
     transition: none;
+  }
+
+  [data-scroll-text] {
+    opacity: 1;
+    transform: none;
   }
 }

@@ -16,6 +16,7 @@ const nameArgument = process.argv.find((argument) =>
   argument.startsWith("--name="),
 );
 const captureRoute = routeArgument?.slice("--route=".length) || "/";
+const viewportOnly = process.argv.includes("--viewport-only");
 const captureName = (nameArgument?.slice("--name=".length) || "homepage")
   .toLowerCase()
   .replaceAll(/[^a-z0-9-]/g, "-");
@@ -179,12 +180,18 @@ async function capture(viewport) {
     });
 
     const { contentSize } = await send("Page.getLayoutMetrics");
+    const captureWidth = viewportOnly
+      ? viewport.width
+      : Math.ceil(contentSize.width);
+    const captureHeight = viewportOnly
+      ? viewport.height
+      : Math.ceil(contentSize.height);
     const screenshot = await send("Page.captureScreenshot", {
-      captureBeyondViewport: true,
+      captureBeyondViewport: !viewportOnly,
       clip: {
-        height: Math.ceil(contentSize.height),
+        height: captureHeight,
         scale: 1,
-        width: Math.ceil(contentSize.width),
+        width: captureWidth,
         x: 0,
         y: 0,
       },

@@ -1,9 +1,4 @@
-import {
-  CheckboxField,
-  SelectField,
-  TextField,
-} from "@/components/forms/form-controls";
-import { Button } from "@/components/ui/button";
+import { DonationForm } from "@/components/donation/donation-form";
 import { Container } from "@/components/ui/container";
 import { Eyebrow, Heading, Text } from "@/components/ui/typography";
 import { donatePageContent } from "@/data/pages";
@@ -35,34 +30,7 @@ export function DonationPage() {
             ))}
           </div>
 
-          <form className="donation-form" aria-labelledby="donation-form-title">
-            <Heading id="donation-form-title" level={3} variant="card">
-              Your Support
-            </Heading>
-            <TextField
-              id="donation-support"
-              label="Your support"
-              min="1"
-              name="support"
-              type="number"
-            />
-            <SelectField
-              id="donation-funding-area"
-              label="Funding will support"
-              name="funding-area"
-              options={donatePageContent.fundingAreas.map((area) => ({
-                label: area,
-                value: area,
-              }))}
-            />
-            <CheckboxField id="donation-reporting" name="reporting">
-              We will report clearly on how funds are used and what the work
-              achieves.
-            </CheckboxField>
-            <Button type="button" size="large">
-              Donate
-            </Button>
-          </form>
+          <DonationForm />
         </Container>
       </section>
     </article>

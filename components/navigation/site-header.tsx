@@ -1,11 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/ui/container";
 import { siteRoutes } from "@/data/site-routes";
-import { brandAssets } from "@/lib/assets";
-import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/utils/cn";
 
 export function SiteHeader() {
@@ -25,23 +23,11 @@ export function SiteHeader() {
       </div>
       <Container className="site-header__inner">
         <Link className="site-header__brand" href="/">
-          <span className="site-header__logo-lockup">
-            <Image
-              className="site-header__logo site-header__logo--base"
-              src={brandAssets.officialLogo}
-              alt={siteConfig.name}
-              quality={92}
-              sizes="(min-width: 1200px) 11rem, 8.5rem"
-            />
-            <Image
-              className="site-header__logo site-header__logo--white-wordmark"
-              src={brandAssets.officialLogo}
-              alt=""
-              aria-hidden="true"
-              quality={92}
-              sizes="(min-width: 1200px) 11rem, 8.5rem"
-            />
-          </span>
+          <BrandLogo
+            className="site-header__logo-lockup"
+            priority
+            sizes="(min-width: 1200px) 11rem, 8.5rem"
+          />
         </Link>
 
         <nav
