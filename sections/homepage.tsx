@@ -91,7 +91,7 @@ export function Homepage({
         </div>
       </Section>
 
-      <Section {...content.advocacy.header}>
+      <Section {...content.advocacy.header} className="section--advocacy">
         <SectionReveal>
           <FeatureCards items={content.advocacy.items} />
         </SectionReveal>

@@ -14,20 +14,25 @@ export function FeatureCards({
 }: FeatureCardsProps) {
   return (
     <CardGrid className="feature-cards" columns={3}>
-      {items.map(({ description, icon: Icon, id, title }) => (
+      {items.map(({ description, icon: Icon, id, title }, index) => (
         <HoverLift key={id}>
           <Card className="feature-card" variant={variant}>
-            {Icon ? (
-              <Icon
-                className="card__icon"
-                aria-hidden="true"
-                strokeWidth={1.5}
-              />
-            ) : null}
-            <Heading level={3} variant="card">
-              {title}
-            </Heading>
-            {description ? <Text muted>{description}</Text> : null}
+            <span className="feature-card__number" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <div className="feature-card__content">
+              {Icon ? (
+                <Icon
+                  className="card__icon"
+                  aria-hidden="true"
+                  strokeWidth={1.5}
+                />
+              ) : null}
+              <Heading level={3} variant="card">
+                {title}
+              </Heading>
+              {description ? <Text muted>{description}</Text> : null}
+            </div>
           </Card>
         </HoverLift>
       ))}

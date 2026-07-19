@@ -518,14 +518,36 @@
 }
 
 .feature-card {
-  padding: var(--space-7) 0 var(--space-6);
-  border: 0;
-  border-top: 1px solid var(--color-copper);
-  background: transparent;
+  display: grid;
+  min-height: 10rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+  padding: var(--space-5);
+  border: 1px solid var(--border-subtle);
+  border-top: 2px solid var(--color-copper);
+  background: color-mix(in srgb, var(--color-soft-white) 72%, transparent);
+}
+
+.feature-card__number {
+  display: inline-grid;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid color-mix(in srgb, var(--color-copper) 58%, transparent);
+  color: var(--color-cedar-brown);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  place-items: center;
 }
 
 .feature-card .card__icon {
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-4);
+}
+
+.section--advocacy .section__header {
+  margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem);
 }
 
 .resource-cards {
@@ -1699,40 +1721,6 @@
   content: "";
 }
 
-.content-page__list--numbered {
-  gap: var(--space-4);
-}
-
-.content-page__list--numbered li {
-  display: grid;
-  min-height: 8.5rem;
-  grid-template-rows: auto 1fr;
-  gap: var(--space-5);
-  padding: var(--space-5);
-  border: 1px solid var(--border-subtle);
-  border-top: 2px solid var(--color-copper);
-  background: color-mix(in srgb, var(--color-soft-white) 90%, transparent);
-  font-family: var(--font-display);
-  font-size: clamp(1.35rem, 2.1vw, 1.85rem);
-  line-height: 1.2;
-}
-
-.content-page__list--numbered li::before {
-  content: none;
-}
-
-.content-page__list-number {
-  width: fit-content;
-  padding-bottom: var(--space-2);
-  border-bottom: 1px solid var(--color-copper);
-  color: var(--color-copper);
-  font-family: var(--font-sans);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  line-height: 1;
-}
-
 .donation-page__body {
   padding-block: var(--space-section);
   background: var(--color-warm-ivory);
@@ -1937,27 +1925,9 @@
     column-gap: var(--space-6);
   }
 
-  .content-page__section-content:has(.content-page__list--numbered) {
-    max-width: none;
-  }
-
-  .content-page__list--numbered {
-    column-gap: var(--space-4);
-  }
-
-  .content-page__list--numbered li {
-    min-height: 10.5rem;
-  }
-
   .donation-page__grid {
     grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.8fr);
     align-items: start;
-  }
-}
-
-@media (min-width: 75rem) {
-  .content-page__list--numbered {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
