@@ -1381,7 +1381,7 @@
   }
 
   .hero__content {
-    grid-column: 1 / span 6;
+    grid-column: 1 / span 7;
   }
 
   .hero .heading--display {
@@ -1398,7 +1398,7 @@
 
   .hero__actions .button {
     min-height: 3rem;
-    padding-inline: var(--space-3);
+    padding-inline: var(--space-2);
     font-size: 0.6875rem;
     letter-spacing: 0.065em;
     white-space: nowrap;
@@ -1455,6 +1455,14 @@
 }
 
 @media (min-width: 88rem) {
+  .hero__content {
+    grid-column: 1 / span 6;
+  }
+
+  .hero__actions .button {
+    padding-inline: var(--space-3);
+  }
+
   .homepage-progress {
     position: fixed;
     z-index: 90;
