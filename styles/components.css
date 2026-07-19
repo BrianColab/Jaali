@@ -1573,11 +1573,11 @@
   .homepage-progress__label {
     position: absolute;
     top: 50%;
-    right: calc(100% + var(--space-3));
+    left: calc(100% + var(--space-3));
     width: max-content;
     max-width: 12rem;
     padding: var(--space-2) var(--space-3);
-    border-right: 1px solid var(--color-copper);
+    border-left: 1px solid var(--color-copper);
     background: var(--color-deep-charcoal);
     color: var(--color-soft-white);
     font-size: 0.625rem;
@@ -1586,7 +1586,7 @@
     opacity: 0;
     pointer-events: none;
     text-transform: uppercase;
-    transform: translate(0.35rem, -50%);
+    transform: translate(-0.35rem, -50%);
     transition:
       opacity var(--duration-fast) var(--ease-standard),
       transform var(--duration-fast) var(--ease-editorial);
@@ -1659,7 +1659,7 @@
 
 .header-motifs__item {
   position: absolute;
-  top: 50%;
+  top: 43%;
   right: clamp(-8rem, -4vw, -1rem);
   width: auto;
   height: clamp(26rem, 165%, 66rem);
@@ -1668,6 +1668,7 @@
 
 @media (max-width: 48rem) {
   .header-motifs__item {
+    top: 45%;
     right: clamp(-6rem, -10vw, -1rem);
     height: clamp(19rem, 140%, 36rem);
   }
