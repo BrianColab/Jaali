@@ -18,7 +18,7 @@ export function SiteFooter() {
             >
               <BrandLogo
                 className="site-footer__logo-lockup"
-                sizes="(min-width: 48rem) 10rem, 8.5rem"
+                sizes="(min-width: 48rem) 18rem, 14rem"
               />
             </Link>
             <p className="site-footer__status">

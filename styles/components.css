@@ -229,7 +229,7 @@
 }
 
 .site-footer__logo-lockup {
-  width: clamp(8.4rem, 9.6vw, 10.2rem);
+  width: clamp(11rem, 26vw, 13rem);
 }
 
 .site-footer__status {
@@ -1342,11 +1342,15 @@
   }
 
   .site-footer__identity {
-    grid-column: 1 / span 3;
+    grid-column: 1 / span 4;
+  }
+
+  .site-footer__logo-lockup {
+    width: clamp(15rem, 21vw, 18rem);
   }
 
   .site-footer__navigation {
-    grid-column: 4 / span 5;
+    grid-column: 5 / span 4;
     margin-top: 0;
   }
 
@@ -1598,16 +1602,16 @@
 .header-motifs__item {
   position: absolute;
   top: 50%;
-  right: clamp(-4rem, -1vw, 1rem);
+  right: clamp(-8rem, -4vw, -1rem);
   width: auto;
-  height: clamp(20rem, 132%, 52rem);
+  height: clamp(26rem, 165%, 66rem);
   transform: translateY(-50%) rotate(var(--motif-rotate, 0deg));
 }
 
 @media (max-width: 48rem) {
   .header-motifs__item {
-    right: clamp(-4rem, -6vw, 0rem);
-    height: clamp(15rem, 118%, 28rem);
+    right: clamp(-6rem, -10vw, -1rem);
+    height: clamp(19rem, 140%, 36rem);
   }
 }
 
