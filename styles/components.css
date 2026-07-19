@@ -248,12 +248,18 @@
 }
 
 .site-footer__commitment-heading {
-  max-width: 24ch;
+  max-width: 34ch;
   margin: 0 0 var(--space-5);
   font-family: var(--font-display), Georgia, serif;
   font-size: clamp(1.5rem, 2.5vw, 2.25rem);
   font-weight: 500;
   line-height: 1.08;
+}
+
+/* One sentence per line, so the phrase never breaks mid-sentence. */
+.site-footer__commitment-heading span {
+  display: block;
+  text-wrap: balance;
 }
 
 .site-footer__legal {

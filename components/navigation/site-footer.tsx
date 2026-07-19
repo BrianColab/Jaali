@@ -44,8 +44,9 @@ export function SiteFooter() {
 
           <div className="site-footer__commitment">
             <p className="site-footer__commitment-heading">
-              For Jaali. For Her Daughter. For Every Mother Still Fighting to Be
-              Heard.
+              <span>For Jaali.</span>
+              <span>For Her Daughter.</span>
+              <span>For Every Mother Still Fighting to Be Heard.</span>
             </p>
             <p className="site-footer__status">
               We will work so that no mother is left waiting, unheard and
