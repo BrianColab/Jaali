@@ -1806,6 +1806,46 @@
   content: "";
 }
 
+/* Resource groups: each category keeps its row, with its links nested under. */
+.content-page__list.content-page__list--resources {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.content-page__resource-links {
+  display: grid;
+  gap: var(--space-2);
+  padding: 0;
+  margin: var(--space-3) 0 0;
+  list-style: none;
+}
+
+.content-page__resource-links li {
+  padding: 0;
+  border-top: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.content-page__resource-links li::before {
+  content: none;
+}
+
+.content-page__resource-link {
+  color: var(--color-cedar-brown);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.content-page__resource-link:hover {
+  color: var(--color-copper);
+}
+
+.content-page__resource-note {
+  color: color-mix(in srgb, currentcolor 68%, transparent);
+}
+
 .donation-page__body {
   padding-block: var(--space-section);
   background: var(--color-warm-ivory);

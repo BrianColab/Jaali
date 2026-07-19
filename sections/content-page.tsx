@@ -60,6 +60,39 @@ export function ContentPage({ content }: ContentPageProps) {
                       ))}
                     </ul>
                   ) : null}
+                  {section.resources ? (
+                    <ul className="content-page__list content-page__list--resources">
+                      {section.resources.map((group) => (
+                        <li key={group.category}>
+                          {group.category}
+                          <ul className="content-page__resource-links">
+                            {group.links.map((link) => (
+                              <li key={link.label}>
+                                {link.href ? (
+                                  <a
+                                    className="content-page__resource-link"
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {link.label}
+                                  </a>
+                                ) : (
+                                  link.label
+                                )}
+                                {link.note ? (
+                                  <span className="content-page__resource-note">
+                                    {" "}
+                                    ({link.note})
+                                  </span>
+                                ) : null}
+                              </li>
+                            ))}
+                          </ul>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </div>
               </SectionReveal>
             </Container>

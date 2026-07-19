@@ -244,15 +244,118 @@ export const resourcesPageContent = {
     {
       id: "resource-areas",
       title: "Resources and Advocacy",
-      items: [
-        "Emergency and maternal-health information",
-        "Indigenous patient navigators and advocacy organizations",
-        "Pregnancy, birth and postpartum supports",
-        "Mental-health, grief and family supports",
-        "Complaint and professional-regulatory processes",
-        "Legal information and referrals",
-        "Local, provincial, territorial and national resources",
-        "Tools for documenting and escalating unsafe care",
+      resources: [
+        {
+          category: "Emergency and maternal-health information",
+          links: [
+            {
+              label: "Hope for Wellness Helpline",
+              href: "https://hopeforwellness.ca",
+              note: "24/7 crisis and wellness support for Indigenous peoples",
+            },
+            {
+              label:
+                "Public Health Agency of Canada – Pregnancy, Birth & Parenting Resources",
+              href: "https://www.canada.ca/en/public-health/services/child-infant-health/supports-programs-pregnancy.html",
+            },
+          ],
+        },
+        {
+          category: "Indigenous patient navigators and advocacy organizations",
+          links: [
+            {
+              label:
+                "National Association of Friendship Centres – Health Navigation Program",
+              href: "https://nafc.ca/departments/programs/health-navigation",
+            },
+            {
+              label: "Native Women’s Association of Canada (NWAC)",
+              href: "https://nwac.ca",
+            },
+          ],
+        },
+        {
+          category: "Pregnancy, birth and postpartum supports",
+          links: [
+            {
+              label: "National Aboriginal Council of Midwives",
+              href: "https://indigenousmidwifery.ca",
+            },
+            {
+              label: "NWAC – Indigenous Maternity Experiences Project",
+              href: "https://nwac.ca/academics-policy/policy-development/health/",
+            },
+          ],
+        },
+        {
+          category: "Mental-health, grief and family supports",
+          links: [
+            {
+              label: "Hope for Wellness Helpline",
+              href: "https://hopeforwellness.ca",
+            },
+            {
+              label:
+                "National Association of Friendship Centres – Mental Health Resources",
+              href: "https://nafc.ca/resources/mental-health",
+            },
+          ],
+        },
+        {
+          category: "Complaint and professional-regulatory processes",
+          links: [
+            {
+              label:
+                "Provincial College of Physicians and Surgeons (province-specific)",
+            },
+            { label: "Provincial College of Nurses" },
+            { label: "Provincial Patient Ombudsman/Patient Relations Office" },
+          ],
+        },
+        {
+          category: "Legal information and referrals",
+          links: [
+            {
+              label: "Aboriginal Legal Services",
+              href: "https://aboriginallegal.ca",
+              note: "Ontario",
+            },
+            { label: "Provincial Legal Aid organizations" },
+            {
+              label: "Indigenous Bar Association",
+              href: "https://www.indigenousbar.ca",
+            },
+          ],
+        },
+        {
+          category: "Local, provincial, territorial and national resources",
+          links: [
+            {
+              label: "NCCIH Indigenous Health Links Interactive Map",
+              href: "https://www.nccih.ca/1678/Interactive_Map.nccih",
+            },
+            {
+              label: "National Association of Friendship Centres",
+              href: "https://nafc.ca",
+            },
+            { label: "Inuit Tapiriit Kanatami", href: "https://itk.ca" },
+            { label: "Métis National Council", href: "https://metisnation.ca" },
+          ],
+        },
+        {
+          category: "Tools for documenting and escalating unsafe care",
+          links: [
+            { label: "Provincial Patient Relations Offices" },
+            { label: "Provincial Health Ombudsman" },
+            {
+              label: "College complaint portals (Physicians, Nurses, Midwives)",
+            },
+            {
+              label: "NWAC – Know Your Rights & Culturally Safe Resources",
+              href: "https://nwac.ca/wg2stgd/culturally-safe-and-trauma-informed-knowledge-hub/",
+            },
+          ],
+        },
       ],
     },
     {
