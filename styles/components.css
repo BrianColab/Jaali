@@ -1258,7 +1258,7 @@
 }
 
 .content-page__hero {
-  padding-block: clamp(6rem, 11vw, 10rem);
+  padding-block: clamp(1.8rem, 3.3vw, 3rem);
   border-bottom: 1px solid
     color-mix(in srgb, var(--color-copper) 36%, transparent);
   background:
