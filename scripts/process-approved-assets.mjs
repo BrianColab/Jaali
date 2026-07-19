@@ -63,9 +63,9 @@ const assets = [
     focalPoint: { x: 0.5, y: 0.5 },
     quality: 92,
     variants: [
-      { name: "desktop", width: 600, height: 750 },
-      { name: "tablet", width: 560, height: 700 },
-      { name: "mobile", width: 480, height: 600 },
+      { name: "desktop", width: 600, height: 900 },
+      { name: "tablet", width: 560, height: 840 },
+      { name: "mobile", width: 480, height: 720 },
     ],
   },
 ];

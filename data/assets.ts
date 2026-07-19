@@ -148,7 +148,7 @@ export const assetManifest = {
       // TODO(content): Confirm final alternative text with the family/editorial team.
       alt: "Steak Night fundraiser poster supporting Justice for Jaali on July 21, 2026.",
       decorative: false,
-      fallbackAspectRatio: "4/5",
+      fallbackAspectRatio: "2/3",
       fallbackLabel: "Justice for Jaali Steak Night fundraiser poster",
       quality: 92,
       sizes: "(min-width: 1200px) 28vw, (min-width: 768px) 38vw, 100vw",
@@ -156,17 +156,17 @@ export const assetManifest = {
         desktop: {
           src: "/assets/images/banners/steak-night-desktop.webp",
           width: 600,
-          height: 750,
+          height: 900,
         },
         tablet: {
           src: "/assets/images/banners/steak-night-tablet.webp",
           width: 560,
-          height: 700,
+          height: 840,
         },
         mobile: {
           src: "/assets/images/banners/steak-night-mobile.webp",
           width: 480,
-          height: 600,
+          height: 720,
         },
       },
     },

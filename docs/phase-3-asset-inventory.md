@@ -19,7 +19,7 @@ preserved exactly.
 | `JAALI Banner Pic.png`   |  1537x1023 | `981AE11E329D175E89AED0CAFCAA3A000408ECDCEEA209E8B8C727ACF726116B` |
 | `Laaaliandboyfriend.png` |  1415x1111 | `F8936EF427AC60364866D1E46F8C191558816BC95279D73949B74E115ABEEE2F` |
 | `remeberringJaali.png`   |  1490x1056 | `9B213C2850E00AA4BC4CA686E7555B2DA4ED099DE1E9D3714149C6E2EE34F715` |
-| `SteakNight.png`         |    624x752 | `E9C599AAE8D7D6681E2085C2079A4EE6A7F077DD711E71296F251222415C7BA9` |
+| `SteakNight.png`         |  1024x1536 | `7A768201F7A7A3605D15468E7A6913D5E62E07FAA7220182CBEE3CE346FF20E3` |
 
 The first and fourth uploaded filenames differ from the requested names
 `Jaali hoodie.png` and `remainingjaali.png`. The actual uploaded filenames are
@@ -37,7 +37,7 @@ approved originals. No image content was generated or retouched.
 | Timeline and quote context | `backgrounds/remembering-jaali-desktop.webp` (1408x1056)   | `backgrounds/remembering-jaali-tablet.webp` (1024x768)   | `backgrounds/remembering-jaali-mobile.webp` (720x900)    |
 | Vision                     | `hero/jaali-banner-desktop.webp` (816x1020)                | `hero/jaali-banner-tablet.webp` (720x900)                | `hero/jaali-banner-mobile.webp` (560x700)                |
 | Supporting resource        | `banners/justice-for-jaali-hoodie-desktop.webp` (1200x900) | `banners/justice-for-jaali-hoodie-tablet.webp` (960x720) | `banners/justice-for-jaali-hoodie-mobile.webp` (720x720) |
-| Donate support             | `banners/steak-night-desktop.webp` (600x750)               | `banners/steak-night-tablet.webp` (560x700)              | `banners/steak-night-mobile.webp` (480x600)              |
+| Donate support             | `banners/steak-night-desktop.webp` (600x900)               | `banners/steak-night-tablet.webp` (560x840)              | `banners/steak-night-mobile.webp` (480x720)              |
 
 Paths in the table are relative to `public/assets/images/`. The hero source
 also provides `hero/jaali-banner-open-graph.webp` at 1200x630.
