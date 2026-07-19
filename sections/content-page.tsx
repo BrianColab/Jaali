@@ -54,9 +54,25 @@ export function ContentPage({ content }: ContentPageProps) {
                     <Text key={paragraph}>{paragraph}</Text>
                   ))}
                   {section.items ? (
-                    <ul className="content-page__list">
-                      {section.items.map((item) => (
-                        <li key={item}>{item}</li>
+                    <ul
+                      className={`content-page__list${
+                        section.id === "we-are-calling-for"
+                          ? "content-page__list--numbered"
+                          : ""
+                      }`}
+                    >
+                      {section.items.map((item, itemIndex) => (
+                        <li key={item}>
+                          {section.id === "we-are-calling-for" ? (
+                            <span
+                              className="content-page__list-number"
+                              aria-hidden="true"
+                            >
+                              {String(itemIndex + 1).padStart(2, "0")}
+                            </span>
+                          ) : null}
+                          <span>{item}</span>
+                        </li>
                       ))}
                     </ul>
                   ) : null}
