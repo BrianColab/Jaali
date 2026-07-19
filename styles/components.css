@@ -1181,11 +1181,6 @@
         color-mix(in srgb, var(--color-deep-charcoal) 18%, transparent) 50%,
         transparent 62%
       ),
-      linear-gradient(
-        0deg,
-        color-mix(in srgb, var(--color-deep-charcoal) 74%, transparent),
-        transparent 36%
-      ),
       radial-gradient(
         circle at 18% 72%,
         color-mix(in srgb, var(--color-copper) 38%, transparent),
@@ -1193,13 +1188,30 @@
       );
   }
 
+  .hero {
+    min-height: clamp(30rem, 48vw, 32rem);
+  }
+
   .hero .editorial-grid {
     align-items: center;
   }
 
   .hero__content {
+    display: flex;
     grid-column: 1 / span 5;
+    align-items: center;
+    flex-direction: column;
     padding-block: var(--space-8);
+    text-align: center;
+  }
+
+  .hero__accent-lines,
+  .hero__copy {
+    margin-inline: auto;
+  }
+
+  .hero__actions {
+    justify-content: center;
   }
 
   .hero .heading--display {
@@ -1218,9 +1230,18 @@
     height: auto;
   }
 
+  .hero__media::after {
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-deep-charcoal) 88%, transparent) 0%,
+      color-mix(in srgb, var(--color-deep-charcoal) 30%, transparent) 36%,
+      transparent 64%
+    );
+  }
+
   .hero__media .responsive-asset__image {
-    object-fit: contain;
-    object-position: right center;
+    object-fit: cover;
+    object-position: right 44%;
     opacity: 1;
   }
 
@@ -1388,7 +1409,7 @@
   }
 
   .hero__media .responsive-asset__image {
-    object-position: right top;
+    object-position: right 44%;
   }
 
   .story-block__media {
