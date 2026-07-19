@@ -814,7 +814,7 @@
 }
 
 .story-block {
-  align-items: center;
+  align-items: start;
 }
 
 .story-block__media,
@@ -1251,7 +1251,7 @@
 
   .story-block__content {
     grid-column: 5 / -1;
-    padding-block: var(--space-8);
+    padding-block: 0;
   }
 
   .story-block--media-end .story-block__media {

@@ -38,8 +38,8 @@
   --space-8: 4rem;
   --space-9: 6rem;
   --space-10: 8rem;
-  --space-section: clamp(3.25rem, 5vw, 5rem);
-  --space-section-header: clamp(4rem, 7vw, 6.5rem);
+  --space-section: clamp(2.75rem, 4vw, 4.25rem);
+  --space-section-header: clamp(2.5rem, 4.5vw, 4rem);
   --space-component: clamp(1.5rem, 3vw, 3rem);
 
   --radius-none: 0;
