@@ -1,4 +1,4 @@
-import { FeatherWatermark } from "@/components/brand/feather-watermark";
+import { HeaderMotifs } from "@/components/brand/header-motifs";
 import { SectionReveal } from "@/components/motion/reveal";
 import { Container } from "@/components/ui/container";
 import { Eyebrow, Heading, Text } from "@/components/ui/typography";
@@ -12,7 +12,7 @@ export function ContentPage({ content }: ContentPageProps) {
   return (
     <article className="content-page">
       <header className="content-page__hero">
-        <FeatherWatermark />
+        <HeaderMotifs seed={content.title} />
         <Container>
           <Eyebrow>{content.eyebrow}</Eyebrow>
           <Heading id="page-title" level={1} variant="display">
