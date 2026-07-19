@@ -6,6 +6,9 @@ type QuoteBlockProps = Readonly<{
 export function QuoteBlock({ attribution, quote }: QuoteBlockProps) {
   return (
     <figure className="quote-block">
+      <span className="quote-block__mark" aria-hidden="true">
+        “
+      </span>
       <blockquote className="quote-block__quote">
         <p>{quote}</p>
       </blockquote>

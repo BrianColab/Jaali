@@ -28,9 +28,14 @@ export function TextRevealController() {
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    elements.forEach((element, index) => {
+    elements.forEach((element) => {
+      const delay = element.matches("h1, h2, h3, h4")
+        ? 0
+        : element.matches("p, blockquote, figcaption")
+          ? 70
+          : 110;
       element.dataset.scrollText = "";
-      element.style.setProperty("--text-reveal-delay", `${(index % 3) * 45}ms`);
+      element.style.setProperty("--text-reveal-delay", `${delay}ms`);
     });
 
     if (reduceMotion || !("IntersectionObserver" in window)) {
@@ -43,7 +48,8 @@ export function TextRevealController() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
+          const wasPassedDuringScroll = entry.boundingClientRect.top < 0;
+          if (!entry.isIntersecting && !wasPassedDuringScroll) return;
 
           const element = entry.target as HTMLElement;
           element.dataset.scrollTextVisible = "";
@@ -54,8 +60,36 @@ export function TextRevealController() {
     );
 
     elements.forEach((element) => observer.observe(element));
+    let scrollFrame: number | null = null;
+    const revealPassedElements = () => {
+      scrollFrame = null;
+      const revealLine = window.innerHeight * 0.92;
 
-    return () => observer.disconnect();
+      elements.forEach((element) => {
+        if (
+          element.dataset.scrollTextVisible !== undefined ||
+          element.getBoundingClientRect().top > revealLine
+        ) {
+          return;
+        }
+
+        element.dataset.scrollTextVisible = "";
+        observer.unobserve(element);
+      });
+    };
+    const handleScroll = () => {
+      if (scrollFrame !== null) return;
+      scrollFrame = window.requestAnimationFrame(revealPassedElements);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    revealPassedElements();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollFrame !== null) window.cancelAnimationFrame(scrollFrame);
+    };
   }, []);
 
   return null;

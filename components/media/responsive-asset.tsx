@@ -105,10 +105,10 @@ export function ResponsiveAsset({
       ? { "--asset-desktop-ratio": getRatio(asset.sources.desktop) }
       : {}),
   };
-
-  return (
+  const hasCaption = Boolean(asset.caption || asset.credit);
+  const picture = (
     <picture
-      className={cn("responsive-asset", className)}
+      className={cn("responsive-asset", !hasCaption && className)}
       style={style}
       data-asset-status="ready"
     >
@@ -138,5 +138,19 @@ export function ResponsiveAsset({
         width={asset.sources.mobile.width}
       />
     </picture>
+  );
+
+  if (!hasCaption) return picture;
+
+  return (
+    <figure className={cn("editorial-figure", className)}>
+      {picture}
+      <figcaption className="editorial-figure__caption">
+        {asset.caption ? <span>{asset.caption}</span> : null}
+        {asset.credit ? (
+          <span className="editorial-figure__credit">{asset.credit}</span>
+        ) : null}
+      </figcaption>
+    </figure>
   );
 }

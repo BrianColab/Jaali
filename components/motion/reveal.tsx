@@ -24,6 +24,10 @@ const revealVariants = {
     hidden: { opacity: 0, y: 10 },
     visible: { opacity: 1, y: 0 },
   },
+  image: {
+    hidden: { clipPath: "inset(0 0 12% 0)", opacity: 0, y: 12 },
+    visible: { clipPath: "inset(0 0 0% 0)", opacity: 1, y: 0 },
+  },
 } satisfies Record<string, Variants>;
 
 type RevealKind = keyof typeof revealVariants;
@@ -54,7 +58,11 @@ export function Reveal({
       whileInView="visible"
       viewport={{ once, amount: 0.18 }}
       transition={{
-        duration: reduceMotion ? 0 : kind === "hero" ? 0.7 : 0.5,
+        duration: reduceMotion
+          ? 0
+          : kind === "hero" || kind === "image"
+            ? 0.75
+            : 0.5,
         delay: reduceMotion ? 0 : delay,
         ease: easing,
       }}
@@ -84,6 +92,10 @@ export function HeroReveal(props: NamedRevealProps) {
 
 export function TimelineReveal(props: NamedRevealProps) {
   return <Reveal kind="timeline" {...props} />;
+}
+
+export function ImageReveal(props: NamedRevealProps) {
+  return <Reveal kind="image" {...props} />;
 }
 
 type HoverLiftProps = Readonly<{

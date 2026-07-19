@@ -11,6 +11,9 @@ export function Timeline({ items }: TimelineProps) {
     <ol className="timeline">
       {items.map((item, index) => (
         <li className="timeline__item" key={item.id}>
+          <span className="timeline__index" aria-hidden="true">
+            {String(index + 1).padStart(2, "0")}
+          </span>
           <span className="timeline__marker" aria-hidden="true" />
           <TimelineReveal className="timeline__content" delay={index * 0.08}>
             {item.date ? (

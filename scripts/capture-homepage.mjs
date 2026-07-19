@@ -17,6 +17,7 @@ const nameArgument = process.argv.find((argument) =>
 );
 const captureRoute = routeArgument?.slice("--route=".length) || "/";
 const viewportOnly = process.argv.includes("--viewport-only");
+const normalMotion = process.argv.includes("--normal-motion");
 const captureName = (nameArgument?.slice("--name=".length) || "homepage")
   .toLowerCase()
   .replaceAll(/[^a-z0-9-]/g, "-");
@@ -144,7 +145,12 @@ async function capture(viewport) {
       width: viewport.width,
     });
     await send("Emulation.setEmulatedMedia", {
-      features: [{ name: "prefers-reduced-motion", value: "reduce" }],
+      features: [
+        {
+          name: "prefers-reduced-motion",
+          value: normalMotion ? "no-preference" : "reduce",
+        },
+      ],
     });
     await send("Page.navigate", {
       url: new URL(captureRoute, "http://127.0.0.1:3210").href,
@@ -155,11 +161,13 @@ async function capture(viewport) {
         const ready = async () => {
           await document.fonts.ready;
           const motionOverride = document.createElement("style");
-          motionOverride.textContent = ".motion-reveal{opacity:1!important;transform:none!important}";
+          motionOverride.textContent = ".motion-reveal{clip-path:none!important;opacity:1!important;transform:none!important}";
           document.head.append(motionOverride);
-          for (let y = 0; y < document.documentElement.scrollHeight; y += window.innerHeight) {
+          for (const image of document.images) image.loading = "eager";
+          await new Promise((done) => setTimeout(done, 500));
+          for (let y = 0; y < document.documentElement.scrollHeight; y += window.innerHeight / 2) {
             window.scrollTo(0, y);
-            await new Promise((done) => setTimeout(done, 80));
+            await new Promise((done) => setTimeout(done, 100));
           }
           window.scrollTo(0, 0);
           await new Promise((done) => setTimeout(done, 250));

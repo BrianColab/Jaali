@@ -8,7 +8,11 @@ import { StoryBlock } from "@/components/content/story-block";
 import { Timeline } from "@/components/content/timeline";
 import { WarningSigns } from "@/components/content/warning-signs";
 import { ResponsiveAsset } from "@/components/media/responsive-asset";
-import { SectionReveal } from "@/components/motion/reveal";
+import { ImageReveal, SectionReveal } from "@/components/motion/reveal";
+import {
+  HomepageProgress,
+  type HomepageChapter,
+} from "@/components/navigation/homepage-progress";
 import { ButtonLink } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
 import { homepageContent } from "@/data/homepage";
@@ -16,6 +20,19 @@ import { homepageAssets } from "@/lib/assets";
 import { Hero } from "@/sections/hero";
 import type { HomepageAssetManifest } from "@/types/assets";
 import type { ContentAction, HomepageContent } from "@/types/content";
+
+const homepageChapters = [
+  { id: "jaalis-story", label: "Jaali", number: "01" },
+  { id: "timeline", label: "What Happened", number: "02" },
+  {
+    id: "not-an-isolated-tragedy",
+    label: "The Wider Issue",
+    number: "03",
+  },
+  { id: "know-your-rights", label: "Your Rights", number: "04" },
+  { id: "vision", label: "The Vision", number: "05" },
+  { id: "donate", label: "Take Action", number: "06" },
+] as const satisfies readonly HomepageChapter[];
 
 type HomepageProps = Readonly<{
   assets?: HomepageAssetManifest;
@@ -36,31 +53,36 @@ export function Homepage({
 }: HomepageProps) {
   return (
     <>
+      <HomepageProgress chapters={homepageChapters} />
       <Hero asset={assets.hero} content={content.hero} />
 
-      <Section {...content.story.header}>
+      <Section {...content.story.header} chapter="01">
         <SectionReveal>
-          <StoryBlock asset={assets.story} {...content.story.block} />
+          <StoryBlock asset={assets.story} opening {...content.story.block} />
         </SectionReveal>
       </Section>
 
-      <Section {...content.timeline.header}>
+      <Section {...content.timeline.header} chapter="02">
         <div className="section-media-layout editorial-grid">
-          <SectionReveal className="section-media-layout__media">
+          <ImageReveal className="section-media-layout__media">
             <ResponsiveAsset asset={assets.timeline} />
-          </SectionReveal>
+          </ImageReveal>
           <div className="section-media-layout__content">
             <Timeline items={content.timeline.items} />
           </div>
         </div>
       </Section>
 
-      <Section {...content.context.header}>
-        <div className="section-media-layout section-media-layout--media-end editorial-grid">
-          <SectionReveal className="section-media-layout__media">
+      <Section
+        {...content.context.header}
+        chapter="03"
+        className="section--signature-quote"
+      >
+        <div className="signature-quote__layout editorial-grid">
+          <ImageReveal className="signature-quote__media">
             <ResponsiveAsset asset={assets.quote} />
-          </SectionReveal>
-          <SectionReveal className="section-media-layout__content">
+          </ImageReveal>
+          <SectionReveal className="signature-quote__content">
             <QuoteBlock
               quote={content.context.quote}
               attribution={content.context.attribution}
@@ -75,7 +97,7 @@ export function Homepage({
         </SectionReveal>
       </Section>
 
-      <Section {...content.rights.header}>
+      <Section {...content.rights.header} chapter="04">
         <SectionReveal>
           <Accordion items={content.rights.items} />
         </SectionReveal>
@@ -96,16 +118,16 @@ export function Homepage({
         </SectionReveal>
       </Section>
 
-      <Section {...content.vision.header}>
+      <Section {...content.vision.header} chapter="05">
         <SectionReveal>
           <StoryBlock asset={assets.vision} {...content.vision.block} />
         </SectionReveal>
       </Section>
 
       <Section {...content.resources.header}>
-        <SectionReveal className="section-supporting-media">
+        <ImageReveal className="section-supporting-media">
           <ResponsiveAsset asset={assets.resources} />
-        </SectionReveal>
+        </ImageReveal>
         <SectionReveal delay={0.08}>
           <ResourceCards items={content.resources.items} />
         </SectionReveal>
@@ -123,11 +145,11 @@ export function Homepage({
         </SectionReveal>
       </Section>
 
-      <Section {...content.donate.header}>
+      <Section {...content.donate.header} chapter="06">
         <div className="section-media-layout editorial-grid">
-          <SectionReveal className="section-media-layout__media">
+          <ImageReveal className="section-media-layout__media">
             <ResponsiveAsset asset={assets.donate} />
-          </SectionReveal>
+          </ImageReveal>
           <SectionReveal className="section-media-layout__content" delay={0.08}>
             <DonateBanner
               title={content.donate.banner.title}

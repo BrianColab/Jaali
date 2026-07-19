@@ -1,4 +1,5 @@
 import { ResponsiveAsset } from "@/components/media/responsive-asset";
+import { ImageReveal } from "@/components/motion/reveal";
 import { Eyebrow, Heading, Text } from "@/components/ui/typography";
 import type { ResponsiveImageAsset } from "@/types/assets";
 import { cn } from "@/utils/cn";
@@ -8,6 +9,7 @@ type StoryBlockProps = Readonly<{
   body: string;
   eyebrow?: string;
   mediaPosition?: "start" | "end";
+  opening?: boolean;
   title: string;
 }>;
 
@@ -16,6 +18,7 @@ export function StoryBlock({
   body,
   eyebrow,
   mediaPosition = "start",
+  opening = false,
   title,
 }: StoryBlockProps) {
   return (
@@ -24,10 +27,13 @@ export function StoryBlock({
         "story-block",
         "editorial-grid",
         mediaPosition === "end" && "story-block--media-end",
+        opening && "story-block--opening",
       )}
     >
       <div className="story-block__media">
-        <ResponsiveAsset asset={asset} />
+        <ImageReveal>
+          <ResponsiveAsset asset={asset} />
+        </ImageReveal>
       </div>
       <div className="story-block__content">
         {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}

@@ -26,6 +26,8 @@ export type PendingResponsiveImageAsset = AssetPresentation &
 export type ReadyResponsiveImageAsset = AssetPresentation &
   Readonly<{
     alt: string;
+    caption?: string;
+    credit?: string;
     decorative: boolean;
     quality?: number;
     sources: ResponsiveImageSources;

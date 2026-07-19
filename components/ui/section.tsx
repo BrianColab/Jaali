@@ -7,6 +7,7 @@ import { cn } from "@/utils/cn";
 
 type SectionProps = Readonly<{
   align?: "left" | "center";
+  chapter?: string;
   children: ReactNode;
   className?: string;
   eyebrow?: string;
@@ -18,6 +19,7 @@ type SectionProps = Readonly<{
 
 export function Section({
   align = "left",
+  chapter,
   children,
   className,
   eyebrow,
@@ -41,7 +43,16 @@ export function Section({
             align === "center" && "section__header--center",
           )}
         >
-          {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
+          {chapter || eyebrow ? (
+            <div className="section__meta">
+              {chapter ? (
+                <span className="section__chapter" aria-hidden="true">
+                  {chapter}
+                </span>
+              ) : null}
+              {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
+            </div>
+          ) : null}
           <Heading id={headingId} level={2} variant="section">
             {title}
           </Heading>
