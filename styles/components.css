@@ -1808,18 +1808,18 @@
   background: var(--color-soft-white);
 }
 
-[data-scroll-text] {
+[data-scroll-reveal] {
   opacity: 0;
   transform: translate3d(0, 0.875rem, 0);
   transition:
     opacity var(--duration-slow) var(--ease-editorial)
-      var(--text-reveal-delay, 0ms),
+      var(--scroll-reveal-delay, 0ms),
     transform var(--duration-slow) var(--ease-editorial)
-      var(--text-reveal-delay, 0ms);
+      var(--scroll-reveal-delay, 0ms);
   will-change: opacity, transform;
 }
 
-[data-scroll-text][data-scroll-text-visible] {
+[data-scroll-reveal][data-scroll-reveal-visible] {
   opacity: 1;
   transform: translate3d(0, 0, 0);
   will-change: auto;
@@ -1974,11 +1974,11 @@
   .accordion__icon,
   .donation-drawer__backdrop,
   .donation-drawer__panel,
-  [data-scroll-text] {
+  [data-scroll-reveal] {
     transition: none;
   }
 
-  [data-scroll-text] {
+  [data-scroll-reveal] {
     opacity: 1;
     transform: none;
   }
