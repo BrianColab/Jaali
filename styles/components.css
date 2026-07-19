@@ -1539,6 +1539,8 @@
 }
 
 .content-page__hero {
+  position: relative;
+  overflow: hidden;
   padding-block: clamp(1.8rem, 3.3vw, 3rem);
   border-bottom: 1px solid
     color-mix(in srgb, var(--color-copper) 36%, transparent);
@@ -1550,6 +1552,33 @@
     ),
     var(--color-deep-charcoal);
   color: var(--color-soft-white);
+  isolation: isolate;
+}
+
+.content-page__hero .site-container {
+  position: relative;
+  z-index: 1;
+}
+
+.feather-watermark {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: clamp(1.5rem, 8vw, 8rem);
+  display: block;
+  width: clamp(9rem, 17vw, 15rem);
+  overflow: hidden;
+  aspect-ratio: 224 / 358;
+  opacity: 0.085;
+  pointer-events: none;
+  transform: translateY(-50%) rotate(7deg);
+}
+
+.feather-watermark__image {
+  width: 317.5%;
+  max-width: none;
+  height: auto;
+  filter: saturate(0.72) contrast(0.92);
 }
 
 .content-page__hero .eyebrow {

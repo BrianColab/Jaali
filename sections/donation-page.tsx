@@ -1,3 +1,4 @@
+import { FeatherWatermark } from "@/components/brand/feather-watermark";
 import { DonationForm } from "@/components/donation/donation-form";
 import { Container } from "@/components/ui/container";
 import { Eyebrow, Heading, Text } from "@/components/ui/typography";
@@ -7,6 +8,7 @@ export function DonationPage() {
   return (
     <article className="content-page donation-page">
       <header className="content-page__hero">
+        <FeatherWatermark />
         <Container>
           <Eyebrow>{donatePageContent.eyebrow}</Eyebrow>
           <Heading id="page-title" level={1} variant="display">
