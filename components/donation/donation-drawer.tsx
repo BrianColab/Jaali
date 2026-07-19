@@ -106,9 +106,15 @@ export function DonationDrawer() {
   useEffect(() => {
     if (!open) return;
 
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
     const previousOverflow = document.body.style.overflow;
+    const previousPaddingRight = document.body.style.paddingRight;
     document.body.style.overflow = "hidden";
-    closeButtonRef.current?.focus();
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+    closeButtonRef.current?.focus({ preventScroll: true });
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -140,6 +146,7 @@ export function DonationDrawer() {
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.body.style.overflow = previousOverflow;
+      document.body.style.paddingRight = previousPaddingRight;
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [closeDrawer, open]);
