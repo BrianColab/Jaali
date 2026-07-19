@@ -4,7 +4,7 @@ export const homepageContent = {
   hero: {
     eyebrow: "Justice for Jaali",
     title: "Indigenous mothers deserve to be heard. Believed. Protected.",
-    body: "This site exists in Jaali’s memory—and because what happened to her must never happen again.",
+    body: "This site exists in Jaali’s memory, because what happened to her must never happen again.",
     primaryAction: {
       href: "/get-help-now",
       label: "I Need Help Now",
