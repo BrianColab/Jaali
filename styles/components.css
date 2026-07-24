@@ -65,7 +65,7 @@
 .brand-logo {
   position: relative;
   display: block;
-  aspect-ratio: 711 / 358;
+  aspect-ratio: 1 / 1;
 }
 
 .brand-logo__image {
@@ -74,15 +74,8 @@
   height: auto;
 }
 
-.brand-logo__image--white-wordmark {
-  position: absolute;
-  inset: 0;
-  clip-path: inset(0 0 0 31.5%);
-  filter: brightness(0) invert(1);
-}
-
 .site-header__logo-lockup {
-  width: clamp(8.4rem, 9.6vw, 10.2rem);
+  width: clamp(4.2rem, 4.8vw, 5.1rem);
 }
 
 .site-header__desktop-nav {
@@ -229,7 +222,7 @@
 }
 
 .site-footer__logo-lockup {
-  width: clamp(11rem, 26vw, 13rem);
+  width: clamp(7rem, 16vw, 9rem);
 }
 
 .site-footer__status {
@@ -1454,7 +1447,7 @@
   }
 
   .site-footer__logo-lockup {
-    width: clamp(15rem, 21vw, 18rem);
+    width: clamp(9rem, 12vw, 11rem);
   }
 
   .site-footer__navigation {
@@ -1984,7 +1977,7 @@
 }
 
 .donation-drawer__logo {
-  width: clamp(8.25rem, 24vw, 10rem);
+  width: clamp(4.25rem, 12vw, 5rem);
 }
 
 .donation-drawer__close {

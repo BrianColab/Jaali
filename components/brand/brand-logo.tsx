@@ -25,15 +25,6 @@ export function BrandLogo({
         quality={92}
         sizes={sizes}
       />
-      <Image
-        className="brand-logo__image brand-logo__image--white-wordmark"
-        src={brandAssets.officialLogo}
-        alt=""
-        aria-hidden="true"
-        priority={priority}
-        quality={92}
-        sizes={sizes}
-      />
     </span>
   );
 }

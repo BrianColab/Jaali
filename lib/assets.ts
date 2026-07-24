@@ -1,4 +1,4 @@
-import officialLogo from "@/TopJustice Logo.png";
+import officialLogo from "@/newLogo.jpeg";
 
 import { assetManifest } from "@/data/assets";
 

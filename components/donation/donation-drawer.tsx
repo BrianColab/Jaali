@@ -189,7 +189,7 @@ export function DonationDrawer() {
         <header className="donation-drawer__header">
           <BrandLogo
             className="donation-drawer__logo"
-            sizes="(min-width: 48rem) 10rem, 8.5rem"
+            sizes="(min-width: 48rem) 5rem, 4.5rem"
           />
           <button
             ref={closeButtonRef}

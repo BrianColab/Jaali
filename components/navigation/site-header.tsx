@@ -26,7 +26,7 @@ export function SiteHeader() {
           <BrandLogo
             className="site-header__logo-lockup"
             priority
-            sizes="(min-width: 1200px) 11rem, 8.5rem"
+            sizes="(min-width: 1200px) 5.5rem, 4.5rem"
           />
         </Link>
 
