@@ -1,4 +1,4 @@
-import officialLogo from "@/newLogo.jpeg";
+import officialLogo from "@/J4J master logo NEW.png";
 
 import { assetManifest } from "@/data/assets";
 
