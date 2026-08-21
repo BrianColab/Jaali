@@ -65,7 +65,16 @@
 .brand-logo {
   position: relative;
   display: block;
+  box-sizing: border-box;
   aspect-ratio: 1 / 1;
+  padding: 0.35rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-copper) 44%, transparent);
+  border-radius: 50%;
+  background: #f7f1e6;
+  box-shadow:
+    0 0.25rem 0.875rem rgb(0 0 0 / 28%),
+    inset 0 0 0 1px rgb(255 255 255 / 54%);
 }
 
 .brand-logo__image {
