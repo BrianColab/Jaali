@@ -7,6 +7,7 @@
   background: rgb(23 23 23 / 94%);
   color: var(--color-soft-white);
   backdrop-filter: blur(0.875rem);
+  box-shadow: 0 0.5rem 1.25rem rgb(23 23 23 / 20%);
 }
 
 .emergency-notice {
@@ -56,7 +57,7 @@
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
-  padding: 0;
+  padding-block: 0.5rem;
   background: transparent;
   color: var(--color-soft-white);
   text-decoration: none;
@@ -1278,9 +1279,10 @@
       linear-gradient(
         90deg,
         var(--color-shimmer-blue) 0%,
-        color-mix(in srgb, var(--color-shimmer-blue) 80%, transparent) 34%,
-        color-mix(in srgb, var(--color-shimmer-blue) 18%, transparent) 50%,
-        transparent 62%
+        color-mix(in srgb, var(--color-shimmer-blue) 88%, transparent) 30%,
+        color-mix(in srgb, var(--color-shimmer-blue) 55%, transparent) 46%,
+        color-mix(in srgb, var(--color-shimmer-blue) 22%, transparent) 60%,
+        transparent 78%
       ),
       radial-gradient(
         circle at 18% 72%,
@@ -1336,12 +1338,19 @@
   }
 
   .hero__media::after {
-    background: linear-gradient(
-      90deg,
-      color-mix(in srgb, var(--color-shimmer-blue) 92%, transparent) 0%,
-      color-mix(in srgb, var(--color-shimmer-blue) 34%, transparent) 30%,
-      transparent 58%
-    );
+    background:
+      linear-gradient(
+        90deg,
+        var(--color-shimmer-blue) 0%,
+        color-mix(in srgb, var(--color-shimmer-blue) 68%, transparent) 24%,
+        color-mix(in srgb, var(--color-shimmer-blue) 30%, transparent) 44%,
+        transparent 65%
+      ),
+      radial-gradient(
+        circle at 12% 92%,
+        color-mix(in srgb, var(--color-shimmer-blue) 60%, transparent),
+        transparent 48%
+      );
   }
 
   .hero__media .responsive-asset__image {
