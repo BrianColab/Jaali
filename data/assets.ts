@@ -1,23 +1,5 @@
 import type { AssetManifest } from "@/types/assets";
 
-const jaaliPortraitSources = {
-  desktop: {
-    src: "/assets/images/hero/jaali-banner-desktop.webp",
-    width: 816,
-    height: 1020,
-  },
-  tablet: {
-    src: "/assets/images/hero/jaali-banner-tablet.webp",
-    width: 720,
-    height: 900,
-  },
-  mobile: {
-    src: "/assets/images/hero/jaali-banner-mobile.webp",
-    width: 560,
-    height: 700,
-  },
-} as const;
-
 const jaaliUpdatedBannerSources = {
   desktop: {
     src: "/assets/images/hero/jaali-update-banner-desktop.webp",
@@ -51,6 +33,42 @@ const rememberingJaaliSources = {
     src: "/assets/images/backgrounds/remembering-jaali-mobile.webp",
     width: 720,
     height: 900,
+  },
+} as const;
+
+const jaaliFamilyTableSources = {
+  desktop: {
+    src: "/assets/images/backgrounds/jaali-family-table-desktop.webp",
+    width: 1408,
+    height: 1056,
+  },
+  tablet: {
+    src: "/assets/images/backgrounds/jaali-family-table-tablet.webp",
+    width: 1024,
+    height: 768,
+  },
+  mobile: {
+    src: "/assets/images/backgrounds/jaali-family-table-mobile.webp",
+    width: 720,
+    height: 900,
+  },
+} as const;
+
+const visionSnowfieldSources = {
+  desktop: {
+    src: "/assets/images/backgrounds/vision-snowfield-desktop.webp",
+    width: 888,
+    height: 1110,
+  },
+  tablet: {
+    src: "/assets/images/backgrounds/vision-snowfield-tablet.webp",
+    width: 720,
+    height: 900,
+  },
+  mobile: {
+    src: "/assets/images/backgrounds/vision-snowfield-mobile.webp",
+    width: 560,
+    height: 700,
   },
 } as const;
 
@@ -97,13 +115,13 @@ export const assetManifest = {
     timeline: {
       status: "ready",
       // TODO(content): Confirm final alternative text with the family/editorial team.
-      alt: "Jaali's family seated together beside a framed photograph of Jaali.",
+      alt: "A reserved table setting for Jaali's family at a community gathering.",
       decorative: false,
       fallbackAspectRatio: "4/5",
-      fallbackLabel: "Jaali's family with a framed photograph of Jaali",
+      fallbackLabel: "A reserved table setting for Jaali's family",
       quality: 88,
       sizes: "(min-width: 1200px) 38vw, (min-width: 768px) 50vw, 100vw",
-      sources: rememberingJaaliSources,
+      sources: jaaliFamilyTableSources,
     },
     quote: {
       status: "ready",
@@ -173,13 +191,13 @@ export const assetManifest = {
     vision: {
       status: "ready",
       // TODO(content): Confirm final alternative text with the family/editorial team.
-      alt: "Jaali smiling outdoors in warm sunset light.",
+      alt: "A woman in a black dress walking through a snow-covered field at dusk, near a birch grove and an old barn.",
       decorative: false,
       fallbackAspectRatio: "4/5",
-      fallbackLabel: "Portrait of Jaali",
+      fallbackLabel: "A figure walking through a snow-covered field",
       quality: 88,
       sizes: "(min-width: 1200px) 44vw, (min-width: 768px) 50vw, 100vw",
-      sources: jaaliPortraitSources,
+      sources: visionSnowfieldSources,
     },
   },
   metadata: {

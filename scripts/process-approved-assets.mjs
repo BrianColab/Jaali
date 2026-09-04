@@ -46,6 +46,17 @@ const assets = [
     ],
   },
   {
+    input: "JaaliFamilyTable.png",
+    outputDirectory: "backgrounds",
+    outputName: "jaali-family-table",
+    focalPoint: { x: 0.5, y: 0.55 },
+    variants: [
+      { name: "desktop", width: 1408, height: 1056 },
+      { name: "tablet", width: 1024, height: 768 },
+      { name: "mobile", width: 720, height: 900 },
+    ],
+  },
+  {
     input: "Black hoodie. .png",
     outputDirectory: "banners",
     outputName: "justice-for-jaali-hoodie",
@@ -54,6 +65,17 @@ const assets = [
       { name: "desktop", width: 1200, height: 900 },
       { name: "tablet", width: 960, height: 720 },
       { name: "mobile", width: 720, height: 720 },
+    ],
+  },
+  {
+    input: "VisionSnowfield.png",
+    outputDirectory: "backgrounds",
+    outputName: "vision-snowfield",
+    focalPoint: { x: 0.32, y: 0.28 },
+    variants: [
+      { name: "desktop", width: 888, height: 1110 },
+      { name: "tablet", width: 720, height: 900 },
+      { name: "mobile", width: 560, height: 700 },
     ],
   },
   {
