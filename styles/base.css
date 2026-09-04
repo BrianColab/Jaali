@@ -52,7 +52,7 @@ video {
 }
 
 dialog::backdrop {
-  background: rgb(23 23 23 / 66%);
+  background: rgb(15 44 84 / 66%);
 }
 
 :focus-visible {

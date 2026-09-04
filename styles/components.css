@@ -219,7 +219,7 @@
 
 .site-footer {
   padding-block: var(--space-9) var(--space-6);
-  background: var(--color-deep-charcoal);
+  background: var(--gradient-shimmer-blue);
   color: var(--color-soft-white);
 }
 
@@ -298,10 +298,10 @@
     145deg,
     color-mix(
       in srgb,
-      var(--color-deep-charcoal) 92%,
+      var(--color-shimmer-blue) 92%,
       var(--color-cedar-brown)
     ),
-    var(--color-deep-charcoal) 46%
+    var(--color-shimmer-blue) 46%
   );
   color: var(--color-soft-white);
 }
@@ -309,7 +309,7 @@
 .section--forest {
   background: color-mix(
     in srgb,
-    var(--color-deep-charcoal) 82%,
+    var(--color-shimmer-blue) 82%,
     var(--color-sage)
   );
   color: var(--color-soft-white);
@@ -479,7 +479,7 @@
 }
 
 .button--primary {
-  background: var(--color-deep-charcoal);
+  background: var(--gradient-shimmer-blue);
   color: var(--color-soft-white);
 }
 
@@ -605,7 +605,7 @@
 
 .card--dark {
   border-color: var(--border-inverse);
-  background: var(--color-deep-charcoal);
+  background: var(--gradient-shimmer-blue);
   color: var(--color-soft-white);
 }
 
@@ -710,7 +710,7 @@
   overflow: hidden;
   align-items: center;
   padding-block: 0;
-  background: var(--color-deep-charcoal);
+  background: var(--gradient-shimmer-blue);
   color: var(--color-soft-white);
   isolation: isolate;
 }
@@ -722,9 +722,9 @@
   background:
     linear-gradient(
       0deg,
-      var(--color-deep-charcoal) 2%,
-      color-mix(in srgb, var(--color-deep-charcoal) 94%, transparent) 24%,
-      color-mix(in srgb, var(--color-deep-charcoal) 48%, transparent) 54%,
+      var(--color-shimmer-blue) 2%,
+      color-mix(in srgb, var(--color-shimmer-blue) 94%, transparent) 24%,
+      color-mix(in srgb, var(--color-shimmer-blue) 48%, transparent) 54%,
       transparent 78%
     ),
     radial-gradient(
@@ -782,7 +782,7 @@
   inset: 0;
   background: linear-gradient(
     0deg,
-    color-mix(in srgb, var(--color-deep-charcoal) 70%, transparent) 0%,
+    color-mix(in srgb, var(--color-shimmer-blue) 70%, transparent) 0%,
     transparent 30%
   );
   content: "";
@@ -1027,7 +1027,7 @@
       color-mix(in srgb, var(--color-cedar-brown) 24%, transparent),
       transparent 38%
     ),
-    var(--color-deep-charcoal);
+    var(--color-shimmer-blue);
 }
 
 .section--signature-quote .section__header {
@@ -1277,9 +1277,9 @@
     background:
       linear-gradient(
         90deg,
-        var(--color-deep-charcoal) 0%,
-        color-mix(in srgb, var(--color-deep-charcoal) 80%, transparent) 34%,
-        color-mix(in srgb, var(--color-deep-charcoal) 18%, transparent) 50%,
+        var(--color-shimmer-blue) 0%,
+        color-mix(in srgb, var(--color-shimmer-blue) 80%, transparent) 34%,
+        color-mix(in srgb, var(--color-shimmer-blue) 18%, transparent) 50%,
         transparent 62%
       ),
       radial-gradient(
@@ -1338,8 +1338,8 @@
   .hero__media::after {
     background: linear-gradient(
       90deg,
-      color-mix(in srgb, var(--color-deep-charcoal) 92%, transparent) 0%,
-      color-mix(in srgb, var(--color-deep-charcoal) 34%, transparent) 30%,
+      color-mix(in srgb, var(--color-shimmer-blue) 92%, transparent) 0%,
+      color-mix(in srgb, var(--color-shimmer-blue) 34%, transparent) 30%,
       transparent 58%
     );
   }
@@ -1595,7 +1595,7 @@
     display: block;
     padding: var(--space-3) var(--space-2);
     border: 1px solid color-mix(in srgb, var(--color-copper) 28%, transparent);
-    background: color-mix(in srgb, var(--color-deep-charcoal) 82%, transparent);
+    background: color-mix(in srgb, var(--color-shimmer-blue) 82%, transparent);
     color: var(--color-soft-white);
     transform: translateY(-50%);
     backdrop-filter: blur(0.75rem);
@@ -1636,7 +1636,7 @@
     max-width: 12rem;
     padding: var(--space-2) var(--space-3);
     border-left: 1px solid var(--color-copper);
-    background: var(--color-deep-charcoal);
+    background: var(--gradient-shimmer-blue);
     color: var(--color-soft-white);
     font-size: 0.625rem;
     font-weight: 700;
@@ -1675,7 +1675,7 @@
       color-mix(in srgb, var(--color-copper) 22%, transparent),
       transparent 36%
     ),
-    var(--color-deep-charcoal);
+    var(--color-shimmer-blue);
   color: var(--color-soft-white);
   isolation: isolate;
 }
@@ -1887,7 +1887,7 @@
   gap: var(--space-5);
   padding: clamp(1.5rem, 4vw, 3rem);
   border-top: 0.25rem solid var(--color-copper);
-  background: var(--color-deep-charcoal);
+  background: var(--gradient-shimmer-blue);
   color: var(--color-soft-white);
 }
 
@@ -1944,7 +1944,7 @@
   height: 100%;
   padding: 0;
   border: 0;
-  background: rgb(10 10 10 / 68%);
+  background: rgb(15 44 84 / 68%);
   cursor: pointer;
   opacity: 0;
   backdrop-filter: blur(0.25rem);
@@ -1991,7 +1991,7 @@
     color-mix(in srgb, var(--color-copper) 38%, transparent);
   background:
     linear-gradient(100deg, rgb(184 115 51 / 12%), transparent 52%),
-    var(--color-deep-charcoal);
+    var(--color-shimmer-blue);
 }
 
 .donation-drawer__logo {
