@@ -1,5 +1,7 @@
 @theme {
   --color-deep-charcoal: #171717;
+  --color-shimmer-blue: #0f2c54;
+  --color-shimmer-blue-bright: #3d78c2;
   --color-warm-ivory: #f7f5f2;
   --color-soft-white: #fcfbf9;
   --color-cedar-brown: #8b5e3c;
@@ -80,6 +82,13 @@
     var(--color-sage)
   );
   --color-critical: var(--color-cedar-brown);
+
+  --gradient-shimmer-blue: linear-gradient(
+    115deg,
+    var(--color-shimmer-blue) 0%,
+    var(--color-shimmer-blue-bright) 50%,
+    var(--color-shimmer-blue) 100%
+  );
 }
 
 @media (min-width: 48rem) {
