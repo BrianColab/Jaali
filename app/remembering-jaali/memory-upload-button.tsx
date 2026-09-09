@@ -1,17 +1,48 @@
 "use client";
 
-import { Lock, UploadCloud } from "lucide-react";
+import { Heart, Lock, UploadCloud } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState, type DragEvent } from "react";
 
 import { TextField } from "@/components/forms/form-controls";
 import { Modal } from "@/components/overlays/modal";
 import { Button } from "@/components/ui/button";
-import { Text } from "@/components/ui/typography";
+import { Heading, Text } from "@/components/ui/typography";
 
 const maxFileSizeBytes = 8 * 1024 * 1024;
 const maxFiles = 5;
 const acceptedTypes = ["image/png", "image/jpeg", "image/gif"];
+
+function uploadWithProgress(
+  url: string,
+  formData: FormData,
+  onProgress: (percent: number) => void,
+): Promise<{ ok: boolean; status: number; body: unknown }> {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
+    xhr.upload.onprogress = (event) => {
+      if (event.lengthComputable) {
+        onProgress(Math.round((event.loaded / event.total) * 100));
+      }
+    };
+    xhr.onload = () => {
+      let body: unknown;
+      try {
+        body = JSON.parse(xhr.responseText);
+      } catch {
+        body = null;
+      }
+      resolve({
+        ok: xhr.status >= 200 && xhr.status < 300,
+        status: xhr.status,
+        body,
+      });
+    };
+    xhr.onerror = () => reject(new Error("Network error"));
+    xhr.send(formData);
+  });
+}
 
 type PendingFile = Readonly<{
   caption: string;
@@ -30,6 +61,7 @@ export function MemoryUploadButton() {
   const [name, setName] = useState("");
   const [dragActive, setDragActive] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [error, setError] = useState<string>();
   const [succeeded, setSucceeded] = useState(false);
 
@@ -46,6 +78,7 @@ export function MemoryUploadButton() {
     setName("");
     setError(undefined);
     setSucceeded(false);
+    setUploadProgress(0);
   }
 
   function handleOpenChange(nextOpen: boolean) {
@@ -127,6 +160,7 @@ export function MemoryUploadButton() {
     }
 
     setSubmitting(true);
+    setUploadProgress(0);
     setError(undefined);
 
     const formData = new FormData();
@@ -136,17 +170,23 @@ export function MemoryUploadButton() {
     }
     if (name.trim()) formData.set("name", name.trim());
 
-    const response = await fetch("/api/memories/upload", {
-      method: "POST",
-      body: formData,
-    });
+    let response: Awaited<ReturnType<typeof uploadWithProgress>>;
+    try {
+      response = await uploadWithProgress(
+        "/api/memories/upload",
+        formData,
+        setUploadProgress,
+      );
+    } catch {
+      setSubmitting(false);
+      setError("Something went wrong. Please try again.");
+      return;
+    }
 
     setSubmitting(false);
 
     if (!response.ok) {
-      const body = (await response.json().catch(() => null)) as {
-        error?: string;
-      } | null;
+      const body = response.body as { error?: string } | null;
       setError(body?.error ?? "Something went wrong. Please try again.");
       return;
     }
@@ -167,7 +207,24 @@ export function MemoryUploadButton() {
         title="Share a Photo of Jaali"
       >
         {succeeded ? (
-          <Text>Thank you — your photo is pending review.</Text>
+          <div className="memory-upload-success">
+            <Heart
+              aria-hidden="true"
+              size={36}
+              strokeWidth={1.5}
+              className="memory-upload-success__icon"
+            />
+            <Heading level={2} variant="card">
+              Thank You
+            </Heading>
+            <Text muted>
+              Your photo{pendingFiles.length > 1 ? "s are" : " is"} pending
+              review and will appear here once approved.
+            </Text>
+            <Button type="button" onClick={() => handleOpenChange(false)}>
+              Done
+            </Button>
+          </div>
         ) : (
           <form className="memory-upload-form" onSubmit={handleSubmit}>
             <div
@@ -264,13 +321,15 @@ export function MemoryUploadButton() {
               </ul>
             ) : null}
 
-            <TextField
-              id="memory-uploader-name"
-              label="Your name (optional)"
-              name="name"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-            />
+            <div className="memory-upload-name">
+              <TextField
+                id="memory-uploader-name"
+                label="Your name (optional)"
+                name="name"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+              />
+            </div>
 
             {error ? (
               <Text size="small" className="form-error" role="alert">
@@ -278,9 +337,25 @@ export function MemoryUploadButton() {
               </Text>
             ) : null}
 
+            {submitting ? (
+              <div
+                className="memory-upload-progress"
+                role="progressbar"
+                aria-valuenow={uploadProgress}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label="Upload progress"
+              >
+                <div
+                  className="memory-upload-progress__bar"
+                  style={{ width: `${uploadProgress}%` }}
+                />
+              </div>
+            ) : null}
+
             <Button type="submit" size="large" disabled={submitting}>
               {submitting
-                ? "Uploading…"
+                ? `Uploading… ${uploadProgress}%`
                 : `Upload ${pendingFiles.length > 1 ? `${pendingFiles.length} Photos` : "Photo"}`}
             </Button>
           </form>
