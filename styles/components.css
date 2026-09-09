@@ -2071,6 +2071,11 @@
   gap: var(--space-4);
 }
 
+.remembering-jaali__title {
+  margin-bottom: 0;
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+}
+
 .memory-gallery {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

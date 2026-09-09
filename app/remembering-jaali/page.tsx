@@ -26,7 +26,12 @@ export default async function RememberingJaaliPage() {
         <Container>
           <header className="section__header remembering-jaali__header">
             <Eyebrow>Justice for Jaali</Eyebrow>
-            <Heading id="remembering-jaali-heading" level={1} variant="section">
+            <Heading
+              id="remembering-jaali-heading"
+              level={1}
+              variant="section"
+              className="remembering-jaali__title"
+            >
               Remembering Jaali
             </Heading>
             <Text size="lead">
