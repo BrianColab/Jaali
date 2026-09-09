@@ -7,7 +7,7 @@ import { useEffect, useId, useRef, useState, type DragEvent } from "react";
 import { TextField } from "@/components/forms/form-controls";
 import { Modal } from "@/components/overlays/modal";
 import { Button } from "@/components/ui/button";
-import { Heading, Text } from "@/components/ui/typography";
+import { Text } from "@/components/ui/typography";
 
 const maxFileSizeBytes = 8 * 1024 * 1024;
 const maxFiles = 5;
@@ -204,7 +204,11 @@ export function MemoryUploadButton() {
       <Modal
         open={open}
         onOpenChange={handleOpenChange}
-        title="Share a Photo of Jaali"
+        title={
+          succeeded
+            ? "Thank You for Sharing a Photo of Jaali"
+            : "Share a Photo(s) of Jaali"
+        }
       >
         {succeeded ? (
           <div className="memory-upload-success">
@@ -214,9 +218,6 @@ export function MemoryUploadButton() {
               strokeWidth={1.5}
               className="memory-upload-success__icon"
             />
-            <Heading level={2} variant="card">
-              Thank You
-            </Heading>
             <Text muted>
               Your photo{pendingFiles.length > 1 ? "s are" : " is"} pending
               review and will appear here once approved.
