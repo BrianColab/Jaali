@@ -6,6 +6,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/typography";
 
+import { MemoryEditFields } from "./memory-edit-fields";
+
 type AdminQueueRowProps = Readonly<{
   caption: string | null;
   createdAt: string;
@@ -56,6 +58,11 @@ export function AdminQueueRow({
         </Text>
         <Text>{uploaderName ?? "Anonymous"}</Text>
         {caption ? <Text size="small">{caption}</Text> : null}
+        <MemoryEditFields
+          id={id}
+          uploaderName={uploaderName}
+          caption={caption}
+        />
         {error ? (
           <Text size="small" className="form-error" role="alert">
             {error}

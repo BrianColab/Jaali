@@ -6,6 +6,8 @@ import { useRef, useState, type DragEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/typography";
 
+import { MemoryEditFields } from "./memory-edit-fields";
+
 type ApprovedMemory = Readonly<{
   caption: string | null;
   id: string;
@@ -109,6 +111,11 @@ export function AdminApprovedGrid({ memories }: AdminApprovedGridProps) {
                   {item.caption}
                 </Text>
               ) : null}
+              <MemoryEditFields
+                id={item.id}
+                uploaderName={item.uploaderName}
+                caption={item.caption}
+              />
             </div>
             <Button
               type="button"

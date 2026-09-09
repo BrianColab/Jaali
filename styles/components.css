@@ -2355,6 +2355,40 @@
   gap: var(--space-1);
 }
 
+.memory-edit-toggle {
+  justify-self: start;
+  padding: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-copper);
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.memory-edit-fields {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.memory-edit-fields__input {
+  width: 100%;
+  padding: 0.375rem 0.5rem;
+  font: inherit;
+  font-size: 0.8125rem;
+  background: var(--color-soft-white);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.memory-edit-fields__actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
 @media (min-width: 48rem) {
   .memory-gallery {
     grid-template-columns: repeat(3, minmax(0, 1fr));

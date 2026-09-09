@@ -75,6 +75,17 @@ export async function approveMemory(id: string): Promise<void> {
   );
 }
 
+export async function updateMemoryDetails(
+  id: string,
+  input: { uploaderName: string | null; caption: string | null },
+): Promise<void> {
+  const db = await getDb();
+  await db.query(
+    `UPDATE memories SET uploader_name = $1, caption = $2 WHERE id = $3`,
+    [input.uploaderName, input.caption, id],
+  );
+}
+
 export async function deleteMemory(id: string): Promise<void> {
   const db = await getDb();
   await db.query(`DELETE FROM memories WHERE id = $1`, [id]);
