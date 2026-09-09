@@ -28,11 +28,11 @@ export const homepageContent = {
       eyebrow: "Justice for Jaali",
       title: "Her Name Was Jaali",
       intro:
-        "Jaali Sutherland-Weenie was a daughter, sister, partner, mother and friend. She was a member of Beardy’s & Okemasis Cree Nation and had completed her bachelor’s degree in Indigenous social work at the First Nations University of Canada.",
+        "Jaali Weenie-Sutherland was a daughter, sister, partner, mother and friend. She was a registered member of the Sweetgrass First Nation and grew up with the Beardy’s & Okemasis Cree Nation people. She had completed her bachelor’s degree in Indigenous social work at the First Nations University of Canada.",
       tone: "soft-white",
     },
     block: {
-      eyebrow: "Jaali Sutherland-Weenie",
+      eyebrow: "Jaali Weenie-Sutherland",
       title:
         "She was preparing to graduate. She was preparing to become a mother.",
       body: "Her partner, Blayne Morin, remembers her smile, her jokes and her big heart. She listened when people needed her. She and Blayne planned to raise their daughter with love, cultural teachings and ceremony. Instead of celebrating her graduation and the birth of her daughter, Jaali’s family is seeking answers about why she died. Jaali’s family wants answers. Accountability. Change. We will not allow her name to become another statistic.",
@@ -52,7 +52,7 @@ export const homepageContent = {
       {
         id: "jaali-entered-care",
         date: "36 weeks pregnant",
-        title: "Jaali Sutherland-Weenie was 24 years old.",
+        title: "Jaali Weenie-Sutherland was 24 years old.",
         description:
           "She entered the health-care system in severe pain. Her family says she had been diagnosed with pre-eclampsia.",
       },

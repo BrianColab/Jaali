@@ -7,7 +7,7 @@ export const storyPageContent = {
   eyebrow: "Justice for Jaali",
   title: "Her Name Was Jaali",
   intro:
-    "Jaali Sutherland-Weenie was a daughter, sister, partner, mother and friend. She was a member of Beardy’s & Okemasis Cree Nation and had completed her bachelor’s degree in Indigenous social work at the First Nations University of Canada.",
+    "Jaali Weenie-Sutherland was a daughter, sister, partner, mother and friend. She was a registered member of the Sweetgrass First Nation and grew up with the Beardy’s & Okemasis Cree Nation people. She had completed her bachelor’s degree in Indigenous social work at the First Nations University of Canada.",
   sections: [
     {
       id: "the-future-she-was-building",
@@ -34,7 +34,7 @@ export const storyPageContent = {
         "Jaali’s life was more than the circumstances of her death.",
         "We remember the young woman who loved her family, completed her education, prepared for motherhood and offered others a listening ear. We honour the future she was building and the daughter who will grow up knowing how deeply her mother was loved.",
         "Jaali’s family has carried unimaginable grief into a demand for change. We will carry that demand with them.",
-        "Her name was Jaali Sutherland-Weenie. This work is for her.",
+        "Her name was Jaali Weenie-Sutherland. This work is for her.",
       ],
     },
   ],
