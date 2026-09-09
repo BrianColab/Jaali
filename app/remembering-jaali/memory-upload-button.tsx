@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useId, useRef, useState, type DragEvent } from "react";
+import { useEffect, useId, useRef, useState, type DragEvent } from "react";
 
 import { TextAreaField, TextField } from "@/components/forms/form-controls";
 import { Modal } from "@/components/overlays/modal";
@@ -9,6 +9,14 @@ import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/typography";
 
 const maxFileSizeBytes = 8 * 1024 * 1024;
+const maxFiles = 5;
+const acceptedTypes = ["image/png", "image/jpeg", "image/gif"];
+
+type PendingFile = Readonly<{
+  file: File;
+  id: string;
+  previewUrl: string;
+}>;
 
 export function MemoryUploadButton() {
   const router = useRouter();
@@ -16,7 +24,7 @@ export function MemoryUploadButton() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [open, setOpen] = useState(false);
-  const [file, setFile] = useState<File>();
+  const [pendingFiles, setPendingFiles] = useState<PendingFile[]>([]);
   const [name, setName] = useState("");
   const [caption, setCaption] = useState("");
   const [dragActive, setDragActive] = useState(false);
@@ -24,8 +32,16 @@ export function MemoryUploadButton() {
   const [error, setError] = useState<string>();
   const [succeeded, setSucceeded] = useState(false);
 
+  useEffect(() => {
+    return () => {
+      for (const pending of pendingFiles)
+        URL.revokeObjectURL(pending.previewUrl);
+    };
+  }, [pendingFiles]);
+
   function resetForm() {
-    setFile(undefined);
+    for (const pending of pendingFiles) URL.revokeObjectURL(pending.previewUrl);
+    setPendingFiles([]);
     setName("");
     setCaption("");
     setError(undefined);
@@ -37,33 +53,67 @@ export function MemoryUploadButton() {
     if (!nextOpen) resetForm();
   }
 
-  function validateAndSetFile(candidate: File | undefined) {
-    if (!candidate) return;
+  function addFiles(candidates: FileList | File[]) {
+    const incoming = Array.from(candidates);
+    if (incoming.length === 0) return;
 
-    if (!candidate.type.startsWith("image/")) {
-      setError("Please choose an image file.");
-      return;
+    const accepted: PendingFile[] = [];
+    let rejectionReason: string | undefined;
+
+    for (const candidate of incoming) {
+      if (!acceptedTypes.includes(candidate.type)) {
+        rejectionReason = "Photos must be PNG, JPEG, or GIF files.";
+        continue;
+      }
+      if (candidate.size > maxFileSizeBytes) {
+        rejectionReason = "Each photo must be 8MB or smaller.";
+        continue;
+      }
+      accepted.push({
+        file: candidate,
+        id: `${candidate.name}-${candidate.lastModified}-${candidate.size}`,
+        previewUrl: URL.createObjectURL(candidate),
+      });
     }
 
-    if (candidate.size > maxFileSizeBytes) {
-      setError("Images must be 8MB or smaller.");
-      return;
-    }
+    setPendingFiles((current) => {
+      const merged = [...current];
+      for (const item of accepted) {
+        if (merged.some((existing) => existing.id === item.id)) {
+          URL.revokeObjectURL(item.previewUrl);
+          continue;
+        }
+        if (merged.length >= maxFiles) {
+          URL.revokeObjectURL(item.previewUrl);
+          rejectionReason = `You can share up to ${maxFiles} photos at a time.`;
+          continue;
+        }
+        merged.push(item);
+      }
+      return merged;
+    });
 
-    setError(undefined);
-    setFile(candidate);
+    setError(rejectionReason);
+  }
+
+  function removeFile(id: string) {
+    setPendingFiles((current) => {
+      const target = current.find((item) => item.id === id);
+      if (target) URL.revokeObjectURL(target.previewUrl);
+      return current.filter((item) => item.id !== id);
+    });
   }
 
   function handleDrop(event: DragEvent<HTMLDivElement>) {
     event.preventDefault();
     setDragActive(false);
-    validateAndSetFile(event.dataTransfer.files[0]);
+    addFiles(event.dataTransfer.files);
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!file) {
-      setError("Please choose a photo to upload.");
+    if (pendingFiles.length === 0) {
+      setError("Please choose at least one photo to upload.");
       return;
     }
 
@@ -71,7 +121,7 @@ export function MemoryUploadButton() {
     setError(undefined);
 
     const formData = new FormData();
-    formData.set("image", file);
+    for (const pending of pendingFiles) formData.append("images", pending.file);
     if (name.trim()) formData.set("name", name.trim());
     if (caption.trim()) formData.set("caption", caption.trim());
 
@@ -128,24 +178,42 @@ export function MemoryUploadButton() {
                 }
               }}
             >
-              {file ? (
-                <Text size="small">{file.name}</Text>
-              ) : (
-                <Text size="small" muted>
-                  Drag and drop a photo here, or click to browse.
-                </Text>
-              )}
+              <Text size="small" muted>
+                Drag and drop photos here, or click to browse. PNG, JPEG, or GIF
+                — up to {maxFiles} photos.
+              </Text>
               <input
                 ref={fileInputRef}
                 id={fileInputId}
                 type="file"
-                accept="image/*"
+                accept="image/png,image/jpeg,image/gif"
+                multiple
                 className="memory-upload-dropzone__input"
-                onChange={(event) =>
-                  validateAndSetFile(event.target.files?.[0])
-                }
+                onChange={(event) => {
+                  if (event.target.files) addFiles(event.target.files);
+                  event.target.value = "";
+                }}
               />
             </div>
+
+            {pendingFiles.length > 0 ? (
+              <ul className="memory-upload-previews">
+                {pendingFiles.map((pending) => (
+                  <li key={pending.id} className="memory-upload-preview">
+                    {/* eslint-disable-next-line @next/next/no-img-element -- local blob: preview URL, not an optimizable remote image */}
+                    <img src={pending.previewUrl} alt="" />
+                    <button
+                      type="button"
+                      className="memory-upload-preview__remove"
+                      aria-label={`Remove ${pending.file.name}`}
+                      onClick={() => removeFile(pending.id)}
+                    >
+                      ×
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
 
             <TextField
               id="memory-uploader-name"
@@ -169,7 +237,9 @@ export function MemoryUploadButton() {
             ) : null}
 
             <Button type="submit" size="large" disabled={submitting}>
-              {submitting ? "Uploading…" : "Upload Photo"}
+              {submitting
+                ? "Uploading…"
+                : `Upload ${pendingFiles.length > 1 ? `${pendingFiles.length} Photos` : "Photo"}`}
             </Button>
           </form>
         )}
