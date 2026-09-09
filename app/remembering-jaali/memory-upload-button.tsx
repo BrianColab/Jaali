@@ -4,7 +4,7 @@ import { Lock, UploadCloud } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState, type DragEvent } from "react";
 
-import { TextAreaField, TextField } from "@/components/forms/form-controls";
+import { TextField } from "@/components/forms/form-controls";
 import { Modal } from "@/components/overlays/modal";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/typography";
@@ -14,6 +14,7 @@ const maxFiles = 5;
 const acceptedTypes = ["image/png", "image/jpeg", "image/gif"];
 
 type PendingFile = Readonly<{
+  caption: string;
   file: File;
   id: string;
   previewUrl: string;
@@ -27,7 +28,6 @@ export function MemoryUploadButton() {
   const [open, setOpen] = useState(false);
   const [pendingFiles, setPendingFiles] = useState<PendingFile[]>([]);
   const [name, setName] = useState("");
-  const [caption, setCaption] = useState("");
   const [dragActive, setDragActive] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string>();
@@ -44,7 +44,6 @@ export function MemoryUploadButton() {
     for (const pending of pendingFiles) URL.revokeObjectURL(pending.previewUrl);
     setPendingFiles([]);
     setName("");
-    setCaption("");
     setError(undefined);
     setSucceeded(false);
   }
@@ -71,6 +70,7 @@ export function MemoryUploadButton() {
         continue;
       }
       accepted.push({
+        caption: "",
         file: candidate,
         id: `${candidate.name}-${candidate.lastModified}-${candidate.size}`,
         previewUrl: URL.createObjectURL(candidate),
@@ -95,6 +95,14 @@ export function MemoryUploadButton() {
     });
 
     setError(rejectionReason);
+  }
+
+  function setFileCaption(id: string, value: string) {
+    setPendingFiles((current) =>
+      current.map((item) =>
+        item.id === id ? { ...item, caption: value } : item,
+      ),
+    );
   }
 
   function removeFile(id: string) {
@@ -122,9 +130,11 @@ export function MemoryUploadButton() {
     setError(undefined);
 
     const formData = new FormData();
-    for (const pending of pendingFiles) formData.append("images", pending.file);
+    for (const pending of pendingFiles) {
+      formData.append("images", pending.file);
+      formData.append("captions", pending.caption.trim());
+    }
     if (name.trim()) formData.set("name", name.trim());
-    if (caption.trim()) formData.set("caption", caption.trim());
 
     const response = await fetch("/api/memories/upload", {
       method: "POST",
@@ -219,18 +229,36 @@ export function MemoryUploadButton() {
 
             {pendingFiles.length > 0 ? (
               <ul className="memory-upload-previews">
-                {pendingFiles.map((pending) => (
+                {pendingFiles.map((pending, index) => (
                   <li key={pending.id} className="memory-upload-preview">
-                    {/* eslint-disable-next-line @next/next/no-img-element -- local blob: preview URL, not an optimizable remote image */}
-                    <img src={pending.previewUrl} alt="" />
-                    <button
-                      type="button"
-                      className="memory-upload-preview__remove"
-                      aria-label={`Remove ${pending.file.name}`}
-                      onClick={() => removeFile(pending.id)}
+                    <div className="memory-upload-preview__image-wrap">
+                      {/* eslint-disable-next-line @next/next/no-img-element -- local blob: preview URL, not an optimizable remote image */}
+                      <img src={pending.previewUrl} alt="" />
+                      <button
+                        type="button"
+                        className="memory-upload-preview__remove"
+                        aria-label={`Remove ${pending.file.name}`}
+                        onClick={() => removeFile(pending.id)}
+                      >
+                        ×
+                      </button>
+                    </div>
+                    <Text
+                      size="small"
+                      muted
+                      className="memory-upload-preview__label"
                     >
-                      ×
-                    </button>
+                      Picture {index + 1}
+                    </Text>
+                    <input
+                      type="text"
+                      className="memory-upload-preview__caption"
+                      placeholder="Caption (optional)"
+                      value={pending.caption}
+                      onChange={(event) =>
+                        setFileCaption(pending.id, event.target.value)
+                      }
+                    />
                   </li>
                 ))}
               </ul>
@@ -242,13 +270,6 @@ export function MemoryUploadButton() {
               name="name"
               value={name}
               onChange={(event) => setName(event.target.value)}
-            />
-            <TextAreaField
-              id="memory-caption"
-              label="Caption (optional)"
-              name="caption"
-              value={caption}
-              onChange={(event) => setCaption(event.target.value)}
             />
 
             {error ? (

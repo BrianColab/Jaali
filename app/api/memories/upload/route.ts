@@ -16,8 +16,10 @@ export async function POST(request: Request) {
   const images = formData
     .getAll("images")
     .filter((entry): entry is File => entry instanceof File && entry.size > 0);
+  const captions = formData
+    .getAll("captions")
+    .filter((entry): entry is string => typeof entry === "string");
   const name = formData.get("name");
-  const caption = formData.get("caption");
 
   if (images.length === 0) {
     return NextResponse.json(
@@ -53,17 +55,16 @@ export async function POST(request: Request) {
     typeof name === "string" && name.trim()
       ? name.trim().slice(0, maxNameLength)
       : null;
-  const trimmedCaption =
-    typeof caption === "string" && caption.trim()
-      ? caption.trim().slice(0, maxCaptionLength)
-      : null;
 
-  for (const image of images) {
+  for (const [index, image] of images.entries()) {
+    const rawCaption = captions[index]?.trim();
+    const caption = rawCaption ? rawCaption.slice(0, maxCaptionLength) : null;
+
     const imageKey = await uploadMemoryImage(image);
     await insertPendingMemory({
       imageKey,
       uploaderName,
-      caption: trimmedCaption,
+      caption,
     });
   }
 

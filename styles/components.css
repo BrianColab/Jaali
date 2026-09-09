@@ -2157,21 +2157,26 @@
 
 .memory-upload-previews {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(4.5rem, 1fr));
-  gap: var(--space-2);
+  grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+  gap: var(--space-3);
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
 .memory-upload-preview {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.memory-upload-preview__image-wrap {
   position: relative;
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: var(--radius-sm);
 }
 
-.memory-upload-preview img {
+.memory-upload-preview__image-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -2191,6 +2196,20 @@
   background: rgb(23 23 23 / 65%);
   border: none;
   border-radius: var(--radius-pill);
+}
+
+.memory-upload-preview__label {
+  color: color-mix(in srgb, var(--color-deep-charcoal) 70%, transparent);
+}
+
+.memory-upload-preview__caption {
+  width: 100%;
+  padding: 0.375rem 0.5rem;
+  font: inherit;
+  font-size: 0.75rem;
+  background: var(--color-soft-white);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
 }
 
 .admin-login {
