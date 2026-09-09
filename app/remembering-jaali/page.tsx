@@ -4,6 +4,7 @@ import { createPageMetadata } from "@/lib/seo";
 import { getApprovedMemories } from "@/lib/memories";
 import { getMemoryImageUrl } from "@/lib/storage";
 
+import { MemoryGallery } from "./memory-gallery";
 import { MemoryUploadButton } from "./memory-upload-button";
 
 export const dynamic = "force-dynamic";
@@ -44,31 +45,14 @@ export default async function RememberingJaaliPage() {
           {memories.length === 0 ? (
             <Text muted>No memory photos have been shared yet.</Text>
           ) : (
-            <ul className="memory-gallery">
-              {memories.map((memory) => (
-                <li key={memory.id} className="memory-card">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    className="memory-card__image"
-                    src={getMemoryImageUrl(memory.imageKey)}
-                    alt={memory.caption ?? "A memory photo of Jaali"}
-                    loading="lazy"
-                  />
-                  {memory.caption || memory.uploaderName ? (
-                    <div className="memory-card__meta">
-                      {memory.caption ? (
-                        <Text size="small">{memory.caption}</Text>
-                      ) : null}
-                      {memory.uploaderName ? (
-                        <Text size="small" muted>
-                          — {memory.uploaderName}
-                        </Text>
-                      ) : null}
-                    </div>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
+            <MemoryGallery
+              memories={memories.map((memory) => ({
+                id: memory.id,
+                imageUrl: getMemoryImageUrl(memory.imageKey),
+                caption: memory.caption,
+                uploaderName: memory.uploaderName,
+              }))}
+            />
           )}
         </Container>
       </section>

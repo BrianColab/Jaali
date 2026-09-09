@@ -2096,17 +2096,99 @@
   background: var(--color-soft-white);
 }
 
+.memory-card__image-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  cursor: pointer;
+  background: var(--surface-muted);
+  border: none;
+}
+
 .memory-card__image {
   display: block;
   aspect-ratio: 4 / 5;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .memory-card__meta {
   display: grid;
   gap: var(--space-1);
   padding: var(--space-3);
+}
+
+.memory-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: var(--space-5);
+  background: rgb(0 0 0 / 88%);
+  animation: memory-lightbox-fade var(--duration-base) var(--ease-standard);
+}
+
+.memory-lightbox__close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  display: inline-grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  cursor: pointer;
+  place-items: center;
+  color: var(--color-soft-white);
+  background: rgb(255 255 255 / 12%);
+  border: none;
+  border-radius: var(--radius-pill);
+}
+
+.memory-lightbox__nav {
+  z-index: 1;
+  display: inline-grid;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  place-items: center;
+  color: var(--color-soft-white);
+  background: rgb(255 255 255 / 12%);
+  border: none;
+  border-radius: var(--radius-pill);
+}
+
+.memory-lightbox__figure {
+  display: grid;
+  grid-column: 2;
+  gap: var(--space-3);
+  justify-items: center;
+  margin: 0;
+  max-width: 100%;
+}
+
+.memory-lightbox__image {
+  max-width: 100%;
+  max-height: 80svh;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  animation: memory-lightbox-fade 180ms ease;
+}
+
+.memory-lightbox__caption {
+  max-width: 40rem;
+  color: var(--color-soft-white);
+  text-align: center;
+}
+
+@keyframes memory-lightbox-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .memory-upload-form {
@@ -2419,6 +2501,11 @@
   .donation-drawer__panel,
   [data-scroll-reveal] {
     transition: none;
+  }
+
+  .memory-lightbox,
+  .memory-lightbox__image {
+    animation: none;
   }
 
   [data-scroll-reveal] {
