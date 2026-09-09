@@ -63,6 +63,7 @@ export default async function AdminMemoriesPage() {
             : "Drag to reorder how photos appear on the public gallery, or delete one."}
         </Text>
         <AdminApprovedGrid
+          key={approvedMemories.map((memory) => memory.id).join(",")}
           memories={approvedMemories.map((memory) => ({
             id: memory.id,
             imageUrl: getMemoryImageUrl(memory.imageKey),
