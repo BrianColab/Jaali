@@ -3,6 +3,7 @@ import type { SiteRoute } from "@/types/navigation";
 export const siteRoutes = [
   { label: "Home", href: "/" },
   { label: "Jaali’s Story", href: "/jaalis-story" },
+  { label: "Remembering Jaali", href: "/remembering-jaali" },
   { label: "Get Help Now", href: "/get-help-now" },
   { label: "Maternal Health", href: "/maternal-health" },
   { label: "Know Your Rights", href: "/know-your-rights" },
