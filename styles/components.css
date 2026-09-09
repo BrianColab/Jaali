@@ -2312,6 +2312,10 @@
   gap: var(--space-1);
 }
 
+.admin-queue-row__details .memory-edit-toggle {
+  margin-top: var(--space-1);
+}
+
 .admin-queue-row__actions {
   display: flex;
   flex-direction: column;
@@ -2353,6 +2357,10 @@
 .admin-approved-card__details {
   display: grid;
   gap: var(--space-1);
+}
+
+.admin-approved-card__details .memory-edit-toggle {
+  margin-top: var(--space-1);
 }
 
 .memory-edit-toggle {

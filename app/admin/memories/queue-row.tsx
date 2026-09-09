@@ -56,8 +56,10 @@ export function AdminQueueRow({
         <Text size="small" muted>
           {new Date(createdAt).toLocaleString("en-CA")}
         </Text>
-        <Text>{uploaderName ?? "Anonymous"}</Text>
-        {caption ? <Text size="small">{caption}</Text> : null}
+        <Text>{caption || "No caption"}</Text>
+        <Text size="small" muted>
+          — {uploaderName ?? "Anonymous"}
+        </Text>
         <MemoryEditFields
           id={id}
           uploaderName={uploaderName}

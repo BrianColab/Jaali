@@ -105,12 +105,10 @@ export function AdminApprovedGrid({ memories }: AdminApprovedGridProps) {
               alt={item.caption ?? "Approved memory photo"}
             />
             <div className="admin-approved-card__details">
-              <Text size="small">{item.uploaderName ?? "Anonymous"}</Text>
-              {item.caption ? (
-                <Text size="small" muted>
-                  {item.caption}
-                </Text>
-              ) : null}
+              <Text size="small">{item.caption || "No caption"}</Text>
+              <Text size="small" muted>
+                — {item.uploaderName ?? "Anonymous"}
+              </Text>
               <MemoryEditFields
                 id={item.id}
                 uploaderName={item.uploaderName}
