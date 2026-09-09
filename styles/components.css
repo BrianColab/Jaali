@@ -1173,8 +1173,12 @@
 }
 
 .modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
   width: min(calc(100% - (2 * var(--page-gutter))), 42rem);
   max-height: calc(100svh - (2 * var(--page-gutter)));
+  margin: 0;
   padding: 0;
   overflow: hidden;
   border: 0;
@@ -1182,6 +1186,7 @@
   background: var(--color-soft-white);
   color: var(--color-deep-charcoal);
   box-shadow: var(--elevation-raised);
+  transform: translate(-50%, -50%);
 }
 
 .modal__inner {
