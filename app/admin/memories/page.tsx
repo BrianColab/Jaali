@@ -2,10 +2,11 @@ import { redirect } from "next/navigation";
 
 import { Container } from "@/components/ui/container";
 import { Heading, Text } from "@/components/ui/typography";
-import { getPendingMemories } from "@/lib/memories";
+import { getApprovedMemories, getPendingMemories } from "@/lib/memories";
 import { hasAdminSession } from "@/lib/require-admin";
 import { getMemoryImageUrl } from "@/lib/storage";
 
+import { AdminApprovedGrid } from "./approved-grid";
 import { AdminQueueRow } from "./queue-row";
 
 export const dynamic = "force-dynamic";
@@ -20,7 +21,10 @@ export default async function AdminMemoriesPage() {
     redirect("/admin/login");
   }
 
-  const memories = await getPendingMemories();
+  const [pendingMemories, approvedMemories] = await Promise.all([
+    getPendingMemories(),
+    getApprovedMemories(),
+  ]);
 
   return (
     <main className="admin-queue">
@@ -29,12 +33,12 @@ export default async function AdminMemoriesPage() {
           Review Memory Photos
         </Heading>
         <Text muted>
-          {memories.length === 0
+          {pendingMemories.length === 0
             ? "No photos are waiting for review."
-            : `${memories.length} photo${memories.length === 1 ? "" : "s"} waiting for review.`}
+            : `${pendingMemories.length} photo${pendingMemories.length === 1 ? "" : "s"} waiting for review.`}
         </Text>
         <ul className="admin-queue__list">
-          {memories.map((memory) => (
+          {pendingMemories.map((memory) => (
             <AdminQueueRow
               key={memory.id}
               id={memory.id}
@@ -45,6 +49,27 @@ export default async function AdminMemoriesPage() {
             />
           ))}
         </ul>
+
+        <Heading
+          level={2}
+          variant="card"
+          className="admin-queue__section-title"
+        >
+          Approved Photos
+        </Heading>
+        <Text muted>
+          {approvedMemories.length === 0
+            ? "No photos are live on the gallery yet."
+            : "Drag to reorder how photos appear on the public gallery, or delete one."}
+        </Text>
+        <AdminApprovedGrid
+          memories={approvedMemories.map((memory) => ({
+            id: memory.id,
+            imageUrl: getMemoryImageUrl(memory.imageKey),
+            uploaderName: memory.uploaderName,
+            caption: memory.caption,
+          }))}
+        />
       </Container>
     </main>
   );

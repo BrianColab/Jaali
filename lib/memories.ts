@@ -1,4 +1,5 @@
 import { getDb } from "@/lib/db";
+import { deleteMemoryImage } from "@/lib/storage";
 import type { MemoryRecord } from "@/types/memories";
 
 type MemoryRow = {
@@ -25,7 +26,8 @@ export async function getApprovedMemories(): Promise<MemoryRecord[]> {
   const db = await getDb();
   const result = await db.query<MemoryRow>(
     `SELECT id, image_key, uploader_name, caption, status, created_at
-     FROM memories WHERE status = 'approved' ORDER BY created_at DESC`,
+     FROM memories WHERE status = 'approved'
+     ORDER BY sort_order ASC NULLS LAST, created_at DESC`,
   );
   return result.rows.map(toRecord);
 }
@@ -64,10 +66,47 @@ export async function getMemoryById(id: string): Promise<MemoryRecord | null> {
 
 export async function approveMemory(id: string): Promise<void> {
   const db = await getDb();
-  await db.query(`UPDATE memories SET status = 'approved' WHERE id = $1`, [id]);
+  await db.query(
+    `UPDATE memories
+     SET status = 'approved',
+         sort_order = COALESCE((SELECT MAX(sort_order) FROM memories WHERE status = 'approved'), 0) + 1
+     WHERE id = $1`,
+    [id],
+  );
 }
 
 export async function deleteMemory(id: string): Promise<void> {
   const db = await getDb();
   await db.query(`DELETE FROM memories WHERE id = $1`, [id]);
+}
+
+export async function removeMemoryAndImage(id: string): Promise<boolean> {
+  const memory = await getMemoryById(id);
+  if (!memory) return false;
+
+  await deleteMemoryImage(memory.imageKey);
+  await deleteMemory(id);
+  return true;
+}
+
+export async function reorderApprovedMemories(
+  orderedIds: readonly string[],
+): Promise<void> {
+  const db = await getDb();
+  const client = await db.connect();
+  try {
+    await client.query("BEGIN");
+    for (const [index, id] of orderedIds.entries()) {
+      await client.query(
+        `UPDATE memories SET sort_order = $1 WHERE id = $2 AND status = 'approved'`,
+        [index, id],
+      );
+    }
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw error;
+  } finally {
+    client.release();
+  }
 }

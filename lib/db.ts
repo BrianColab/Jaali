@@ -26,6 +26,19 @@ async function ensureTable(): Promise<void> {
       created_at timestamptz NOT NULL DEFAULT now()
     );
   `);
+  await getPool().query(
+    `ALTER TABLE memories ADD COLUMN IF NOT EXISTS sort_order integer;`,
+  );
+  await getPool().query(`
+    UPDATE memories AS m
+    SET sort_order = backfill.rn
+    FROM (
+      SELECT id, ROW_NUMBER() OVER (ORDER BY created_at ASC) AS rn
+      FROM memories
+      WHERE status = 'approved' AND sort_order IS NULL
+    ) AS backfill
+    WHERE m.id = backfill.id;
+  `);
 }
 
 export async function getDb(): Promise<Pool> {
