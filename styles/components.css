@@ -2097,12 +2097,11 @@
 .memory-upload-dropzone {
   display: grid;
   place-items: center;
-  gap: var(--space-2);
-  min-height: 9rem;
+  gap: var(--space-1);
+  min-height: 11rem;
   padding: var(--space-5);
-  cursor: pointer;
   text-align: center;
-  border: 1px dashed var(--border-subtle);
+  border: 2px dashed var(--border-subtle);
   border-radius: var(--radius-md);
   background: var(--surface-muted);
 }
@@ -2112,6 +2111,27 @@
   background: color-mix(in srgb, var(--color-copper) 8%, var(--surface-muted));
 }
 
+.memory-upload-dropzone__icon {
+  margin-bottom: var(--space-2);
+  color: color-mix(in srgb, var(--color-deep-charcoal) 55%, transparent);
+}
+
+.memory-upload-dropzone__label {
+  font-weight: 700;
+}
+
+.memory-upload-dropzone__browse {
+  padding: 0;
+  font: inherit;
+  font-weight: 700;
+  color: var(--color-copper);
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .memory-upload-dropzone__input {
   position: absolute;
   width: 1px;
@@ -2119,6 +2139,20 @@
   overflow: hidden;
   opacity: 0;
   clip: rect(0, 0, 0, 0);
+}
+
+.memory-upload-dropzone__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.memory-upload-dropzone__secure {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
 }
 
 .memory-upload-previews {

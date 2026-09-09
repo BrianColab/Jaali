@@ -1,5 +1,6 @@
 "use client";
 
+import { Lock, UploadCloud } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState, type DragEvent } from "react";
 
@@ -168,20 +169,26 @@ export function MemoryUploadButton() {
               }}
               onDragLeave={() => setDragActive(false)}
               onDrop={handleDrop}
-              onClick={() => fileInputRef.current?.click()}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  fileInputRef.current?.click();
-                }
-              }}
             >
-              <Text size="small" muted>
-                Drag and drop photos here, or click to browse. PNG, JPEG, or GIF
-                — up to {maxFiles} photos.
+              <UploadCloud
+                aria-hidden="true"
+                size={32}
+                strokeWidth={1.75}
+                className="memory-upload-dropzone__icon"
+              />
+              <Text size="small" className="memory-upload-dropzone__label">
+                Drag and Drop here
               </Text>
+              <Text size="small" muted>
+                or
+              </Text>
+              <button
+                type="button"
+                className="memory-upload-dropzone__browse"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                Browse files
+              </button>
               <input
                 ref={fileInputRef}
                 id={fileInputId}
@@ -194,6 +201,20 @@ export function MemoryUploadButton() {
                   event.target.value = "";
                 }}
               />
+            </div>
+
+            <div className="memory-upload-dropzone__footer">
+              <Text size="small" muted>
+                Accepted file types: PNG, JPEG, GIF — up to {maxFiles} photos
+              </Text>
+              <Text
+                size="small"
+                muted
+                className="memory-upload-dropzone__secure"
+              >
+                <Lock aria-hidden="true" size={14} strokeWidth={1.75} />
+                Secure
+              </Text>
             </div>
 
             {pendingFiles.length > 0 ? (
