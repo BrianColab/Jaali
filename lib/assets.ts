@@ -1,4 +1,4 @@
-import officialLogo from "@/J4J master logo NEW.png";
+import officialLogo from "@/public/assets/images/brand/jaali-logo.png";
 
 import { assetManifest } from "@/data/assets";
 
