@@ -34,7 +34,7 @@ export default async function RememberingJaaliPage() {
             >
               Remembering Jaali
             </Heading>
-            <Text size="lead">
+            <Text size="lead" className="remembering-jaali__intro">
               Family, friends and community members are sharing photos and
               memories of Jaali. Every photo is reviewed before it appears here.
             </Text>
