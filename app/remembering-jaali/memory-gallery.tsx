@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -16,10 +17,52 @@ type MemoryGalleryProps = Readonly<{
   memories: readonly GalleryMemory[];
 }>;
 
+function getColumnCount(): number {
+  if (typeof window === "undefined") return 2;
+  if (window.matchMedia("(min-width: 48rem)").matches) return 4;
+  if (window.matchMedia("(min-width: 30rem)").matches) return 3;
+  return 2;
+}
+
+function useColumnCount(): number {
+  const [columnCount, setColumnCount] = useState(getColumnCount);
+
+  useEffect(() => {
+    const tablet = window.matchMedia("(min-width: 30rem)");
+    const desktop = window.matchMedia("(min-width: 48rem)");
+    const update = () => setColumnCount(getColumnCount());
+
+    update();
+    tablet.addEventListener("change", update);
+    desktop.addEventListener("change", update);
+    return () => {
+      tablet.removeEventListener("change", update);
+      desktop.removeEventListener("change", update);
+    };
+  }, []);
+
+  return columnCount;
+}
+
+function distributeIntoColumns<T>(
+  items: readonly T[],
+  columnCount: number,
+): T[][] {
+  const columns: T[][] = Array.from({ length: columnCount }, () => []);
+  items.forEach((item, index) => columns[index % columnCount]?.push(item));
+  return columns;
+}
+
 export function MemoryGallery({ memories }: MemoryGalleryProps) {
   const [openIndex, setOpenIndex] = useState<number>();
   const open = openIndex !== undefined;
   const current = open ? memories[openIndex] : undefined;
+
+  const columnCount = useColumnCount();
+  const columns = distributeIntoColumns(memories, columnCount);
+  const openByMemoryId = new Map(
+    memories.map((memory, index) => [memory.id, index]),
+  );
 
   const [layerA, setLayerA] = useState<GalleryMemory>();
   const [layerB, setLayerB] = useState<GalleryMemory>();
@@ -74,38 +117,50 @@ export function MemoryGallery({ memories }: MemoryGalleryProps) {
 
   return (
     <>
-      <ul className="memory-gallery">
-        {memories.map((memory, index) => (
-          <li key={memory.id} className="memory-card">
-            <button
-              type="button"
-              className="memory-card__image-button"
-              onClick={() => setOpenIndex(index)}
-              aria-label={`View full-size photo${memory.caption ? `: ${memory.caption}` : ""}`}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className="memory-card__image"
-                src={memory.imageUrl}
-                alt={memory.caption ?? "A memory photo of Jaali"}
-                loading="lazy"
-              />
-            </button>
-            {memory.caption || memory.uploaderName ? (
-              <div className="memory-card__meta">
-                {memory.caption ? (
-                  <Text size="small">{memory.caption}</Text>
+      <div className="memory-gallery">
+        {columns.map((column, columnIndex) => (
+          <div className="memory-gallery__column" key={columnIndex}>
+            {column.map((memory) => (
+              <motion.div
+                key={memory.id}
+                layout
+                layoutId={memory.id}
+                className="memory-card"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <button
+                  type="button"
+                  className="memory-card__image-button"
+                  onClick={() => setOpenIndex(openByMemoryId.get(memory.id))}
+                  aria-label={`View full-size photo${memory.caption ? `: ${memory.caption}` : ""}`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className="memory-card__image"
+                    src={memory.imageUrl}
+                    alt={memory.caption ?? "A memory photo of Jaali"}
+                    loading="lazy"
+                  />
+                </button>
+                {memory.caption || memory.uploaderName ? (
+                  <div className="memory-card__meta">
+                    {memory.caption ? (
+                      <Text size="small">{memory.caption}</Text>
+                    ) : null}
+                    {memory.uploaderName ? (
+                      <Text size="small" muted>
+                        — {memory.uploaderName}
+                      </Text>
+                    ) : null}
+                  </div>
                 ) : null}
-                {memory.uploaderName ? (
-                  <Text size="small" muted>
-                    — {memory.uploaderName}
-                  </Text>
-                ) : null}
-              </div>
-            ) : null}
-          </li>
+              </motion.div>
+            ))}
+          </div>
         ))}
-      </ul>
+      </div>
 
       {open && current ? (
         <div

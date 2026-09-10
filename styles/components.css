@@ -2081,19 +2081,21 @@
 }
 
 .memory-gallery {
-  column-count: 2;
-  column-gap: var(--space-4);
+  display: flex;
+  gap: var(--space-4);
   margin-top: var(--space-component);
-  padding: 0;
-  list-style: none;
+}
+
+.memory-gallery__column {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
 }
 
 .memory-card {
-  display: inline-block;
   overflow: hidden;
-  width: 100%;
-  margin-bottom: var(--space-4);
-  break-inside: avoid;
   border-radius: var(--radius-md);
   background: var(--color-soft-white);
   box-shadow: var(--elevation-hairline);
@@ -2504,18 +2506,6 @@
 .memory-edit-fields__actions {
   display: flex;
   gap: var(--space-2);
-}
-
-@media (min-width: 30rem) {
-  .memory-gallery {
-    column-count: 3;
-  }
-}
-
-@media (min-width: 48rem) {
-  .memory-gallery {
-    column-count: 4;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
