@@ -2177,12 +2177,20 @@
   max-width: 100%;
 }
 
-.memory-lightbox__image {
-  max-width: 100%;
-  max-height: 80svh;
+.memory-lightbox__stage {
+  position: relative;
+  width: min(90vw, 60rem);
+  height: 80svh;
+}
+
+.memory-lightbox__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   border-radius: var(--radius-sm);
-  animation: memory-lightbox-fade 180ms ease;
+  transition: opacity 420ms ease;
 }
 
 .memory-lightbox__caption {
@@ -2516,12 +2524,12 @@
   .donation-drawer__backdrop,
   .donation-drawer__panel,
   .memory-card,
+  .memory-lightbox__layer,
   [data-scroll-reveal] {
     transition: none;
   }
 
-  .memory-lightbox,
-  .memory-lightbox__image {
+  .memory-lightbox {
     animation: none;
   }
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Text } from "@/components/ui/typography";
 
@@ -20,6 +20,30 @@ export function MemoryGallery({ memories }: MemoryGalleryProps) {
   const [openIndex, setOpenIndex] = useState<number>();
   const open = openIndex !== undefined;
   const current = open ? memories[openIndex] : undefined;
+
+  const [layerA, setLayerA] = useState<GalleryMemory>();
+  const [layerB, setLayerB] = useState<GalleryMemory>();
+  const [showLayerA, setShowLayerA] = useState(true);
+  const showingLayerARef = useRef(true);
+
+  useEffect(() => {
+    if (!current) return;
+
+    if (showingLayerARef.current) {
+      setLayerB(current);
+      requestAnimationFrame(() => {
+        setShowLayerA(false);
+        showingLayerARef.current = false;
+      });
+    } else {
+      setLayerA(current);
+      requestAnimationFrame(() => {
+        setShowLayerA(true);
+        showingLayerARef.current = true;
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [current?.id]);
 
   useEffect(() => {
     if (!open) return;
@@ -122,13 +146,26 @@ export function MemoryGallery({ memories }: MemoryGalleryProps) {
             className="memory-lightbox__figure"
             onClick={(event) => event.stopPropagation()}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              key={current.id}
-              className="memory-lightbox__image"
-              src={current.imageUrl}
-              alt={current.caption ?? "A memory photo of Jaali"}
-            />
+            <div className="memory-lightbox__stage">
+              {layerA ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  className="memory-lightbox__layer"
+                  style={{ opacity: showLayerA ? 1 : 0 }}
+                  src={layerA.imageUrl}
+                  alt={layerA.caption ?? "A memory photo of Jaali"}
+                />
+              ) : null}
+              {layerB ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  className="memory-lightbox__layer"
+                  style={{ opacity: showLayerA ? 0 : 1 }}
+                  src={layerB.imageUrl}
+                  alt={layerB.caption ?? "A memory photo of Jaali"}
+                />
+              ) : null}
+            </div>
             {current.caption || current.uploaderName ? (
               <figcaption className="memory-lightbox__caption">
                 {current.caption}
