@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { Menu } from "lucide-react";
+import { useRef } from "react";
 
 import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/ui/container";
@@ -7,6 +10,8 @@ import { siteRoutes } from "@/data/site-routes";
 import { cn } from "@/utils/cn";
 
 export function SiteHeader() {
+  const mobileMenuRef = useRef<HTMLDetailsElement>(null);
+
   return (
     <header className="site-header">
       <div
@@ -75,7 +80,15 @@ export function SiteHeader() {
         </Container>
       </div>
       <Container className="site-header__inner">
-        <Link className="site-header__brand" href="/">
+        <Link
+          className="site-header__brand"
+          href="/"
+          onClick={() => {
+            if (mobileMenuRef.current) {
+              mobileMenuRef.current.open = false;
+            }
+          }}
+        >
           <BrandLogo
             className="site-header__logo-lockup"
             priority
@@ -104,7 +117,7 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <details className="site-header__menu">
+        <details className="site-header__menu" ref={mobileMenuRef}>
           <summary className="site-header__menu-summary">
             <Menu aria-hidden="true" size={20} strokeWidth={1.75} />
             <span className="visually-hidden">Open navigation</span>
@@ -122,6 +135,11 @@ export function SiteHeader() {
                       route.href === "/contact" && "site-header__donate-link",
                     )}
                     href={route.href}
+                    onClick={() => {
+                      if (mobileMenuRef.current) {
+                        mobileMenuRef.current.open = false;
+                      }
+                    }}
                   >
                     {route.label}
                   </Link>

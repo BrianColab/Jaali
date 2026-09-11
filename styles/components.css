@@ -1873,6 +1873,58 @@
     height: clamp(19rem, 140%, 36rem);
   }
 
+  .hero {
+    min-height: 34rem;
+  }
+
+  .hero .editorial-grid {
+    align-items: center;
+  }
+
+  .hero__content {
+    display: flex;
+    grid-column: 1 / -1;
+    flex-direction: column;
+    padding-block: var(--space-6);
+    text-align: left;
+  }
+
+  .hero__accent-lines,
+  .hero__copy {
+    margin-inline: 0;
+  }
+
+  .hero .heading--display {
+    max-width: 8ch;
+    font-size: clamp(2.25rem, 9vw, 3rem);
+    line-height: 1.02;
+  }
+
+  .hero__copy {
+    max-width: 18ch;
+    font-size: 0.9375rem;
+  }
+
+  .hero__media {
+    position: absolute;
+    inset: 0 0 0 52%;
+    order: 0;
+    width: auto;
+    height: auto;
+    aspect-ratio: auto;
+  }
+
+  .hero__media::after {
+    display: none;
+  }
+
+  .hero__media .responsive-asset__image {
+    object-fit: cover;
+    object-position: 60% center;
+    mask-image: linear-gradient(90deg, transparent 0%, black 34%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 34%);
+  }
+
   .hero__actions {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
