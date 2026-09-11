@@ -15,7 +15,10 @@ export const metadata = createPageMetadata(
 );
 
 export default async function RememberingJaaliPage() {
-  const memories = await getApprovedMemories();
+  const memories = await getApprovedMemories().catch((error) => {
+    console.error("Failed to load approved memories:", error);
+    return [];
+  });
 
   return (
     <main>

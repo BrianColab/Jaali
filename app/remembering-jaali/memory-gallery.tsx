@@ -25,7 +25,9 @@ function getColumnCount(): number {
 }
 
 function useColumnCount(): number {
-  const [columnCount, setColumnCount] = useState(getColumnCount);
+  // Start at the server's fallback value so the client's first render
+  // matches the SSR markup; the effect below corrects it after mount.
+  const [columnCount, setColumnCount] = useState<number>(2);
 
   useEffect(() => {
     const tablet = window.matchMedia("(min-width: 30rem)");
