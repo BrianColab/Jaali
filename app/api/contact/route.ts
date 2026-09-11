@@ -26,7 +26,7 @@ export async function POST(request: Request) {
 
   const resend = new Resend(apiKey);
   const { error } = await resend.emails.send({
-    from: "Justice for Jaali Contact Form <onboarding@resend.dev>",
+    from: "Justice for Jaali Contact Form <contact@j4j.ca>",
     to: contactRecipient,
     replyTo: email,
     subject: subject ? `Contact form: ${subject}` : "New contact form message",

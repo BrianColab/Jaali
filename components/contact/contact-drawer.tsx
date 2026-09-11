@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { BrandLogo } from "@/components/brand/brand-logo";
 import { ContactForm } from "@/components/contact/contact-form";
-import { Eyebrow, Heading, Text } from "@/components/ui/typography";
+import { Eyebrow, Heading } from "@/components/ui/typography";
 
 const closeDurationFallback = 280;
 
@@ -186,10 +186,18 @@ export function ContactDrawer() {
         aria-labelledby="contact-drawer-title"
       >
         <header className="contact-drawer__header">
-          <BrandLogo
-            className="contact-drawer__logo"
-            sizes="(min-width: 48rem) 5rem, 4.5rem"
-          />
+          <div className="contact-drawer__brand">
+            <BrandLogo
+              className="contact-drawer__logo"
+              sizes="(min-width: 48rem) 5rem, 4.5rem"
+            />
+            <div className="contact-drawer__heading-group">
+              <Eyebrow>Get in Touch</Eyebrow>
+              <Heading id="contact-drawer-title" level={2} variant="card">
+                Contact Us
+              </Heading>
+            </div>
+          </div>
           <button
             ref={closeButtonRef}
             className="contact-drawer__close"
@@ -202,15 +210,6 @@ export function ContactDrawer() {
         </header>
 
         <div className="contact-drawer__body">
-          <div className="contact-drawer__introduction">
-            <Eyebrow>Get in Touch</Eyebrow>
-            <Heading id="contact-drawer-title" level={2} variant="section">
-              Contact Us
-            </Heading>
-            <Text className="contact-drawer__intro-text" size="small">
-              Send us a message and our team will follow up with you.
-            </Text>
-          </div>
           <ContactForm
             className="contact-form--drawer"
             idPrefix="contact-drawer"
