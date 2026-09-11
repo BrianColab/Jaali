@@ -3,7 +3,6 @@ import { CtaBanner } from "@/components/content/cta-banner";
 import { DonateBanner } from "@/components/content/donate-banner";
 import { FeatureCards } from "@/components/content/feature-cards";
 import { QuoteBlock } from "@/components/content/quote-block";
-import { ResourceCards } from "@/components/content/resource-cards";
 import { StoryBlock } from "@/components/content/story-block";
 import { Timeline } from "@/components/content/timeline";
 import { WarningSigns } from "@/components/content/warning-signs";
@@ -129,17 +128,6 @@ export function Homepage({
         <SectionReveal>
           <StoryBlock asset={assets.vision} {...content.vision.block} />
         </SectionReveal>
-      </Section>
-
-      <Section {...content.resources.header} className="section--resources">
-        <div className="resources-layout editorial-grid">
-          <ImageReveal className="resources-layout__media">
-            <ResponsiveAsset asset={assets.resources} />
-          </ImageReveal>
-          <SectionReveal className="resources-layout__cards" delay={0.08}>
-            <ResourceCards items={content.resources.items} />
-          </SectionReveal>
-        </div>
       </Section>
 
       <Section {...content.shareStory.header}>

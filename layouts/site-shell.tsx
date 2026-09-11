@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { DonationDrawer } from "@/components/donation/donation-drawer";
+import { ContactDrawer } from "@/components/contact/contact-drawer";
 import { TextRevealController } from "@/components/motion/text-reveal-controller";
 import { RouteScrollRestoration } from "@/components/navigation/route-scroll-restoration";
 import { SkipLink } from "@/components/navigation/skip-link";
@@ -22,7 +22,7 @@ export function SiteShell({ children }: SiteShellProps) {
         {children}
       </main>
       <SiteFooter />
-      <DonationDrawer />
+      <ContactDrawer />
     </>
   );
 }

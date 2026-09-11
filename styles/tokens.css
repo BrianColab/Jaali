@@ -64,7 +64,7 @@
   --container-reading: 48rem;
   --measure-body: 68ch;
   --header-height: 4.75rem;
-  --notice-height: 2.125rem;
+  --notice-height: 3rem;
 
   --border-subtle: color-mix(
     in srgb,
@@ -95,6 +95,7 @@
   :root {
     --page-gutter: 2rem;
     --header-height: 5rem;
+    --notice-height: 2.5rem;
   }
 }
 
@@ -102,5 +103,6 @@
   :root {
     --page-gutter: 3rem;
     --header-height: 5.25rem;
+    --notice-height: 2.5rem;
   }
 }

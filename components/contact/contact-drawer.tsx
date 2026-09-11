@@ -4,9 +4,8 @@ import { X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { BrandLogo } from "@/components/brand/brand-logo";
-import { DonationForm } from "@/components/donation/donation-form";
+import { ContactForm } from "@/components/contact/contact-form";
 import { Eyebrow, Heading, Text } from "@/components/ui/typography";
-import { donatePageContent } from "@/data/pages";
 
 const closeDurationFallback = 280;
 
@@ -24,7 +23,7 @@ function readCloseDuration(panel: HTMLElement | null) {
   return closeDurationFallback;
 }
 
-export function DonationDrawer() {
+export function ContactDrawer() {
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const drawerRef = useRef<HTMLElement>(null);
@@ -77,7 +76,7 @@ export function DonationDrawer() {
   }, []);
 
   useEffect(() => {
-    const handleDonateLink = (event: MouseEvent) => {
+    const handleContactLink = (event: MouseEvent) => {
       if (
         event.defaultPrevented ||
         event.button !== 0 ||
@@ -92,21 +91,21 @@ export function DonationDrawer() {
       const target = event.target;
       if (!(target instanceof Element)) return;
 
-      const link = target.closest<HTMLAnchorElement>('a[href="/donate"]');
+      const link = target.closest<HTMLAnchorElement>('a[href="/contact"]');
       if (!link || link.target === "_blank") return;
 
       event.preventDefault();
       openDrawer();
     };
 
-    document.addEventListener("click", handleDonateLink, true);
+    document.addEventListener("click", handleContactLink, true);
     const initialOpenFrame =
-      window.location.hash === "#donate"
+      window.location.hash === "#contact"
         ? window.requestAnimationFrame(openDrawer)
         : null;
 
     return () => {
-      document.removeEventListener("click", handleDonateLink, true);
+      document.removeEventListener("click", handleContactLink, true);
       if (initialOpenFrame !== null) {
         window.cancelAnimationFrame(initialOpenFrame);
       }
@@ -169,50 +168,52 @@ export function DonationDrawer() {
 
   return (
     <div
-      className="donation-drawer"
+      className="contact-drawer"
       data-open={open ? "true" : "false"}
       role="presentation"
     >
       <button
-        className="donation-drawer__backdrop"
+        className="contact-drawer__backdrop"
         type="button"
-        aria-label="Close donation form"
+        aria-label="Close contact form"
         onClick={closeDrawer}
       />
       <aside
         ref={drawerRef}
-        className="donation-drawer__panel"
+        className="contact-drawer__panel"
         role="dialog"
         aria-modal="true"
-        aria-labelledby="donation-drawer-title"
+        aria-labelledby="contact-drawer-title"
       >
-        <header className="donation-drawer__header">
+        <header className="contact-drawer__header">
           <BrandLogo
-            className="donation-drawer__logo"
+            className="contact-drawer__logo"
             sizes="(min-width: 48rem) 5rem, 4.5rem"
           />
           <button
             ref={closeButtonRef}
-            className="donation-drawer__close"
+            className="contact-drawer__close"
             type="button"
-            aria-label="Close donation form"
+            aria-label="Close contact form"
             onClick={closeDrawer}
           >
             <X aria-hidden="true" size={22} strokeWidth={1.5} />
           </button>
         </header>
 
-        <div className="donation-drawer__body">
-          <div className="donation-drawer__introduction">
-            <Eyebrow>{donatePageContent.eyebrow}</Eyebrow>
-            <Heading id="donation-drawer-title" level={2} variant="section">
-              {donatePageContent.title}
+        <div className="contact-drawer__body">
+          <div className="contact-drawer__introduction">
+            <Eyebrow>Get in Touch</Eyebrow>
+            <Heading id="contact-drawer-title" level={2} variant="section">
+              Contact Us
             </Heading>
-            <Text>{donatePageContent.intro}</Text>
+            <Text>
+              Send us a message and our team will follow up with you.
+            </Text>
           </div>
-          <DonationForm
-            className="donation-form--drawer"
-            idPrefix="donation-drawer"
+          <ContactForm
+            className="contact-form--drawer"
+            idPrefix="contact-drawer"
           />
         </div>
       </aside>
