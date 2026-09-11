@@ -75,9 +75,9 @@ export function ContactForm({
       aria-labelledby={titleId}
       onSubmit={handleSubmit}
     >
-      <Heading id={titleId} level={3} variant="card">
-        Contact Us
-      </Heading>
+      <span id={titleId} className="visually-hidden">
+        Contact form
+      </span>
       <TextField
         id={`${idPrefix}-name`}
         label="Your name"

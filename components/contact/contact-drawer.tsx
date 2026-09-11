@@ -207,7 +207,7 @@ export function ContactDrawer() {
             <Heading id="contact-drawer-title" level={2} variant="section">
               Contact Us
             </Heading>
-            <Text>
+            <Text className="contact-drawer__intro-text" size="small">
               Send us a message and our team will follow up with you.
             </Text>
           </div>
