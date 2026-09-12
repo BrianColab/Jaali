@@ -32,7 +32,7 @@ export function SiteFooter() {
             aria-label="Footer navigation"
           >
             <ul className="site-footer__nav-list">
-              {siteRoutes.map((route) => (
+              {siteRoutes.flatMap((route) => [route, ...(route.children ?? [])]).map((route) => (
                 <li key={route.href}>
                   <Link className="site-footer__nav-link" href={route.href}>
                     {route.label}

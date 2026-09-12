@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Menu } from "lucide-react";
-import { useRef } from "react";
+import { ChevronDown, Heart, Menu } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/ui/container";
@@ -11,6 +11,38 @@ import { cn } from "@/utils/cn";
 
 export function SiteHeader() {
   const mobileMenuRef = useRef<HTMLDetailsElement>(null);
+  const desktopNavRef = useRef<HTMLElement>(null);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!openDropdown) return;
+
+    function closeOnOutsidePointer(event: PointerEvent) {
+      if (!desktopNavRef.current?.contains(event.target as Node)) {
+        setOpenDropdown(null);
+      }
+    }
+
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+
+      const toggle = desktopNavRef.current?.querySelector<HTMLButtonElement>(
+        'button[aria-expanded="true"]',
+      );
+      if (toggle?.parentElement?.contains(document.activeElement)) {
+        event.preventDefault();
+        toggle.focus();
+      }
+      setOpenDropdown(null);
+    }
+
+    document.addEventListener("pointerdown", closeOnOutsidePointer);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsidePointer);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [openDropdown]);
 
   return (
     <header className="site-header">
@@ -99,21 +131,102 @@ export function SiteHeader() {
         <nav
           className="site-header__desktop-nav"
           aria-label="Primary navigation"
+          ref={desktopNavRef}
         >
           <ul className="site-header__nav-list">
-            {siteRoutes.slice(1).map((route) => (
-              <li key={route.href}>
-                <Link
+            {siteRoutes.slice(1).map((route) => {
+              const isOpen = openDropdown === route.href;
+              const dropdownId = `desktop-nav${route.href.replaceAll("/", "-")}`;
+
+              return (
+                <li
+                  key={route.href}
                   className={cn(
-                    "site-header__nav-link",
-                    route.href === "/contact" && "site-header__donate-link",
+                    route.children && "site-header__nav-item--dropdown",
                   )}
-                  href={route.href}
+                  data-open={isOpen}
+                  onPointerEnter={(event) => {
+                    if (event.pointerType === "mouse") {
+                      setOpenDropdown(route.children ? route.href : null);
+                    }
+                  }}
+                  onPointerLeave={(event) => {
+                    if (!event.currentTarget.contains(document.activeElement)) {
+                      setOpenDropdown(null);
+                    }
+                  }}
+                  onFocus={(event) => {
+                    if (
+                      !event.currentTarget.contains(event.relatedTarget) &&
+                      event.target.tagName !== "BUTTON"
+                    ) {
+                      setOpenDropdown(route.children ? route.href : null);
+                    }
+                  }}
+                  onBlur={(event) => {
+                    if (!event.currentTarget.contains(event.relatedTarget)) {
+                      setOpenDropdown(null);
+                    }
+                  }}
                 >
-                  {route.label}
-                </Link>
-              </li>
-            ))}
+                  <Link
+                    className={cn(
+                      "site-header__nav-link",
+                      route.href === "/contact" && "site-header__donate-link",
+                    )}
+                    href={route.href}
+                    onClick={() => setOpenDropdown(null)}
+                  >
+                    {route.href === "/remembering-jaali" ? (
+                      <Heart
+                        className="site-header__nav-icon"
+                        aria-hidden="true"
+                        size={18}
+                        strokeWidth={2}
+                      />
+                    ) : null}
+                    {route.label}
+                  </Link>
+                  {route.children ? (
+                    <>
+                      <button
+                        className="site-header__dropdown-toggle"
+                        type="button"
+                        aria-label={`${route.label} submenu`}
+                        aria-expanded={isOpen}
+                        aria-controls={dropdownId}
+                        onClick={() =>
+                          setOpenDropdown(isOpen ? null : route.href)
+                        }
+                      >
+                        <ChevronDown
+                          aria-hidden="true"
+                          size={14}
+                          strokeWidth={2}
+                        />
+                      </button>
+                      <ul
+                        className="site-header__dropdown"
+                        id={dropdownId}
+                        hidden={!isOpen}
+                      >
+                        {route.children.map((child) => (
+                          <li key={child.href}>
+                            <Link
+                              className="site-header__dropdown-link"
+                              href={child.href}
+                              onClick={() => setOpenDropdown(null)}
+                            >
+                              {child.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : null}
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
@@ -143,6 +256,25 @@ export function SiteHeader() {
                   >
                     {route.label}
                   </Link>
+                  {route.children ? (
+                    <ul className="site-header__mobile-submenu">
+                      {route.children.map((child) => (
+                        <li key={child.href}>
+                          <Link
+                            className="site-header__mobile-submenu-link"
+                            href={child.href}
+                            onClick={() => {
+                              if (mobileMenuRef.current) {
+                                mobileMenuRef.current.open = false;
+                              }
+                            }}
+                          >
+                            {child.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </li>
               ))}
             </ul>
