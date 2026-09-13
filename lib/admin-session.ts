@@ -35,13 +35,18 @@ export function isValidAdminSessionToken(token: string | undefined): boolean {
   return Number.isFinite(expires) && expires > Date.now();
 }
 
-export function verifyAdminPassword(password: string): boolean {
-  const expected = process.env.ADMIN_PASSWORD;
-  if (!expected) return false;
-
+function matchesPassword(password: string, expected: string): boolean {
   const passwordBuffer = Buffer.from(password);
   const expectedBuffer = Buffer.from(expected);
   if (passwordBuffer.length !== expectedBuffer.length) return false;
 
   return timingSafeEqual(passwordBuffer, expectedBuffer);
+}
+
+export function verifyAdminPassword(password: string): boolean {
+  const candidates = [process.env.ADMIN_PASSWORD, process.env.ADMIN_PASSWORD_2];
+
+  return candidates.some(
+    (expected) => !!expected && matchesPassword(password, expected),
+  );
 }
