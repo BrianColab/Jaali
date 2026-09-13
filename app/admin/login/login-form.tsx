@@ -6,7 +6,9 @@ import { useState } from "react";
 import { TextField } from "@/components/forms/form-controls";
 import { Button } from "@/components/ui/button";
 
-export function AdminLoginForm() {
+export function AdminLoginForm({
+  autoFocus,
+}: Readonly<{ autoFocus?: boolean }> = {}) {
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string>();
@@ -43,6 +45,7 @@ export function AdminLoginForm() {
         name="password"
         type="password"
         autoComplete="current-password"
+        autoFocus={autoFocus}
         required
         value={password}
         onChange={(event) => setPassword(event.target.value)}

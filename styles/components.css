@@ -3054,6 +3054,40 @@
   gap: var(--space-4);
 }
 
+.admin-login-modal {
+  position: fixed;
+  z-index: 300;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+}
+
+.admin-login-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: rgb(15 44 84 / 68%);
+  cursor: pointer;
+  backdrop-filter: blur(0.25rem);
+}
+
+.admin-login-modal__panel {
+  position: relative;
+  display: grid;
+  gap: var(--space-4);
+  width: min(100%, 24rem);
+  padding: var(--space-6);
+  border: 1px solid color-mix(in srgb, var(--color-copper) 38%, transparent);
+  border-radius: var(--radius-md);
+  background: var(--color-warm-ivory);
+  box-shadow: 0 1.5rem 5rem rgb(0 0 0 / 28%);
+  color: var(--color-deep-charcoal);
+}
+
 .admin-queue__container {
   display: grid;
   gap: var(--space-4);
