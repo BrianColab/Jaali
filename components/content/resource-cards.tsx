@@ -14,7 +14,14 @@ export function ResourceCards({ items }: ResourceCardsProps) {
   return (
     <CardGrid className="resource-cards" columns={2}>
       {items.map((item, index) => (
-        <HoverLift key={item.id}>
+        <HoverLift
+          key={item.id}
+          className={
+            index >= items.length - 2
+              ? "resource-cards__item resource-cards__item--wide"
+              : "resource-cards__item"
+          }
+        >
           <Card className="resource-card">
             <span className="resource-card__number" aria-hidden="true">
               {String(index + 1).padStart(2, "0")}

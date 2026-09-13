@@ -1274,6 +1274,18 @@
   .section--shirt-preorder .section-media-layout__content {
     grid-column: 6 / -1;
   }
+
+  .section--resources__sub .resource-cards {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .section--resources__sub .resource-cards__item {
+    grid-column: span 2;
+  }
+
+  .section--resources__sub .resource-cards__item--wide {
+    grid-column: span 3;
+  }
 }
 
 .resources-layout {
