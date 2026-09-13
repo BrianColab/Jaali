@@ -1,5 +1,6 @@
 "use client";
 
+import { Heart } from "lucide-react";
 import { useState } from "react";
 import type { FormEvent } from "react";
 
@@ -70,7 +71,13 @@ export function PreorderForm({
 
   if (status === "success") {
     return (
-      <div className={cn("preorder-form", className)}>
+      <div className={cn("preorder-form", "preorder-form--success", className)}>
+        <Heart
+          className="preorder-form__heart"
+          aria-hidden="true"
+          size={40}
+          strokeWidth={1.5}
+        />
         <Heading id={titleId} level={3} variant="card">
           You&apos;re on the list
         </Heading>

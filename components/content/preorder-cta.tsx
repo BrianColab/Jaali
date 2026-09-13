@@ -14,7 +14,12 @@ export function PreorderCta() {
       <Button type="button" size="large" onClick={() => setOpen(true)}>
         Pre-Order a Shirt
       </Button>
-      <Modal open={open} onOpenChange={setOpen} title="Pre-Order a Shirt">
+      <Modal
+        open={open}
+        onOpenChange={setOpen}
+        title="Pre-Order a Shirt"
+        showLogo
+      >
         <PreorderForm idPrefix="preorder-modal" />
       </Modal>
     </>

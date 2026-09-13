@@ -1514,8 +1514,19 @@
   color: var(--color-soft-white);
 }
 
+.modal__title-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
 .modal__header .heading {
   margin-bottom: 0;
+}
+
+.modal__logo {
+  flex: 0 0 auto;
+  width: 2.75rem;
 }
 
 .modal__close {
@@ -3059,6 +3070,16 @@
   display: grid;
   align-content: start;
   gap: var(--space-4);
+}
+
+.preorder-form--success {
+  justify-items: center;
+  text-align: center;
+}
+
+.preorder-form__heart {
+  color: var(--color-copper);
+  fill: color-mix(in srgb, var(--color-copper) 18%, transparent);
 }
 
 .preorder-form__swatches {
