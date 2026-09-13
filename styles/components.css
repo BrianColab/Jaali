@@ -583,11 +583,21 @@
 }
 
 .site-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
   padding-top: var(--space-6);
   margin-top: var(--space-8);
   border-top: 1px solid var(--border-inverse);
   color: color-mix(in srgb, var(--color-soft-white) 62%, transparent);
   font-size: 0.8125rem;
+}
+
+.site-footer__copyright {
+  color: color-mix(in srgb, var(--color-soft-white) 48%, transparent);
+  white-space: nowrap;
 }
 
 .section {

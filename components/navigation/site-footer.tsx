@@ -56,10 +56,14 @@ export function SiteFooter() {
         </div>
 
         <div className="site-footer__legal">
-          <p>
-            This website is not an emergency or clinical service. If you or your
-            baby may be in immediate danger, call 911 or seek emergency medical
-            care now.
+          <p className="site-footer__disclaimer">
+            This website is not an emergency or clinical service.
+            <br />
+            If you or your baby may be in immediate danger, call 911 or seek
+            emergency medical care now.
+          </p>
+          <p className="site-footer__copyright">
+            &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
         </div>
       </Container>
