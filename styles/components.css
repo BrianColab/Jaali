@@ -1193,6 +1193,26 @@
   grid-column: 1 / -1;
 }
 
+.section--shirt-preorder .section-media-layout {
+  align-items: start;
+}
+
+.section--shirt-preorder .section-media-layout__media {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-5);
+}
+
+.section--resources__sub .resource-cards {
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+.section--resources__sub .resource-card {
+  min-height: unset;
+  padding: var(--space-4);
+}
+
 .resources-layout {
   align-items: start;
 }

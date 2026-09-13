@@ -152,21 +152,23 @@ export function Homepage({
         className="section--shirt-preorder"
       >
         <div className="section-media-layout editorial-grid">
-          <ImageReveal className="section-media-layout__media">
-            <ResponsiveAsset asset={assets.resources} />
-          </ImageReveal>
-          <SectionReveal className="section-media-layout__content">
-            <PreorderCta />
-          </SectionReveal>
-        </div>
-
-        <div className="section__content-spacer section--resources__sub">
-          <Eyebrow>{content.resources.header.eyebrow}</Eyebrow>
-          <Heading level={3} variant="card">
-            {content.resources.header.title}
-          </Heading>
-          <Text muted>{content.resources.header.intro}</Text>
-          <SectionReveal delay={0.08}>
+          <div className="section-media-layout__media">
+            <ImageReveal>
+              <ResponsiveAsset asset={assets.resources} />
+            </ImageReveal>
+            <SectionReveal>
+              <PreorderCta />
+            </SectionReveal>
+          </div>
+          <SectionReveal
+            className="section-media-layout__content section--resources__sub"
+            delay={0.08}
+          >
+            <Eyebrow>{content.resources.header.eyebrow}</Eyebrow>
+            <Heading level={3} variant="card">
+              {content.resources.header.title}
+            </Heading>
+            <Text muted>{content.resources.header.intro}</Text>
             <ResourceCards items={content.resources.items} />
           </SectionReveal>
         </div>
