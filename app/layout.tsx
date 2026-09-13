@@ -64,7 +64,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Script
           async
           data-id="101511679"
-          src="/597e791a37996d3f5fb.js"
+          src="//static.getclicky.com/js"
           strategy="afterInteractive"
         />
         <noscript>
@@ -74,7 +74,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               alt="Clicky"
               width={1}
               height={1}
-              src="/3336e377e2fb9a82cae"
+              src="//in.getclicky.com/101511679ns.gif"
             />
           </p>
         </noscript>
