@@ -3318,3 +3318,59 @@
     transform: none;
   }
 }
+
+.media-kit-grid {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.media-kit-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.media-kit-card__preview {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--color-soft-white);
+}
+
+.media-kit-card__image {
+  object-fit: cover;
+}
+
+.media-kit-card__image--contain {
+  object-fit: contain;
+  padding: var(--space-4);
+}
+
+.media-kit-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-component);
+}
+
+.media-kit-card__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.media-kit-card__controls .form-label {
+  width: 100%;
+}
+
+.media-kit-card__controls .form-control {
+  flex: 1 1 8rem;
+}
+
+.media-kit-card__download {
+  flex: 1 1 auto;
+}

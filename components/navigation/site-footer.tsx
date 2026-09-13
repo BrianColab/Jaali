@@ -61,6 +61,11 @@ export function SiteFooter() {
             baby may be in immediate danger, call 911 or seek emergency medical
             care now.
           </p>
+          <p>
+            <Link className="site-footer__nav-link" href="/media-kit">
+              Media Kit
+            </Link>
+          </p>
         </div>
       </Container>
     </footer>
