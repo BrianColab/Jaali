@@ -17,6 +17,7 @@ export const siteRoutes: readonly SiteRoute[] = [
     children: [
       { label: "Share Your Experience", href: "/share-your-experience" },
       { label: "Advocacy", href: "/advocacy" },
+      { label: "Media Kit", href: "/media-kit" },
     ],
   },
   { label: "Remembering Jaali", href: "/remembering-jaali" },
