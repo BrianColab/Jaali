@@ -297,7 +297,7 @@ export const homepageContent = {
       title: "Help Build What Should Have Been There for Jaali",
       intro:
         "Your support will help build an Indigenous-led maternal-health and patient-safety network shaped by families with lived experience.",
-      tone: "charcoal",
+      tone: "forest",
     },
     banner: {
       title: "Fund the Network",
