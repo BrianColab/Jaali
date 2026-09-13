@@ -827,6 +827,63 @@
   opacity: 0.48;
 }
 
+.preorder-shirt-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  min-height: 50px;
+  height: 50px;
+  min-width: 190px;
+  padding: 0 22px;
+  background: #f08a24;
+  border: 1px solid #f5a04a;
+  border-radius: 2px;
+  color: #0f3156;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow:
+    0 2px 0 rgb(0 0 0 / 45%),
+    0 12px 22px rgb(0 0 0 / 30%);
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.preorder-shirt-cta::after {
+  content: "\2192";
+  display: inline-block;
+  transition: transform 180ms ease;
+}
+
+.preorder-shirt-cta:hover {
+  background: #f59a23;
+  transform: translateY(-2px);
+  box-shadow:
+    0 3px 0 rgb(0 0 0 / 45%),
+    0 16px 28px rgb(0 0 0 / 34%);
+}
+
+.preorder-shirt-cta:hover::after {
+  transform: translateX(4px);
+}
+
+.preorder-shirt-cta:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 1px 0 rgb(0 0 0 / 45%),
+    0 6px 14px rgb(0 0 0 / 26%);
+}
+
+.preorder-shirt-cta:focus-visible {
+  outline: 3px solid #f5a04a;
+  outline-offset: 3px;
+}
+
 .card-grid {
   display: grid;
   gap: var(--space-5);

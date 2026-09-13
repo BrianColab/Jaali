@@ -11,7 +11,12 @@ export function PreorderCta() {
 
   return (
     <>
-      <Button type="button" size="large" onClick={() => setOpen(true)}>
+      <Button
+        type="button"
+        size="large"
+        className="preorder-shirt-cta"
+        onClick={() => setOpen(true)}
+      >
         Pre-Order a Shirt
       </Button>
       <Modal
