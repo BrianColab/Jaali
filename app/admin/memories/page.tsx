@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
+import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Heading, Text } from "@/components/ui/typography";
 import { getApprovedMemories, getPendingMemories } from "@/lib/memories";
@@ -33,7 +33,13 @@ export default async function AdminMemoriesPage() {
         <Heading level={1} variant="section">
           Review Memory Photos
         </Heading>
-        <Link href="/admin/preorders">View Pre-Orders Merch →</Link>
+        <ButtonLink
+          href="/admin/preorders"
+          variant="secondary"
+          className="admin-queue__nav-link"
+        >
+          View Pre-Orders Merch →
+        </ButtonLink>
         <Text muted>
           {pendingMemories.length === 0
             ? "No photos are waiting for review."

@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
+import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Heading, Text } from "@/components/ui/typography";
 import { getAllPreorders } from "@/lib/preorders";
@@ -29,7 +29,13 @@ export default async function AdminPreordersPage() {
         <Heading level={1} variant="section">
           Pre-Orders Merch
         </Heading>
-        <Link href="/admin/memories">View memory photos →</Link>
+        <ButtonLink
+          href="/admin/memories"
+          variant="secondary"
+          className="admin-queue__nav-link"
+        >
+          View memory photos →
+        </ButtonLink>
         <Text muted>
           {preorders.length === 0
             ? "No preorders yet."

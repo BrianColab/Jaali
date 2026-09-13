@@ -10,10 +10,71 @@ type AdminPreorderTableProps = Readonly<{
   preorders: readonly PreorderRecord[];
 }>;
 
+const EXPORT_COLUMNS = [
+  "Date",
+  "Name",
+  "Email",
+  "Phone",
+  "Size",
+  "Color",
+  "Qty",
+] as const;
+
+function toRow(item: PreorderRecord): string[] {
+  return [
+    new Date(item.createdAt).toLocaleDateString("en-CA"),
+    item.name,
+    item.email,
+    item.phone,
+    item.size,
+    item.color,
+    String(item.quantity),
+  ];
+}
+
+function downloadBlob(blob: Blob, filename: string) {
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
 export function AdminPreorderTable({ preorders }: AdminPreorderTableProps) {
   const [items, setItems] = useState(preorders);
   const [deletingId, setDeletingId] = useState<string>();
   const [error, setError] = useState<string>();
+
+  function handleExportExcel() {
+    const rows = [EXPORT_COLUMNS, ...items.map(toRow)];
+    const csv = rows
+      .map((row) =>
+        row
+          .map((cell) => `"${cell.replaceAll('"', '""')}"`)
+          .join(","),
+      )
+      .join("\r\n");
+    downloadBlob(
+      new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" }),
+      "jaali-preorders.csv",
+    );
+  }
+
+  async function handleExportPdf() {
+    const [{ default: jsPDF }, autoTable] = await Promise.all([
+      import("jspdf"),
+      import("jspdf-autotable"),
+    ]);
+    const doc = new jsPDF();
+    doc.text("Justice for Jaali — Shirt Preorders", 14, 16);
+    autoTable.default(doc, {
+      startY: 22,
+      head: [[...EXPORT_COLUMNS]],
+      body: items.map(toRow),
+    });
+    doc.save("jaali-preorders.pdf");
+  }
 
   async function handleDelete(id: string) {
     setDeletingId(id);
@@ -42,6 +103,14 @@ export function AdminPreorderTable({ preorders }: AdminPreorderTableProps) {
           {error}
         </Text>
       ) : null}
+      <div className="admin-preorder-table__exports">
+        <Button type="button" variant="secondary" onClick={handleExportPdf}>
+          Download as PDF
+        </Button>
+        <Button type="button" variant="secondary" onClick={handleExportExcel}>
+          Download as Excel
+        </Button>
+      </div>
       <div className="admin-preorder-table__wrap">
         <table className="admin-preorder-table">
           <thead>
