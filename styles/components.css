@@ -3094,6 +3094,14 @@
   padding-block: var(--space-8);
 }
 
+.admin-queue__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
 .admin-queue__list {
   display: grid;
   gap: var(--space-4);

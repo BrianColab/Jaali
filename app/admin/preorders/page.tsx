@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 
+import { AdminLogoutButton } from "@/components/navigation/admin-logout-button";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Heading, Text } from "@/components/ui/typography";
@@ -26,9 +27,12 @@ export default async function AdminPreordersPage() {
   return (
     <main className="admin-queue">
       <Container className="admin-queue__container">
-        <Heading level={1} variant="section">
-          Pre-Orders Merch
-        </Heading>
+        <div className="admin-queue__header">
+          <Heading level={1} variant="section">
+            Pre-Orders Merch
+          </Heading>
+          <AdminLogoutButton />
+        </div>
         <ButtonLink
           href="/admin/memories"
           variant="secondary"
