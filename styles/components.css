@@ -1204,13 +1204,13 @@
 }
 
 .section--resources__sub .resource-cards {
-  grid-template-columns: 1fr;
   gap: var(--space-3);
 }
 
 .section--resources__sub .resource-card {
   min-height: unset;
   padding: var(--space-4);
+  gap: var(--space-2);
 }
 
 .resources-layout {

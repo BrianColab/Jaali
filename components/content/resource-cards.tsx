@@ -12,7 +12,7 @@ type ResourceCardsProps = Readonly<{
 
 export function ResourceCards({ items }: ResourceCardsProps) {
   return (
-    <CardGrid className="resource-cards" columns={3}>
+    <CardGrid className="resource-cards" columns={2}>
       {items.map((item, index) => (
         <HoverLift key={item.id}>
           <Card className="resource-card">
