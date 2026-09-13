@@ -39,6 +39,7 @@ type TextFieldProps = Readonly<{
   id: string;
   label: string;
   prefix?: string;
+  suffix?: ReactNode;
 }> &
   Omit<
     ComponentPropsWithoutRef<"input">,
@@ -51,6 +52,7 @@ export function TextField({
   id,
   label,
   prefix,
+  suffix,
   type = "text",
   ...props
 }: TextFieldProps) {
@@ -71,12 +73,17 @@ export function TextField({
       <label className="form-label" htmlFor={id}>
         {label}
       </label>
-      {prefix ? (
+      {prefix || suffix ? (
         <div className="form-control-affix">
-          <span className="form-control-affix__prefix" aria-hidden="true">
-            {prefix}
-          </span>
+          {prefix ? (
+            <span className="form-control-affix__prefix" aria-hidden="true">
+              {prefix}
+            </span>
+          ) : null}
           {input}
+          {suffix ? (
+            <span className="form-control-affix__suffix">{suffix}</span>
+          ) : null}
         </div>
       ) : (
         input

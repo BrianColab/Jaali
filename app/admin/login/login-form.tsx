@@ -1,5 +1,6 @@
 "use client";
 
+import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -12,6 +13,7 @@ export function AdminLoginForm({
 }: Readonly<{ autoFocus?: boolean; onSuccess?: () => void }> = {}) {
   const router = useRouter();
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string>();
   const [submitting, setSubmitting] = useState(false);
 
@@ -45,12 +47,26 @@ export function AdminLoginForm({
         id="admin-password"
         label="Admin password"
         name="password"
-        type="password"
+        type={showPassword ? "text" : "password"}
         autoComplete="current-password"
         autoFocus={autoFocus}
         required
         value={password}
         onChange={(event) => setPassword(event.target.value)}
+        suffix={
+          <button
+            type="button"
+            aria-label={showPassword ? "Hide password" : "Show password"}
+            aria-pressed={showPassword}
+            onClick={() => setShowPassword((visible) => !visible)}
+          >
+            {showPassword ? (
+              <EyeOff aria-hidden="true" size={18} strokeWidth={1.5} />
+            ) : (
+              <Eye aria-hidden="true" size={18} strokeWidth={1.5} />
+            )}
+          </button>
+        }
         {...(error ? { error } : {})}
       />
       <Button type="submit" size="large" disabled={submitting}>

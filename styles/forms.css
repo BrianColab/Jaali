@@ -40,8 +40,37 @@
   transform: translateY(-50%);
 }
 
-.form-control-affix .form-control {
+.form-control-affix:has(.form-control-affix__prefix) .form-control {
   padding-left: 2.25rem;
+}
+
+.form-control-affix__suffix {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: 0.5rem;
+  display: flex;
+  transform: translateY(-50%);
+}
+
+.form-control-affix:has(.form-control-affix__suffix) .form-control {
+  padding-right: 2.75rem;
+}
+
+.form-control-affix__suffix button {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: color-mix(in srgb, var(--color-deep-charcoal) 72%, transparent);
+  cursor: pointer;
+}
+
+.form-control-affix__suffix button:hover {
+  color: var(--color-deep-charcoal);
 }
 
 .form-control[aria-invalid="true"] {
