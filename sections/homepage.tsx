@@ -2,6 +2,7 @@ import { Accordion } from "@/components/content/accordion";
 import { CtaBanner } from "@/components/content/cta-banner";
 import { DonateBanner } from "@/components/content/donate-banner";
 import { FeatureCards } from "@/components/content/feature-cards";
+import { PreorderCta } from "@/components/content/preorder-cta";
 import { QuoteBlock } from "@/components/content/quote-block";
 import { StoryBlock } from "@/components/content/story-block";
 import { Timeline } from "@/components/content/timeline";
@@ -30,7 +31,8 @@ const homepageChapters = [
   },
   { id: "know-your-rights", label: "Your Rights", number: "04" },
   { id: "vision", label: "The Vision", number: "05" },
-  { id: "donate", label: "Take Action", number: "06" },
+  { id: "shirt-preorder", label: "Preorder a Shirt", number: "06" },
+  { id: "donate", label: "Take Action", number: "07" },
 ] as const satisfies readonly HomepageChapter[];
 
 type HomepageProps = Readonly<{
@@ -142,7 +144,22 @@ export function Homepage({
         </SectionReveal>
       </Section>
 
-      <Section {...content.donate.header} chapter="06">
+      <Section
+        {...content.preorder.header}
+        chapter="06"
+        className="section--shirt-preorder"
+      >
+        <div className="section-media-layout editorial-grid">
+          <ImageReveal className="section-media-layout__media">
+            <ResponsiveAsset asset={assets.resources} />
+          </ImageReveal>
+          <SectionReveal className="section-media-layout__content">
+            <PreorderCta />
+          </SectionReveal>
+        </div>
+      </Section>
+
+      <Section {...content.donate.header} chapter="07">
         <div className="section-media-layout editorial-grid">
           <ImageReveal className="section-media-layout__media">
             <ResponsiveAsset asset={assets.donate} />

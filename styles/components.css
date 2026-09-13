@@ -3027,6 +3027,65 @@
   margin-top: var(--space-1);
 }
 
+.admin-preorder-table__wrap {
+  overflow-x: auto;
+}
+
+.admin-preorder-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-small, 0.875rem);
+}
+
+.admin-preorder-table th,
+.admin-preorder-table td {
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+  white-space: nowrap;
+}
+
+.preorder-form {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+}
+
+.preorder-form__swatches {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.preorder-form__swatch {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 0.125rem solid var(--border-subtle);
+  cursor: pointer;
+  padding: 0;
+}
+
+.preorder-form__swatch[data-color="black"] {
+  background: #111111;
+}
+
+.preorder-form__swatch[data-color="white"] {
+  background: #ffffff;
+}
+
+.preorder-form__swatch[data-color="red"] {
+  background: #c1272d;
+}
+
+.preorder-form__swatch[data-color="yellow"] {
+  background: #f4c430;
+}
+
+.preorder-form__swatch--selected {
+  border-color: var(--color-copper);
+  box-shadow: 0 0 0 0.125rem var(--color-copper);
+}
+
 .memory-edit-toggle {
   justify-self: start;
   padding: 0;

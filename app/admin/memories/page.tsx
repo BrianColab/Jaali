@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { Container } from "@/components/ui/container";
@@ -32,6 +33,7 @@ export default async function AdminMemoriesPage() {
         <Heading level={1} variant="section">
           Review Memory Photos
         </Heading>
+        <Link href="/admin/preorders">View Pre-Orders Merch →</Link>
         <Text muted>
           {pendingMemories.length === 0
             ? "No photos are waiting for review."

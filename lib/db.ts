@@ -39,6 +39,18 @@ async function ensureTable(): Promise<void> {
     ) AS backfill
     WHERE m.id = backfill.id;
   `);
+  await getPool().query(`
+    CREATE TABLE IF NOT EXISTS shirt_preorders (
+      id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+      name text NOT NULL,
+      email text NOT NULL,
+      phone text NOT NULL,
+      size text NOT NULL,
+      color text NOT NULL,
+      quantity integer NOT NULL,
+      created_at timestamptz NOT NULL DEFAULT now()
+    );
+  `);
 }
 
 export async function getDb(): Promise<Pool> {

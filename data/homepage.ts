@@ -219,6 +219,16 @@ export const homepageContent = {
       mediaPosition: "end",
     },
   },
+  preorder: {
+    header: {
+      id: "shirt-preorder",
+      eyebrow: "Support the Cause",
+      title: "Preorder a Justice for Jaali Shirt",
+      intro:
+        "Pick your size and colour, leave your contact details, and we'll reach out the moment the shirts are ready to ship.",
+      tone: "charcoal",
+    },
+  },
   resources: {
     header: {
       id: "resources",

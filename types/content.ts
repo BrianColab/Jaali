@@ -80,6 +80,9 @@ export type HomepageContent = Readonly<{
     tertiaryAction: ContentAction;
     title: string;
   }>;
+  preorder: Readonly<{
+    header: SectionHeaderContent;
+  }>;
   resources: Readonly<{
     header: SectionHeaderContent;
     items: readonly ResourceCardItem[];
