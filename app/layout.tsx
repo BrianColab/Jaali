@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import type { ReactNode } from "react";
 
 import { SiteShell } from "@/layouts/site-shell";
@@ -60,6 +61,23 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <style>{`.motion-reveal { opacity: 1 !important; transform: none !important; }`}</style>
         </noscript>
         <SiteShell>{children}</SiteShell>
+        <Script
+          async
+          data-id="101511679"
+          src="/597e791a37996d3f5fb.js"
+          strategy="afterInteractive"
+        />
+        <noscript>
+          <p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt="Clicky"
+              width={1}
+              height={1}
+              src="/3336e377e2fb9a82cae"
+            />
+          </p>
+        </noscript>
       </body>
     </html>
   );
