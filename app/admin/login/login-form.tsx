@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button";
 
 export function AdminLoginForm({
   autoFocus,
-}: Readonly<{ autoFocus?: boolean }> = {}) {
+  onSuccess,
+}: Readonly<{ autoFocus?: boolean; onSuccess?: () => void }> = {}) {
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string>();
@@ -33,6 +34,7 @@ export function AdminLoginForm({
       return;
     }
 
+    onSuccess?.();
     router.push("/admin/memories");
     router.refresh();
   }

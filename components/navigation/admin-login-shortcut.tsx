@@ -88,7 +88,7 @@ export function AdminLoginShortcut() {
         <Text muted>
           Enter the shared admin password to review memory photos.
         </Text>
-        <AdminLoginForm autoFocus />
+        <AdminLoginForm autoFocus onSuccess={() => setOpen(false)} />
       </div>
     </div>
   );
