@@ -1260,6 +1260,10 @@
   gap: var(--space-5);
 }
 
+.shirt-preorder__intro {
+  max-width: 26rem;
+}
+
 .section--resources__sub .resource-cards {
   gap: var(--space-3);
 }

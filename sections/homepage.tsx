@@ -54,6 +54,9 @@ export function Homepage({
   assets = homepageAssets,
   content = homepageContent,
 }: HomepageProps) {
+  const { intro: preorderIntro, ...preorderSectionHeader } =
+    content.preorder.header;
+
   return (
     <>
       <HomepageProgress chapters={homepageChapters} />
@@ -147,12 +150,15 @@ export function Homepage({
       </Section>
 
       <Section
-        {...content.preorder.header}
+        {...preorderSectionHeader}
         chapter="06"
         className="section--shirt-preorder"
       >
         <div className="section-media-layout editorial-grid">
           <div className="section-media-layout__media">
+            <Text size="lead" className="shirt-preorder__intro">
+              {preorderIntro}
+            </Text>
             <ImageReveal>
               <ResponsiveAsset asset={assets.resources} />
             </ImageReveal>
