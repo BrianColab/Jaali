@@ -4,6 +4,7 @@ import { DonateBanner } from "@/components/content/donate-banner";
 import { FeatureCards } from "@/components/content/feature-cards";
 import { PreorderCta } from "@/components/content/preorder-cta";
 import { QuoteBlock } from "@/components/content/quote-block";
+import { ResourceCards } from "@/components/content/resource-cards";
 import { StoryBlock } from "@/components/content/story-block";
 import { Timeline } from "@/components/content/timeline";
 import { WarningSigns } from "@/components/content/warning-signs";
@@ -155,6 +156,17 @@ export function Homepage({
           </ImageReveal>
           <SectionReveal className="section-media-layout__content">
             <PreorderCta />
+          </SectionReveal>
+        </div>
+      </Section>
+
+      <Section {...content.resources.header} className="section--resources">
+        <div className="section-media-layout editorial-grid">
+          <ImageReveal className="section-media-layout__media">
+            <ResponsiveAsset asset={assets.resources} />
+          </ImageReveal>
+          <SectionReveal className="section-media-layout__content">
+            <ResourceCards items={content.resources.items} />
           </SectionReveal>
         </div>
       </Section>
