@@ -18,7 +18,7 @@ export const homepageContent = {
       label: "Share Your Experience",
     },
     quaternaryAction: {
-      href: "/donate",
+      href: "/#donate",
       label: "Support the Work",
     },
   },
@@ -303,7 +303,7 @@ export const homepageContent = {
       title: "Fund the Network",
       body: "Funding will support resource development, patient navigation, advocacy, technology, community outreach, education and the responsible collection of evidence needed to drive change. We will report clearly on how funds are used and what the work achieves.",
       action: {
-        href: "/donate",
+        href: "/#donate",
         label: "Donate",
       },
     },

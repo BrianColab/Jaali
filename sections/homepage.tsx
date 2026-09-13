@@ -189,9 +189,6 @@ export function Homepage({
             <DonateBanner
               title={content.donate.banner.title}
               body={content.donate.banner.body}
-              actions={
-                <ContentActionLink action={content.donate.banner.action} />
-              }
             />
           </SectionReveal>
         </div>

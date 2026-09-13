@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { Heading, Text } from "@/components/ui/typography";
 
 type DonateBannerProps = Readonly<{
-  actions: ReactNode;
+  actions?: ReactNode;
   body: string;
   title: string;
 }>;
@@ -18,7 +18,9 @@ export function DonateBanner({ actions, body, title }: DonateBannerProps) {
           </Heading>
           <Text size="lead">{body}</Text>
         </div>
-        <div className="donate-banner__actions button-row">{actions}</div>
+        {actions ? (
+          <div className="donate-banner__actions button-row">{actions}</div>
+        ) : null}
       </div>
     </aside>
   );

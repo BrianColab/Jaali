@@ -1827,8 +1827,11 @@
     grid-row: 1;
   }
 
-  .cta-banner__inner,
-  .donate-banner__inner {
+  .cta-banner__inner {
+    grid-template-columns: minmax(0, 2fr) minmax(14rem, 1fr);
+  }
+
+  .donate-banner__inner:has(.donate-banner__actions) {
     grid-template-columns: minmax(0, 2fr) minmax(14rem, 1fr);
   }
 
