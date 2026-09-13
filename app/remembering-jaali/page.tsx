@@ -12,6 +12,7 @@ export const dynamic = "force-dynamic";
 export const metadata = createPageMetadata(
   "Remembering Jaali",
   "/remembering-jaali",
+  "Family, friends and community members share photos and memories of Jaali Weenie-Sutherland, reviewed before appearing on this memorial gallery.",
 );
 
 export default async function RememberingJaaliPage() {

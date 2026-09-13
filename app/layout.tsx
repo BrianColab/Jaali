@@ -13,6 +13,14 @@ import "./globals.css";
 const faviconMetadata = getFaviconMetadata(metadataAssets.favicon);
 const openGraphImages = getOpenGraphImages(metadataAssets.openGraph);
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  name: siteConfig.name,
+  url: siteConfig.url.toString(),
+  description: siteConfig.description,
+};
+
 export const metadata: Metadata = {
   applicationName: siteConfig.name,
   description: siteConfig.description,
@@ -60,6 +68,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <noscript>
           <style>{`.motion-reveal { opacity: 1 !important; transform: none !important; }`}</style>
         </noscript>
+        <Script
+          id="organization-jsonld"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+        >
+          {JSON.stringify(organizationJsonLd)}
+        </Script>
         <SiteShell>{children}</SiteShell>
         <Script
           async
