@@ -582,6 +582,11 @@
   text-wrap: balance;
 }
 
+.site-footer__legal p[data-scroll-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
 .site-footer__legal {
   display: flex;
   flex-wrap: wrap;
