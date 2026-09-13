@@ -16,6 +16,7 @@ import {
 } from "@/components/navigation/homepage-progress";
 import { ButtonLink } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
+import { Eyebrow, Heading, Text } from "@/components/ui/typography";
 import { homepageContent } from "@/data/homepage";
 import { homepageAssets } from "@/lib/assets";
 import { Hero } from "@/sections/hero";
@@ -158,14 +159,14 @@ export function Homepage({
             <PreorderCta />
           </SectionReveal>
         </div>
-      </Section>
 
-      <Section {...content.resources.header} className="section--resources">
-        <div className="section-media-layout editorial-grid">
-          <ImageReveal className="section-media-layout__media">
-            <ResponsiveAsset asset={assets.resources} />
-          </ImageReveal>
-          <SectionReveal className="section-media-layout__content">
+        <div className="section__content-spacer section--resources__sub">
+          <Eyebrow>{content.resources.header.eyebrow}</Eyebrow>
+          <Heading level={3} variant="card">
+            {content.resources.header.title}
+          </Heading>
+          <Text muted>{content.resources.header.intro}</Text>
+          <SectionReveal delay={0.08}>
             <ResourceCards items={content.resources.items} />
           </SectionReveal>
         </div>

@@ -1,8 +1,25 @@
-export type ShirtSize = "S" | "M" | "L" | "XL" | "XXL";
+export type ShirtSize =
+  | "XS"
+  | "S"
+  | "M"
+  | "L"
+  | "XL"
+  | "XXL"
+  | "3XL"
+  | "4XL";
 
 export type ShirtColor = "Black" | "White" | "Red" | "Yellow";
 
-export const SHIRT_SIZES: readonly ShirtSize[] = ["S", "M", "L", "XL", "XXL"];
+export const SHIRT_SIZES: readonly ShirtSize[] = [
+  "XS",
+  "S",
+  "M",
+  "L",
+  "XL",
+  "XXL",
+  "3XL",
+  "4XL",
+];
 
 export const SHIRT_COLORS: readonly ShirtColor[] = [
   "Black",
