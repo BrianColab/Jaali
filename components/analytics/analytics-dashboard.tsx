@@ -453,7 +453,7 @@ function RankedList({
           : "analytics-ranked-list"
       }
     >
-      {items.slice(0, 8).map((item, index) => (
+      {items.slice(0, 5).map((item, index) => (
         <li
           key={item.title}
           className="analytics-ranked-list__item"
@@ -497,7 +497,7 @@ function ContentList({ items }: Readonly<{ items: readonly ContentItem[] }>) {
 
   return (
     <ul className="analytics-ranked-list">
-      {items.slice(0, 6).map((item) => (
+      {items.slice(0, 5).map((item) => (
         <li
           key={item.url || item.title}
           className="analytics-ranked-list__item"

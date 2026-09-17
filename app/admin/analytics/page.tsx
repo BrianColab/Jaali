@@ -17,7 +17,7 @@ export const metadata = {
   robots: { index: false, follow: false },
 };
 
-const DEFAULT_RANGE: AnalyticsDateRange = { preset: "30days" };
+const DEFAULT_RANGE: AnalyticsDateRange = { preset: "7days" };
 
 export default async function AdminAnalyticsPage() {
   if (!(await hasAdminSession())) {
