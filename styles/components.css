@@ -4555,6 +4555,17 @@
   content: "";
 }
 
+.announcement-bar__quarters {
+  height: 0.25rem;
+  background: linear-gradient(
+    to right,
+    #0168a7 0% 25%,
+    #ffffff 25% 50%,
+    #de1827 50% 75%,
+    #f6b802 75% 100%
+  );
+}
+
 .announcement-bar__inner {
   position: relative;
   z-index: 1;
