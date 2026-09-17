@@ -17,6 +17,15 @@ function shortenUrl(url: string | null): string {
   }
 }
 
+function countryCodeToFlag(countryCode: string | null): string {
+  if (!countryCode || !/^[a-z]{2}$/i.test(countryCode)) return "🌐";
+  return countryCode
+    .toUpperCase()
+    .split("")
+    .map((character) => String.fromCodePoint(127397 + character.charCodeAt(0)))
+    .join("");
+}
+
 export function RecentVisitorsTable({
   error,
   visitors,
@@ -54,7 +63,14 @@ export function RecentVisitorsTable({
           {visitors.map((visitor, index) => (
             <tr key={`${visitor.time}-${index}`}>
               <td>{visitor.time}</td>
-              <td>{visitor.location ?? "—"}</td>
+              <td>
+                <span className="analytics-table__location">
+                  <span className="analytics-flag" aria-hidden="true">
+                    {countryCodeToFlag(visitor.countryCode)}
+                  </span>
+                  {visitor.location ?? "—"}
+                </span>
+              </td>
               <td>{visitor.trafficSource}</td>
               <td>{shortenUrl(visitor.landingPage)}</td>
               <td>{visitor.pagesViewed}</td>

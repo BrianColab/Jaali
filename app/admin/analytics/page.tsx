@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { ImageIcon, ShoppingBag } from "lucide-react";
 
 import { AnalyticsDashboard } from "@/components/analytics/analytics-dashboard";
 import { AdminLogoutButton } from "@/components/navigation/admin-logout-button";
@@ -29,30 +30,42 @@ export default async function AdminAnalyticsPage() {
   ]);
 
   return (
-    <main className="admin-queue">
-      <Container className="admin-queue__container">
-        <div className="admin-queue__header">
-          <Heading level={1} variant="section">
-            Analytics
-          </Heading>
-          <AdminLogoutButton />
-        </div>
-        <div className="admin-queue__nav-links">
-          <ButtonLink
-            href="/admin/memories"
-            variant="secondary"
-            className="admin-queue__nav-link"
-          >
-            View memory photos →
-          </ButtonLink>
-          <ButtonLink
-            href="/admin/preorders"
-            variant="secondary"
-            className="admin-queue__nav-link"
-          >
-            View Pre-Orders Merch →
-          </ButtonLink>
-        </div>
+    <div className="analytics-page">
+      <Container className="admin-queue__container analytics-page__container">
+        <header className="analytics-page__header">
+          <div className="analytics-page__heading">
+            <div className="analytics-page__title-row">
+              <Heading level={1} variant="section">
+                Analytics
+              </Heading>
+              <span className="analytics-page__status">
+                <span aria-hidden="true" />
+                Clicky connected
+              </span>
+            </div>
+            <p>Website traffic and audience activity</p>
+          </div>
+          <div className="analytics-page__actions">
+            <ButtonLink
+              href="/admin/memories"
+              variant="secondary"
+              className="admin-queue__nav-link"
+            >
+              <ImageIcon aria-hidden="true" size={16} />
+              Memory photos
+            </ButtonLink>
+            <ButtonLink
+              href="/admin/preorders"
+              variant="secondary"
+              className="admin-queue__nav-link"
+            >
+              <ShoppingBag aria-hidden="true" size={16} />
+              Pre-orders
+            </ButtonLink>
+            <AdminLogoutButton />
+          </div>
+        </header>
+        <div className="analytics-page__rule" />
         <AnalyticsDashboard
           initialRange={DEFAULT_RANGE}
           initialSnapshot={snapshotResult.ok ? snapshotResult.data : null}
@@ -65,6 +78,6 @@ export default async function AdminAnalyticsPage() {
           }
         />
       </Container>
-    </main>
+    </div>
   );
 }

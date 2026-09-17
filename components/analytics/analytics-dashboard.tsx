@@ -1,6 +1,8 @@
 "use client";
 
+import type { CSSProperties, ReactNode } from "react";
 import { useState, useTransition } from "react";
+import { Clock3, Eye, MousePointerClick, UserCheck, Users } from "lucide-react";
 
 import { TextField } from "@/components/forms/form-controls";
 import { Button } from "@/components/ui/button";
@@ -160,97 +162,84 @@ export function AnalyticsDashboard({
       {snapshot ? (
         <>
           <CardGrid columns={3} className="analytics-overview">
-            <Card>
-              <Text size="small" muted>
-                Visitors
-              </Text>
-              <Heading level={2} variant="card">
-                {snapshot.overview.visitors.toLocaleString()}
-              </Heading>
-            </Card>
-            <Card>
-              <Text size="small" muted>
-                Unique Visitors
-              </Text>
-              <Heading level={2} variant="card">
-                {snapshot.overview.uniqueVisitors.toLocaleString()}
-              </Heading>
-            </Card>
-            <Card>
-              <Text size="small" muted>
-                Page Views
-              </Text>
-              <Heading level={2} variant="card">
-                {snapshot.overview.pageViews.toLocaleString()}
-              </Heading>
-            </Card>
-            <Card>
-              <Text size="small" muted>
-                Average Time on Site
-              </Text>
-              <Heading level={2} variant="card">
-                {formatDurationSeconds(
-                  snapshot.overview.averageTimeOnSiteSeconds,
-                )}
-              </Heading>
-            </Card>
-            <Card>
-              <Text size="small" muted>
-                Bounce Rate
-              </Text>
-              <Heading level={2} variant="card">
-                {snapshot.overview.bounceRatePercent.toFixed(1)}%
-              </Heading>
-            </Card>
+            <MetricCard
+              icon={<Users aria-hidden="true" />}
+              label="Visitors"
+              value={snapshot.overview.visitors.toLocaleString()}
+            />
+            <MetricCard
+              icon={<UserCheck aria-hidden="true" />}
+              label="Unique visitors"
+              value={snapshot.overview.uniqueVisitors.toLocaleString()}
+            />
+            <MetricCard
+              icon={<Eye aria-hidden="true" />}
+              label="Page views"
+              value={snapshot.overview.pageViews.toLocaleString()}
+            />
+            <MetricCard
+              icon={<Clock3 aria-hidden="true" />}
+              label="Average time"
+              value={formatDurationSeconds(
+                snapshot.overview.averageTimeOnSiteSeconds,
+              )}
+            />
+            <MetricCard
+              icon={<MousePointerClick aria-hidden="true" />}
+              label="Bounce rate"
+              value={`${snapshot.overview.bounceRatePercent.toFixed(1)}%`}
+            />
           </CardGrid>
 
           <section className="analytics-section">
-            <Heading level={2} variant="card">
-              Traffic Over Time
-            </Heading>
+            <SectionHeading
+              title="Traffic over time"
+              description="Visitors and page views for the selected period"
+            />
             <TrafficChart points={snapshot.traffic} />
           </section>
 
           <div className="analytics-columns">
             <section className="analytics-section">
-              <Heading level={2} variant="card">
-                Traffic Sources
-              </Heading>
-              <RankedList
-                items={snapshot.trafficSources}
-                emptyLabel="No traffic source data."
+              <SectionHeading
+                title="Traffic sources"
+                description="How people found the website"
               />
+              <SourceDistribution items={snapshot.trafficSources} />
             </section>
 
             <section className="analytics-section">
-              <Heading level={2} variant="card">
-                Referrers
-              </Heading>
+              <SectionHeading
+                title="Referrers"
+                description="Sites sending the most visits"
+              />
               <RankedList
                 items={snapshot.referrers}
                 emptyLabel="No referring sites recorded."
+                showBars
               />
             </section>
           </div>
 
           <section className="analytics-section">
-            <Heading level={2} variant="card">
-              Top Content
-            </Heading>
+            <SectionHeading
+              title="Top content"
+              description="The pages people enter, view and leave from"
+            />
             <div className="analytics-columns analytics-columns--three">
-              <div>
+              <div className="analytics-subsection">
                 <Text size="small" muted>
                   Top Pages
                 </Text>
                 <ContentList items={snapshot.content.topPages} />
               </div>
-              <div>
+              <div className="analytics-subsection">
                 <Text size="small" muted>
                   Top Landing Pages
                 </Text>
                 <ContentList items={snapshot.content.topLandingPages} />
               </div>
-              <div>
+              <div className="analytics-subsection">
                 <Text size="small" muted>
                   Top Exit Pages
                 </Text>
@@ -260,11 +249,12 @@ export function AnalyticsDashboard({
           </section>
 
           <section className="analytics-section">
-            <Heading level={2} variant="card">
-              Audience
-            </Heading>
+            <SectionHeading
+              title="Audience"
+              description="Where visitors are and how they browse"
+            />
             <div className="analytics-columns analytics-columns--three">
-              <div>
+              <div className="analytics-subsection">
                 <Text size="small" muted>
                   Countries
                 </Text>
@@ -272,9 +262,10 @@ export function AnalyticsDashboard({
                   items={snapshot.audience.countries}
                   emptyLabel="No data."
                   compact
+                  showFlags
                 />
               </div>
-              <div>
+              <div className="analytics-subsection">
                 <Text size="small" muted>
                   Cities
                 </Text>
@@ -282,9 +273,10 @@ export function AnalyticsDashboard({
                   items={snapshot.audience.cities}
                   emptyLabel="No data."
                   compact
+                  showFlags
                 />
               </div>
-              <div>
+              <div className="analytics-subsection">
                 <Text size="small" muted>
                   Browsers
                 </Text>
@@ -294,7 +286,7 @@ export function AnalyticsDashboard({
                   compact
                 />
               </div>
-              <div>
+              <div className="analytics-subsection">
                 <Text size="small" muted>
                   Operating Systems
                 </Text>
@@ -304,7 +296,7 @@ export function AnalyticsDashboard({
                   compact
                 />
               </div>
-              <div>
+              <div className="analytics-subsection">
                 <Text size="small" muted>
                   Devices
                 </Text>
@@ -318,9 +310,10 @@ export function AnalyticsDashboard({
           </section>
 
           <section className="analytics-section">
-            <Heading level={2} variant="card">
-              Recent Activity
-            </Heading>
+            <SectionHeading
+              title="Recent activity"
+              description="The latest visits reported by Clicky"
+            />
             <RecentVisitorsTable
               visitors={recentVisitors}
               error={recentVisitorsError}
@@ -332,14 +325,117 @@ export function AnalyticsDashboard({
   );
 }
 
+function MetricCard({
+  icon,
+  label,
+  value,
+}: Readonly<{ icon: ReactNode; label: string; value: string }>) {
+  return (
+    <Card className="analytics-kpi">
+      <span className="analytics-kpi__icon">{icon}</span>
+      <div>
+        <Text size="small" muted>
+          {label}
+        </Text>
+        <Heading level={2} variant="card">
+          {value}
+        </Heading>
+      </div>
+    </Card>
+  );
+}
+
+function SectionHeading({
+  description,
+  title,
+}: Readonly<{ description: string; title: string }>) {
+  return (
+    <div className="analytics-section__heading">
+      <Heading level={2} variant="card">
+        {title}
+      </Heading>
+      <Text size="small" muted>
+        {description}
+      </Text>
+    </div>
+  );
+}
+
+const SOURCE_COLORS = ["#165dff", "#18a875", "#f59e0b", "#8b5cf6"];
+
+function SourceDistribution({
+  items,
+}: Readonly<{ items: readonly RankedItem[] }>) {
+  if (items.length === 0) {
+    return (
+      <Text size="small" muted>
+        No traffic source data.
+      </Text>
+    );
+  }
+
+  const visibleItems = items.slice(0, 4);
+  const total = visibleItems.reduce((sum, item) => sum + item.visits, 0);
+  const segments = visibleItems.map((item, index) => ({
+    item,
+    offset:
+      total > 0
+        ? (visibleItems
+            .slice(0, index)
+            .reduce((sum, previous) => sum + previous.visits, 0) /
+            total) *
+          100
+        : 0,
+    share: total > 0 ? (item.visits / total) * 100 : 0,
+  }));
+
+  return (
+    <div className="analytics-source-layout">
+      <div className="analytics-donut" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <circle className="analytics-donut__track" cx="60" cy="60" r="48" />
+          {segments.map(({ item, offset, share }, index) => (
+            <circle
+              key={item.title}
+              className="analytics-donut__segment"
+              cx="60"
+              cy="60"
+              r="48"
+              pathLength="100"
+              stroke={SOURCE_COLORS[index]}
+              strokeDasharray={`${share} ${100 - share}`}
+              strokeDashoffset={-offset}
+            />
+          ))}
+        </svg>
+        <span>
+          <strong>{total.toLocaleString()}</strong>
+          visits
+        </span>
+      </div>
+      <RankedList
+        items={visibleItems}
+        emptyLabel="No traffic source data."
+        colorCoded
+      />
+    </div>
+  );
+}
+
 function RankedList({
+  colorCoded,
   compact,
   emptyLabel,
   items,
+  showBars,
+  showFlags,
 }: Readonly<{
+  colorCoded?: boolean;
   compact?: boolean;
   emptyLabel: string;
   items: readonly RankedItem[];
+  showBars?: boolean;
+  showFlags?: boolean;
 }>) {
   if (items.length === 0) {
     return (
@@ -357,12 +453,33 @@ function RankedList({
           : "analytics-ranked-list"
       }
     >
-      {items.slice(0, 8).map((item) => (
-        <li key={item.title} className="analytics-ranked-list__item">
-          <span className="analytics-ranked-list__title">{item.title}</span>
-          <span className="analytics-ranked-list__value">
-            {item.visits.toLocaleString()}
-          </span>
+      {items.slice(0, 8).map((item, index) => (
+        <li
+          key={item.title}
+          className="analytics-ranked-list__item"
+          style={
+            colorCoded
+              ? ({
+                  "--analytics-series-color": SOURCE_COLORS[index],
+                } as CSSProperties)
+              : undefined
+          }
+        >
+          <div className="analytics-ranked-list__row">
+            <span className="analytics-ranked-list__title">
+              {colorCoded ? <i aria-hidden="true" /> : null}
+              {showFlags ? <FlagForTitle title={item.title} /> : null}
+              {item.title}
+            </span>
+            <span className="analytics-ranked-list__value">
+              {item.visits.toLocaleString()}
+            </span>
+          </div>
+          {showBars ? (
+            <span className="analytics-ranked-list__bar" aria-hidden="true">
+              <span style={{ width: `${Math.max(2, item.percent)}%` }} />
+            </span>
+          ) : null}
         </li>
       ))}
     </ul>
@@ -385,14 +502,34 @@ function ContentList({ items }: Readonly<{ items: readonly ContentItem[] }>) {
           key={item.url || item.title}
           className="analytics-ranked-list__item"
         >
-          <span className="analytics-ranked-list__title" title={item.url}>
-            {item.title}
-          </span>
-          <span className="analytics-ranked-list__value">
-            {item.visits.toLocaleString()}
+          <div className="analytics-ranked-list__row">
+            <span className="analytics-ranked-list__title" title={item.url}>
+              {item.title}
+            </span>
+            <span className="analytics-ranked-list__value">
+              {item.visits.toLocaleString()}
+            </span>
+          </div>
+          <span className="analytics-ranked-list__bar" aria-hidden="true">
+            <span style={{ width: `${Math.max(2, item.percent)}%` }} />
           </span>
         </li>
       ))}
     </ul>
+  );
+}
+
+function FlagForTitle({ title }: Readonly<{ title: string }>) {
+  const normalized = title.toLowerCase();
+  const flag = normalized.includes("canada")
+    ? "🇨🇦"
+    : normalized.includes("united states")
+      ? "🇺🇸"
+      : "🌐";
+
+  return (
+    <span className="analytics-flag" aria-hidden="true">
+      {flag}
+    </span>
   );
 }

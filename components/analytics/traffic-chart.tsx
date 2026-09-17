@@ -4,17 +4,23 @@ type TrafficChartProps = Readonly<{
   points: readonly TrafficPoint[];
 }>;
 
-const CHART_WIDTH = 640;
-const CHART_HEIGHT = 240;
-const PADDING_X = 8;
-const PADDING_TOP = 16;
-const PADDING_BOTTOM = 28;
-const USABLE_WIDTH = CHART_WIDTH - PADDING_X * 2;
+const CHART_WIDTH = 840;
+const CHART_HEIGHT = 300;
+const PADDING_LEFT = 48;
+const PADDING_RIGHT = 16;
+const PADDING_TOP = 18;
+const PADDING_BOTTOM = 44;
+const USABLE_WIDTH = CHART_WIDTH - PADDING_LEFT - PADDING_RIGHT;
 const USABLE_HEIGHT = CHART_HEIGHT - PADDING_TOP - PADDING_BOTTOM;
 
 function xFor(index: number, count: number): number {
-  if (count <= 1) return PADDING_X;
-  return PADDING_X + (USABLE_WIDTH / (count - 1)) * index;
+  if (count <= 1) return PADDING_LEFT;
+  return PADDING_LEFT + (USABLE_WIDTH / (count - 1)) * index;
+}
+
+function buildAreaPath(values: readonly number[], max: number): string {
+  const baseY = PADDING_TOP + USABLE_HEIGHT;
+  return `${buildPath(values, max)} L${xFor(values.length - 1, values.length)},${baseY} L${xFor(0, values.length)},${baseY} Z`;
 }
 
 function yFor(value: number, max: number): number {
@@ -42,6 +48,7 @@ export function TrafficChart({ points }: TrafficChartProps) {
   const pageViewValues = points.map((point) => point.pageViews);
   const max = Math.max(1, ...visitorValues, ...pageViewValues);
   const labelStep = Math.max(1, Math.ceil(points.length / 6));
+  const gridTicks = [0, 0.25, 0.5, 0.75, 1];
 
   return (
     <div className="analytics-chart">
@@ -52,6 +59,38 @@ export function TrafficChart({ points }: TrafficChartProps) {
         className="analytics-chart__svg"
         preserveAspectRatio="none"
       >
+        <defs>
+          <linearGradient id="pageviews-area" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#165dff" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#165dff" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        {gridTicks.map((tick) => {
+          const y = PADDING_TOP + USABLE_HEIGHT - tick * USABLE_HEIGHT;
+          return (
+            <g key={tick}>
+              <line
+                x1={PADDING_LEFT}
+                x2={CHART_WIDTH - PADDING_RIGHT}
+                y1={y}
+                y2={y}
+                className="analytics-chart__grid"
+              />
+              <text
+                x={PADDING_LEFT - 10}
+                y={y + 4}
+                textAnchor="end"
+                className="analytics-chart__y-label"
+              >
+                {Math.round(max * tick)}
+              </text>
+            </g>
+          );
+        })}
+        <path
+          d={buildAreaPath(pageViewValues, max)}
+          className="analytics-chart__area"
+        />
         <path
           d={buildPath(pageViewValues, max)}
           className="analytics-chart__line analytics-chart__line--pageviews"
@@ -70,6 +109,15 @@ export function TrafficChart({ points }: TrafficChartProps) {
           >
             <title>{`${point.label}: ${point.visitors} visitors, ${point.pageViews} page views`}</title>
           </circle>
+        ))}
+        {points.map((point, index) => (
+          <circle
+            key={`pageview-point-${point.label}-${index}`}
+            cx={xFor(index, points.length)}
+            cy={yFor(point.pageViews, max)}
+            r={2.5}
+            className="analytics-chart__dot analytics-chart__dot--pageviews"
+          />
         ))}
         {points.map((point, index) => {
           const isLast = index === points.length - 1;
