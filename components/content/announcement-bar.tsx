@@ -21,8 +21,8 @@ export function AnnouncementBar({ content }: AnnouncementBarProps) {
             <span className="announcement-bar__icon-wrap" aria-hidden="true">
               <svg
                 className="announcement-bar__icon"
-                width={30}
-                height={30}
+                width="100%"
+                height="100%"
                 viewBox="0 0 24 24"
               >
                 <path
