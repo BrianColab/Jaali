@@ -57,11 +57,18 @@ export type CtaContent = Readonly<{
   title: string;
 }>;
 
+export type AnnouncementContent = Readonly<{
+  action: ContentAction;
+  headline: string;
+  label: string;
+}>;
+
 export type HomepageContent = Readonly<{
   advocacy: Readonly<{
     header: SectionHeaderContent;
     items: readonly FeatureCardItem[];
   }>;
+  announcement: AnnouncementContent;
   context: Readonly<{
     attribution: string;
     header: SectionHeaderContent;
@@ -101,6 +108,7 @@ export type HomepageContent = Readonly<{
     header: SectionHeaderContent;
   }>;
   timeline: Readonly<{
+    cta: CtaContent;
     header: SectionHeaderContent;
     items: readonly TimelineItem[];
   }>;

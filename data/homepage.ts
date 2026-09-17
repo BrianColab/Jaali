@@ -1,6 +1,15 @@
 import type { HomepageContent } from "@/types/content";
 
 export const homepageContent = {
+  announcement: {
+    label: "Latest News",
+    headline:
+      "Resolutions 13-2026 – Support for Jaali’s Call to Action and a National Review of Indigenous Patient Safety",
+    action: {
+      href: "/documents/resolutions-13-2026-jaali-call-to-action.pdf",
+      label: "Read the Resolution",
+    },
+  },
   hero: {
     eyebrow: "Justice for Jaali",
     title: "Indigenous mothers deserve to be heard. Believed. Protected.",
@@ -69,6 +78,14 @@ export const homepageContent = {
         description: "Her baby daughter survived.",
       },
     ],
+    cta: {
+      title: "Follow the Coverage",
+      body: "Reporting, community response and formal national action have carried Jaali's story forward. The archive follows it in order, from the first coverage in May 2026 to Assembly of First Nations Resolution 50/2026.",
+      action: {
+        href: "/media",
+        label: "Explore Media & Milestones",
+      },
+    },
   },
   context: {
     header: {

@@ -20,6 +20,7 @@ export const siteRoutes: readonly SiteRoute[] = [
       { label: "Media Kit", href: "/media-kit" },
     ],
   },
+  { label: "Media & Milestones", href: "/media" },
   { label: "Remembering Jaali", href: "/remembering-jaali" },
   { label: "Contact Us", href: "/contact" },
 ];

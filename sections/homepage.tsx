@@ -1,4 +1,5 @@
 import { Accordion } from "@/components/content/accordion";
+import { AnnouncementBar } from "@/components/content/announcement-bar";
 import { CtaBanner } from "@/components/content/cta-banner";
 import { DonateBanner } from "@/components/content/donate-banner";
 import { FeatureCards } from "@/components/content/feature-cards";
@@ -61,6 +62,7 @@ export function Homepage({
     <>
       <HomepageProgress chapters={homepageChapters} />
       <Hero asset={assets.hero} content={content.hero} />
+      <AnnouncementBar content={content.announcement} />
 
       <Section {...content.story.header} chapter="01">
         <SectionReveal>
@@ -81,6 +83,17 @@ export function Homepage({
             <Timeline items={content.timeline.items} />
           </div>
         </div>
+        <SectionReveal className="section--timeline-feature__cta" delay={0.08}>
+          <div className="section__content-spacer">
+            <CtaBanner
+              title={content.timeline.cta.title}
+              body={content.timeline.cta.body}
+              actions={
+                <ContentActionLink action={content.timeline.cta.action} />
+              }
+            />
+          </div>
+        </SectionReveal>
       </Section>
 
       <Section
