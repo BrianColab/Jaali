@@ -37,13 +37,22 @@ export default async function AdminMemoriesPage() {
           </Heading>
           <AdminLogoutButton />
         </div>
-        <ButtonLink
-          href="/admin/preorders"
-          variant="secondary"
-          className="admin-queue__nav-link"
-        >
-          View Pre-Orders Merch →
-        </ButtonLink>
+        <div className="admin-queue__nav-links">
+          <ButtonLink
+            href="/admin/preorders"
+            variant="secondary"
+            className="admin-queue__nav-link"
+          >
+            View Pre-Orders Merch →
+          </ButtonLink>
+          <ButtonLink
+            href="/admin/analytics"
+            variant="secondary"
+            className="admin-queue__nav-link"
+          >
+            View Analytics →
+          </ButtonLink>
+        </div>
         <Text muted>
           {pendingMemories.length === 0
             ? "No photos are waiting for review."

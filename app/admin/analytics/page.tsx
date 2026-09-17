@@ -1,35 +1,39 @@
 import { redirect } from "next/navigation";
 
+import { AnalyticsDashboard } from "@/components/analytics/analytics-dashboard";
 import { AdminLogoutButton } from "@/components/navigation/admin-logout-button";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { Heading, Text } from "@/components/ui/typography";
-import { getAllPreorders } from "@/lib/preorders";
+import { Heading } from "@/components/ui/typography";
+import { getAnalyticsSnapshot, getRecentVisitors } from "@/lib/clicky";
 import { hasAdminSession } from "@/lib/require-admin";
-
-import { AdminPreorderTable } from "./preorder-table";
+import type { AnalyticsDateRange } from "@/types/analytics";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Pre-Orders Merch",
+  title: "Analytics",
   robots: { index: false, follow: false },
 };
 
-export default async function AdminPreordersPage() {
+const DEFAULT_RANGE: AnalyticsDateRange = { preset: "30days" };
+
+export default async function AdminAnalyticsPage() {
   if (!(await hasAdminSession())) {
     redirect("/admin/login");
   }
 
-  const preorders = await getAllPreorders();
-  const totalShirts = preorders.reduce((sum, order) => sum + order.quantity, 0);
+  const [snapshotResult, recentVisitorsResult] = await Promise.all([
+    getAnalyticsSnapshot(DEFAULT_RANGE),
+    getRecentVisitors(DEFAULT_RANGE),
+  ]);
 
   return (
     <main className="admin-queue">
       <Container className="admin-queue__container">
         <div className="admin-queue__header">
           <Heading level={1} variant="section">
-            Pre-Orders Merch
+            Analytics
           </Heading>
           <AdminLogoutButton />
         </div>
@@ -42,19 +46,24 @@ export default async function AdminPreordersPage() {
             View memory photos →
           </ButtonLink>
           <ButtonLink
-            href="/admin/analytics"
+            href="/admin/preorders"
             variant="secondary"
             className="admin-queue__nav-link"
           >
-            View Analytics →
+            View Pre-Orders Merch →
           </ButtonLink>
         </div>
-        <Text muted>
-          {preorders.length === 0
-            ? "No preorders yet."
-            : `${preorders.length} preorder${preorders.length === 1 ? "" : "s"} — ${totalShirts} shirt${totalShirts === 1 ? "" : "s"} total.`}
-        </Text>
-        <AdminPreorderTable preorders={preorders} />
+        <AnalyticsDashboard
+          initialRange={DEFAULT_RANGE}
+          initialSnapshot={snapshotResult.ok ? snapshotResult.data : null}
+          initialError={snapshotResult.ok ? null : snapshotResult.error}
+          initialRecentVisitors={
+            recentVisitorsResult.ok ? recentVisitorsResult.data : []
+          }
+          initialRecentVisitorsError={
+            recentVisitorsResult.ok ? null : recentVisitorsResult.error
+          }
+        />
       </Container>
     </main>
   );
