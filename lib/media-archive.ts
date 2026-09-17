@@ -92,9 +92,11 @@ export function sortMediaItems(
   items: readonly MediaItem[],
   order: MediaSortOrder,
 ): readonly MediaItem[] {
-  return [...items].sort((a, b) =>
-    order === "oldest"
+  return [...items].sort((a, b) => {
+    if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
+
+    return order === "oldest"
       ? a.date.localeCompare(b.date)
-      : b.date.localeCompare(a.date),
-  );
+      : b.date.localeCompare(a.date);
+  });
 }

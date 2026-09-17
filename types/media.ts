@@ -6,6 +6,7 @@ export type MediaFilter = "All" | MediaType;
 export type MediaSortOrder = "oldest" | "newest";
 
 export type MediaItem = Readonly<{
+  actionLabel?: string;
   author: string | null;
   /** ISO `YYYY-MM-DD`. Sorting key, and the fallback for the displayed date. */
   date: string;
@@ -17,6 +18,8 @@ export type MediaItem = Readonly<{
   majorMilestone?: boolean;
   /** Editorial provenance for maintainers. Never rendered. */
   notes?: string;
+  /** Keeps a high-priority item ahead of chronological sorting. */
+  pinned?: boolean;
   publish: boolean;
   secondaryLabel?: string;
   secondaryUrl?: string;

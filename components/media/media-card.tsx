@@ -45,6 +45,7 @@ type MediaCardProps = Readonly<{
 
 export function MediaCard({ item }: MediaCardProps) {
   const isMilestone = item.majorMilestone === true;
+  const isPinned = item.pinned === true;
   const banner = getMediaBanner(item);
   const badgeTone = item.type
     .toLowerCase()
@@ -53,7 +54,11 @@ export function MediaCard({ item }: MediaCardProps) {
 
   return (
     <article
-      className={cn("media-card", isMilestone && "media-card--milestone")}
+      className={cn(
+        "media-card",
+        isMilestone && "media-card--milestone",
+        isPinned && "media-card--pinned",
+      )}
     >
       <div className="media-card__banner">
         <Image
@@ -78,6 +83,10 @@ export function MediaCard({ item }: MediaCardProps) {
       </div>
 
       <div className="media-card__body">
+        {isPinned ? (
+          <p className="media-card__priority">Priority announcement</p>
+        ) : null}
+
         <Heading level={3} variant="card" className="media-card__headline">
           {item.headline}
         </Heading>
@@ -95,7 +104,7 @@ export function MediaCard({ item }: MediaCardProps) {
             <ExternalAction
               headline={item.headline}
               href={item.url}
-              label={primaryActionLabel(item.type)}
+              label={item.actionLabel ?? primaryActionLabel(item.type)}
               variant="primary"
             />
           ) : null}

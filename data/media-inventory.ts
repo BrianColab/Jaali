@@ -21,6 +21,26 @@ export const mediaFilters: readonly MediaFilter[] = [
  */
 export const mediaItems: readonly MediaItem[] = [
   {
+    id: "resolution-13-2026",
+    date: "2026-09-17",
+    dateDisplay: "Official PDF",
+    source: "Justice for Jaali",
+    author: null,
+    type: "Official Actions",
+    headline:
+      "Resolutions 13-2026 – Support for Jaali’s Call to Action and a National Review of Indigenous Patient Safety",
+    summary:
+      "Read the official resolution supporting Jaali’s Call to Action and a national review focused on Indigenous patient safety, accountability and lasting systemic change.",
+    url: "/documents/resolutions-13-2026-jaali-call-to-action.pdf",
+    actionLabel: "Read the resolution",
+    featured: true,
+    majorMilestone: true,
+    pinned: true,
+    publish: true,
+    notes:
+      "Pinned priority document. Matches the major resolution announcement on the homepage.",
+  },
+  {
     id: "cbc-2026-05-25",
     date: "2026-05-25",
     source: "CBC News",
