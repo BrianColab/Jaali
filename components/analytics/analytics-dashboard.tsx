@@ -2,7 +2,15 @@
 
 import type { CSSProperties, ReactNode } from "react";
 import { useState, useTransition } from "react";
-import { Clock3, Eye, MousePointerClick, UserCheck, Users } from "lucide-react";
+import {
+  BarChart3,
+  Clock3,
+  Download,
+  Eye,
+  MousePointerClick,
+  UserCheck,
+  Users,
+} from "lucide-react";
 
 import { TextField } from "@/components/forms/form-controls";
 import { Button } from "@/components/ui/button";
@@ -18,6 +26,7 @@ import type {
   RecentVisitor,
 } from "@/types/analytics";
 
+import { CountryFlag, countryCodeFromTitle } from "./country-flag";
 import { RecentVisitorsTable } from "./recent-visitors-table";
 import { TrafficChart } from "./traffic-chart";
 
@@ -43,6 +52,27 @@ function todayIso(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
+function rangeLabel(range: AnalyticsDateRange): string {
+  if (range.preset === "today") return "Today";
+  if (range.preset === "7days") return "Last 7 days";
+  if (range.preset === "30days") return "Last 30 days";
+  return `${range.from ?? "Custom start"} to ${range.to ?? "Custom end"}`;
+}
+
+async function loadLogoDataUrl(): Promise<string> {
+  const response = await fetch("/assets/images/brand/jaali-logo.png");
+  if (!response.ok) throw new Error("The report logo could not be loaded.");
+  const blob = await response.blob();
+
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () =>
+      reject(new Error("The report logo could not be read."));
+    reader.readAsDataURL(blob);
+  });
+}
+
 export function AnalyticsDashboard({
   initialError,
   initialRange,
@@ -61,6 +91,8 @@ export function AnalyticsDashboard({
   const [recentVisitorsError, setRecentVisitorsError] = useState(
     initialRecentVisitorsError,
   );
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportError, setExportError] = useState<string>();
   const [isPending, startTransition] = useTransition();
 
   async function loadRange(range: AnalyticsDateRange) {
@@ -96,6 +128,259 @@ export function AnalyticsDashboard({
     startTransition(() => {
       loadRange({ preset: "custom", from: customFrom, to: customTo });
     });
+  }
+
+  async function handleExportPdf() {
+    if (!snapshot || isExporting) return;
+
+    setIsExporting(true);
+    setExportError(undefined);
+
+    try {
+      const [[{ default: jsPDF }, autoTable], logoDataUrl] = await Promise.all([
+        Promise.all([import("jspdf"), import("jspdf-autotable")]),
+        loadLogoDataUrl(),
+      ]);
+      const doc = new jsPDF({
+        orientation: "landscape",
+        unit: "mm",
+        format: "a4",
+      });
+      const reportDate = new Date();
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const pageHeight = doc.internal.pageSize.getHeight();
+      const tableDoc = doc as typeof doc & {
+        lastAutoTable?: { finalY: number };
+      };
+      let nextY = 42;
+
+      doc.addImage(logoDataUrl, "PNG", 14, 10, 22, 22);
+      doc.setTextColor(16, 24, 40);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(18);
+      doc.text("Website Analytics", 42, 17);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(9);
+      doc.setTextColor(102, 112, 133);
+      doc.text(rangeLabel(snapshot.range), 42, 23);
+      doc.text(`Generated ${reportDate.toLocaleString("en-CA")}`, 42, 28);
+      doc.setDrawColor(228, 231, 236);
+      doc.line(14, 35, pageWidth - 14, 35);
+
+      const addSection = (
+        title: string,
+        head: string[][],
+        body: Array<Array<string | number>>,
+      ) => {
+        if (nextY > pageHeight - 32) {
+          doc.addPage();
+          nextY = 18;
+        }
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(11);
+        doc.setTextColor(16, 24, 40);
+        doc.text(title, 14, nextY);
+        autoTable.default(doc, {
+          startY: nextY + 4,
+          head,
+          body,
+          margin: { left: 14, right: 14 },
+          styles: {
+            font: "helvetica",
+            fontSize: 8,
+            cellPadding: 2.2,
+            lineColor: [218, 223, 231],
+            lineWidth: 0.15,
+            textColor: [52, 64, 84],
+          },
+          headStyles: {
+            fillColor: [23, 43, 77],
+            textColor: [255, 255, 255],
+            fontStyle: "bold",
+          },
+          alternateRowStyles: { fillColor: [247, 249, 252] },
+        });
+        nextY = (tableDoc.lastAutoTable?.finalY ?? nextY + 12) + 9;
+      };
+
+      const pagesPerVisit =
+        snapshot.overview.visitors > 0
+          ? snapshot.overview.pageViews / snapshot.overview.visitors
+          : 0;
+
+      addSection(
+        "Performance summary",
+        [["Metric", "Value", "Metric", "Value", "Metric", "Value"]],
+        [
+          [
+            "Visitors",
+            snapshot.overview.visitors.toLocaleString(),
+            "Unique visitors",
+            snapshot.overview.uniqueVisitors.toLocaleString(),
+            "Page views",
+            snapshot.overview.pageViews.toLocaleString(),
+          ],
+          [
+            "Average time",
+            formatDurationSeconds(snapshot.overview.averageTimeOnSiteSeconds),
+            "Bounce rate",
+            `${snapshot.overview.bounceRatePercent.toFixed(1)}%`,
+            "Pages / visit",
+            pagesPerVisit.toFixed(1),
+          ],
+        ],
+      );
+
+      addSection(
+        "Traffic over time",
+        [["Period", "Visitors", "Page views"]],
+        snapshot.traffic.map((point) => [
+          point.label,
+          point.visitors,
+          point.pageViews,
+        ]),
+      );
+
+      addSection(
+        "Acquisition",
+        [["Type", "Source", "Visits", "Share"]],
+        [
+          ...snapshot.trafficSources
+            .slice(0, 10)
+            .map((item) => [
+              "Traffic source",
+              item.title,
+              item.visits,
+              `${item.percent.toFixed(1)}%`,
+            ]),
+          ...snapshot.referrers
+            .slice(0, 10)
+            .map((item) => [
+              "Referrer",
+              item.title,
+              item.visits,
+              `${item.percent.toFixed(1)}%`,
+            ]),
+        ],
+      );
+
+      addSection(
+        "Top content",
+        [["Type", "Page", "Visits", "Share"]],
+        [
+          ...snapshot.content.topPages
+            .slice(0, 5)
+            .map((item) => [
+              "Top page",
+              item.title,
+              item.visits,
+              `${item.percent.toFixed(1)}%`,
+            ]),
+          ...snapshot.content.topLandingPages
+            .slice(0, 5)
+            .map((item) => [
+              "Landing page",
+              item.title,
+              item.visits,
+              `${item.percent.toFixed(1)}%`,
+            ]),
+          ...snapshot.content.topExitPages
+            .slice(0, 5)
+            .map((item) => [
+              "Exit page",
+              item.title,
+              item.visits,
+              `${item.percent.toFixed(1)}%`,
+            ]),
+        ],
+      );
+
+      addSection(
+        "Audience",
+        [["Category", "Detail", "Visits", "Share"]],
+        [
+          ...snapshot.audience.countries
+            .slice(0, 5)
+            .map((item) => [
+              "Country",
+              item.title,
+              item.visits,
+              `${item.percent.toFixed(1)}%`,
+            ]),
+          ...snapshot.audience.cities
+            .slice(0, 5)
+            .map((item) => [
+              "City",
+              item.title,
+              item.visits,
+              `${item.percent.toFixed(1)}%`,
+            ]),
+          ...snapshot.audience.browsers
+            .slice(0, 5)
+            .map((item) => [
+              "Browser",
+              item.title,
+              item.visits,
+              `${item.percent.toFixed(1)}%`,
+            ]),
+          ...snapshot.audience.operatingSystems
+            .slice(0, 5)
+            .map((item) => [
+              "Operating system",
+              item.title,
+              item.visits,
+              `${item.percent.toFixed(1)}%`,
+            ]),
+          ...snapshot.audience.devices
+            .slice(0, 5)
+            .map((item) => [
+              "Device",
+              item.title,
+              item.visits,
+              `${item.percent.toFixed(1)}%`,
+            ]),
+        ],
+      );
+
+      if (recentVisitors.length > 0) {
+        addSection(
+          "Recent activity",
+          [
+            [
+              "Time",
+              "Location",
+              "Source",
+              "Landing page",
+              "Pages",
+              "Time on site",
+            ],
+          ],
+          recentVisitors.map((visitor) => [
+            visitor.time,
+            visitor.location ?? "-",
+            visitor.trafficSource,
+            visitor.landingPage ?? "-",
+            visitor.pagesViewed,
+            formatDurationSeconds(visitor.timeOnSiteSeconds),
+          ]),
+        );
+      }
+
+      const filenameRange =
+        snapshot.range.preset === "custom" ? "custom" : snapshot.range.preset;
+      doc.save(
+        `j4j-analytics-${filenameRange}-${reportDate.toISOString().slice(0, 10)}.pdf`,
+      );
+    } catch (pdfError) {
+      setExportError(
+        pdfError instanceof Error
+          ? pdfError.message
+          : "The PDF could not be created.",
+      );
+    } finally {
+      setIsExporting(false);
+    }
   }
 
   return (
@@ -145,7 +430,23 @@ export function AnalyticsDashboard({
             </Button>
           </div>
         ) : null}
+        <Button
+          type="button"
+          variant="secondary"
+          className="analytics-range__export"
+          disabled={!snapshot || isExporting || isPending}
+          onClick={handleExportPdf}
+        >
+          <Download aria-hidden="true" />
+          {isExporting ? "Preparing PDF..." : "Download PDF"}
+        </Button>
       </div>
+
+      {exportError ? (
+        <Text size="small" className="form-error" role="alert">
+          {exportError}
+        </Text>
+      ) : null}
 
       {isPending ? (
         <Text size="small" muted>
@@ -188,6 +489,17 @@ export function AnalyticsDashboard({
               icon={<MousePointerClick aria-hidden="true" />}
               label="Bounce rate"
               value={`${snapshot.overview.bounceRatePercent.toFixed(1)}%`}
+            />
+            <MetricCard
+              icon={<BarChart3 aria-hidden="true" />}
+              label="Pages / visit"
+              value={
+                snapshot.overview.visitors > 0
+                  ? (
+                      snapshot.overview.pageViews / snapshot.overview.visitors
+                    ).toFixed(1)
+                  : "0.0"
+              }
             />
           </CardGrid>
 
@@ -520,16 +832,5 @@ function ContentList({ items }: Readonly<{ items: readonly ContentItem[] }>) {
 }
 
 function FlagForTitle({ title }: Readonly<{ title: string }>) {
-  const normalized = title.toLowerCase();
-  const flag = normalized.includes("canada")
-    ? "🇨🇦"
-    : normalized.includes("united states")
-      ? "🇺🇸"
-      : "🌐";
-
-  return (
-    <span className="analytics-flag" aria-hidden="true">
-      {flag}
-    </span>
-  );
+  return <CountryFlag code={countryCodeFromTitle(title)} label={title} />;
 }

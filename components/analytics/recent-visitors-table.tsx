@@ -6,6 +6,8 @@ import { Text } from "@/components/ui/typography";
 import { formatDurationSeconds } from "@/lib/format-duration";
 import type { RecentVisitor } from "@/types/analytics";
 
+import { CountryFlag } from "./country-flag";
+
 type RecentVisitorsTableProps = Readonly<{
   error: string | null;
   visitors: readonly RecentVisitor[];
@@ -21,15 +23,6 @@ function shortenUrl(url: string | null): string {
   } catch {
     return url;
   }
-}
-
-function countryCodeToFlag(countryCode: string | null): string {
-  if (!countryCode || !/^[a-z]{2}$/i.test(countryCode)) return "🌐";
-  return countryCode
-    .toUpperCase()
-    .split("")
-    .map((character) => String.fromCodePoint(127397 + character.charCodeAt(0)))
-    .join("");
 }
 
 export function RecentVisitorsTable({
@@ -79,9 +72,10 @@ export function RecentVisitorsTable({
                 <td>{visitor.time}</td>
                 <td>
                   <span className="analytics-table__location">
-                    <span className="analytics-flag" aria-hidden="true">
-                      {countryCodeToFlag(visitor.countryCode)}
-                    </span>
+                    <CountryFlag
+                      code={visitor.countryCode}
+                      label={visitor.location ?? undefined}
+                    />
                     {visitor.location ?? "—"}
                   </span>
                 </td>
