@@ -47,10 +47,6 @@ export function MediaCard({ item }: MediaCardProps) {
   const isMilestone = item.majorMilestone === true;
   const isPinned = item.pinned === true;
   const banner = getMediaBanner(item);
-  const badgeTone = item.type
-    .toLowerCase()
-    .replaceAll(" ", "-")
-    .replace("&", "and");
 
   return (
     <article
@@ -60,18 +56,24 @@ export function MediaCard({ item }: MediaCardProps) {
         isPinned && "media-card--pinned",
       )}
     >
-      <div className="media-card__banner">
+      <div
+        className={cn(
+          "media-card__banner",
+          banner.fit === "contain" && "media-card__banner--contain",
+        )}
+      >
         <Image
-          className="media-card__image"
+          className={cn(
+            "media-card__image",
+            banner.fit === "contain" && "media-card__image--contain",
+          )}
           src={banner.src}
           alt=""
           fill
           sizes="(min-width: 87.5rem) 21vw, (min-width: 64rem) 30vw, (min-width: 48rem) 46vw, 94vw"
           style={{ objectPosition: banner.objectPosition }}
         />
-        <span
-          className={cn("media-card__badge", `media-card__badge--${badgeTone}`)}
-        >
+        <span className="media-card__badge">
           {item.source}
         </span>
         {isMilestone ? (

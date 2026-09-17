@@ -3,7 +3,17 @@ import type { MediaItem } from "@/types/media";
 type MediaBanner = Readonly<{
   objectPosition: string;
   src: string;
+  fit?: "cover" | "contain";
 }>;
+
+// Fixed banners for specific stories, checked before the rotating set below.
+const mediaBannerOverrides: Readonly<Record<string, MediaBanner>> = {
+  "resolution-13-2026": {
+    src: "/assets/images/brand/assembly-of-first-nations-logo.png",
+    objectPosition: "center",
+    fit: "contain",
+  },
+};
 
 const mediaBanners: readonly [MediaBanner, ...MediaBanner[]] = [
   {
@@ -72,6 +82,9 @@ function hashStoryKey(value: string): number {
 
 export function getMediaBanner(story: MediaItem): MediaBanner {
   const storyKey = story.id || story.url || story.headline;
+  const override = mediaBannerOverrides[storyKey];
+  if (override) return override;
+
   const bannerIndex =
     hashStoryKey(`media-25:${storyKey}`) % mediaBanners.length;
 

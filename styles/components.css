@@ -4219,37 +4219,33 @@ body:has(.analytics-page) > .site-footer {
   object-fit: cover;
 }
 
+.media-card__banner--contain {
+  background: var(--color-soft-white);
+}
+
+.media-card__image--contain {
+  object-fit: contain;
+  padding: 2rem;
+}
+
 .media-card__badge {
   position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  max-width: calc(100% - 1.5rem);
-  padding: 0.3125rem 0.6875rem;
-  border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--color-soft-white) 94%, transparent);
-  box-shadow: 0 0.125rem 0.5rem rgb(23 23 23 / 12%);
-  color: var(--color-deep-charcoal);
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0;
+  background: var(--color-deep-charcoal);
+  box-shadow: none;
+  color: var(--color-soft-white);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.045em;
   line-height: 1.25;
+  text-align: center;
   text-transform: uppercase;
-}
-
-.media-card__badge--news {
-  color: var(--color-shimmer-blue);
-}
-
-.media-card__badge--video-and-audio {
-  color: var(--color-cedar-brown);
-}
-
-.media-card__badge--official-actions {
-  color: var(--color-forest-green);
-}
-
-.media-card__badge--community {
-  color: color-mix(in srgb, var(--color-forest-green) 85%, black);
 }
 
 .media-card__milestone {
