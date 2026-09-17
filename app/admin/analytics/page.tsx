@@ -30,9 +30,9 @@ export default async function AdminAnalyticsPage() {
   ]);
 
   return (
-    <div className="analytics-page">
+    <main className="admin-queue analytics-page">
       <Container className="admin-queue__container analytics-page__container">
-        <header className="analytics-page__header">
+        <div className="admin-queue__header analytics-page__header">
           <div className="analytics-page__heading">
             <div className="analytics-page__title-row">
               <Heading level={1} variant="section">
@@ -45,27 +45,26 @@ export default async function AdminAnalyticsPage() {
             </div>
             <p>Website traffic and audience activity</p>
           </div>
-          <div className="analytics-page__actions">
-            <ButtonLink
-              href="/admin/memories"
-              variant="secondary"
-              className="admin-queue__nav-link"
-            >
-              <ImageIcon aria-hidden="true" size={16} />
-              Memory photos
-            </ButtonLink>
-            <ButtonLink
-              href="/admin/preorders"
-              variant="secondary"
-              className="admin-queue__nav-link"
-            >
-              <ShoppingBag aria-hidden="true" size={16} />
-              Pre-orders
-            </ButtonLink>
-            <AdminLogoutButton />
-          </div>
-        </header>
-        <div className="analytics-page__rule" />
+          <AdminLogoutButton />
+        </div>
+        <div className="admin-queue__nav-links analytics-page__actions">
+          <ButtonLink
+            href="/admin/memories"
+            variant="secondary"
+            className="admin-queue__nav-link"
+          >
+            <ImageIcon aria-hidden="true" size={16} />
+            Memory photos
+          </ButtonLink>
+          <ButtonLink
+            href="/admin/preorders"
+            variant="secondary"
+            className="admin-queue__nav-link"
+          >
+            <ShoppingBag aria-hidden="true" size={16} />
+            Pre-orders
+          </ButtonLink>
+        </div>
         <AnalyticsDashboard
           initialRange={DEFAULT_RANGE}
           initialSnapshot={snapshotResult.ok ? snapshotResult.data : null}
@@ -78,6 +77,6 @@ export default async function AdminAnalyticsPage() {
           }
         />
       </Container>
-    </div>
+    </main>
   );
 }
