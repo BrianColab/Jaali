@@ -1,4 +1,4 @@
-import { ArrowUpRight, FileText } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
 import { Container } from "@/components/ui/container";
@@ -19,11 +19,32 @@ export function AnnouncementBar({ content }: AnnouncementBarProps) {
         <Reveal kind="fadeUp" className="announcement-bar__inner">
           <div className="announcement-bar__message">
             <span className="announcement-bar__icon-wrap" aria-hidden="true">
-              <FileText
+              <svg
                 className="announcement-bar__icon"
-                size={24}
+                width={24}
+                height={24}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
                 strokeWidth={1.75}
-              />
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5z" />
+                <path d="M14 2v6h6" />
+                <text
+                  x="12"
+                  y="17.5"
+                  textAnchor="middle"
+                  fontSize="6.5"
+                  fontWeight="700"
+                  stroke="none"
+                  fill="currentColor"
+                  fontFamily="sans-serif"
+                >
+                  PDF
+                </text>
+              </svg>
             </span>
             <div className="announcement-bar__copy">
               <p className="announcement-bar__meta">
