@@ -6,6 +6,7 @@ export type EventDetail = Readonly<{
 export type SiteEvent = Readonly<{
   actionLabel?: string;
   address?: string;
+  calendarFile?: string;
   /** ISO `YYYY-MM-DD`. Sorting key. */
   date: string;
   dateDisplay: string;

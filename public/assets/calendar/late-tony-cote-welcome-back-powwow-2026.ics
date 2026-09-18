@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Justice for Jaali//Community Events//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:late-tony-cote-welcome-back-powwow-2026@justiceforjaali.ca
+DTSTAMP:20260918T120000Z
+DTSTART;TZID=America/Regina:20260924T100000
+SUMMARY:Late Tony Cote Welcome Back Traditional Pow Wow
+LOCATION:First Nations University of Canada\, 1 First Nations Way\, Regina\, SK
+DESCRIPTION:Registration begins at 10:00 a.m. Grand entry at 1:30 p.m. Student Memorial Special honouring the late Jaali Sutherland\, Jeremy Joel Brass\, and Trevor Dubois. Hosted by the FNUniv Students' Association\, Regina Campus. Contact: reginastudentassoc@firstnationsuniversity.ca
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

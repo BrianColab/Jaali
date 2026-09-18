@@ -4,13 +4,20 @@ import { HeaderMotifs } from "@/components/brand/header-motifs";
 import { Container } from "@/components/ui/container";
 import { Eyebrow, Heading, Text } from "@/components/ui/typography";
 import { events } from "@/data/events";
-import { sortEventsByDateDesc } from "@/lib/events";
+import { buildEventJsonLd, sortEventsByDateDesc } from "@/lib/events";
 
 export function EventsPage() {
-  const [featuredEvent, ...otherEvents] = sortEventsByDateDesc(events);
+  const sortedEvents = sortEventsByDateDesc(events);
+  const [featuredEvent, ...otherEvents] = sortedEvents;
 
   return (
     <article className="content-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(sortedEvents.map(buildEventJsonLd)),
+        }}
+      />
       <header className="content-page__hero">
         <HeaderMotifs seed="Justice for Jaali Community Events" />
         <Container>
@@ -39,7 +46,10 @@ export function EventsPage() {
 
           {featuredEvent ? (
             <>
-              <p className="events-page__eyebrow">Latest event</p>
+              <div className="events-page__section-heading">
+                <p className="events-page__eyebrow">Featured gathering</p>
+                <p className="events-page__section-note">Everyone is welcome</p>
+              </div>
               <EventCard event={featuredEvent} />
             </>
           ) : (
@@ -55,7 +65,7 @@ export function EventsPage() {
                 variant="card"
                 className="events-page__more-heading"
               >
-                More events
+                Previous
               </Heading>
               <ul className="events-page__list">
                 {otherEvents.map((event) => (
