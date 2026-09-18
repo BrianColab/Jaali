@@ -1,5 +1,4 @@
 import { EventCard } from "@/components/events/event-card";
-import { EventListItem } from "@/components/events/event-list-item";
 import { HeaderMotifs } from "@/components/brand/header-motifs";
 import { Container } from "@/components/ui/container";
 import { Eyebrow, Heading, Text } from "@/components/ui/typography";
@@ -60,18 +59,23 @@ export function EventsPage() {
 
           {otherEvents.length > 0 ? (
             <div className="events-page__more">
-              <Heading
-                level={2}
-                variant="card"
-                className="events-page__more-heading"
-              >
-                Previous
-              </Heading>
-              <ul className="events-page__list">
+              <div className="events-page__section-heading">
+                <Heading
+                  level={2}
+                  variant="card"
+                  className="events-page__more-heading"
+                >
+                  Past events
+                </Heading>
+                <p className="events-page__section-note">
+                  Community moments we’ve shared
+                </p>
+              </div>
+              <div className="events-page__past-events">
                 {otherEvents.map((event) => (
-                  <EventListItem key={event.id} event={event} />
+                  <EventCard key={event.id} event={event} />
                 ))}
-              </ul>
+              </div>
             </div>
           ) : null}
         </Container>

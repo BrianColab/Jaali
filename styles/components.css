@@ -4573,9 +4573,29 @@
 }
 
 .events-page__more-heading {
-  margin: 0 0 var(--space-4);
-  color: var(--color-deep-charcoal);
-  font-size: 1.0625rem;
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0;
+  color: #8e241f;
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.events-page__more-heading::before {
+  width: 2rem;
+  height: 0.1875rem;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, #c12e26, #e9a52e);
+  content: "";
+}
+
+.events-page__past-events {
+  display: grid;
+  gap: var(--space-7);
 }
 
 .events-page__list {
@@ -4700,12 +4720,13 @@
 .event-card__poster-cta {
   position: absolute;
   z-index: 2;
-  right: 1rem;
-  bottom: 1rem;
+  right: clamp(1rem, 3vw, 1.5rem);
+  bottom: clamp(1rem, 3vw, 1.5rem);
   display: inline-flex;
   min-height: 2.25rem;
   align-items: center;
   gap: 0.375rem;
+  max-width: calc(100% - 2rem);
   padding-inline: 0.875rem;
   border: 1px solid rgb(255 255 255 / 35%);
   border-radius: var(--radius-pill);
@@ -4715,6 +4736,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.02em;
+  white-space: nowrap;
   transition: background var(--duration-fast) var(--ease-standard);
 }
 
