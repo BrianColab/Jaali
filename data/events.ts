@@ -42,6 +42,7 @@ export const events: readonly SiteEvent[] = [
       "Steak Night fundraiser poster supporting Justice for Jaali, July 21, 2026, at Sports on Tap.",
     summary:
       "A steak supper fundraiser at Sports on Tap in support of Justice for Jaali, with cocktails followed by supper.",
+    status: "past",
     details: [
       { label: "Cocktails", value: "5:00 p.m." },
       { label: "Supper", value: "6:00 p.m." },

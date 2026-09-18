@@ -4758,6 +4758,33 @@
     linear-gradient(145deg, #fffdf9, #f7f2ea);
 }
 
+.event-card__status {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.625rem 0.875rem;
+  margin: 0 0 1.125rem;
+  border: 1px solid rgb(139 31 27 / 18%);
+  border-radius: var(--radius-pill);
+  background: #8e241f;
+  box-shadow: 0 0.5rem 1.25rem rgb(126 28 24 / 18%);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.event-card__status::before {
+  width: 0.5rem;
+  height: 0.5rem;
+  border: 2px solid rgb(255 255 255 / 92%);
+  border-radius: 50%;
+  content: "";
+}
+
 .event-card__topline {
   display: flex;
   align-items: center;

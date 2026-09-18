@@ -18,5 +18,6 @@ export type SiteEvent = Readonly<{
   location: string;
   summary: string;
   title: string;
+  status?: "upcoming" | "past";
   url?: string;
 }>;

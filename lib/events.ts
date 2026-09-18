@@ -44,7 +44,10 @@ export function buildEventJsonLd(event: SiteEvent) {
     "@type": "Event",
     name: event.title,
     startDate: event.date,
-    eventStatus: "https://schema.org/EventScheduled",
+    eventStatus:
+      event.status === "past"
+        ? "https://schema.org/EventCompleted"
+        : "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     location: {
       "@type": "Place",

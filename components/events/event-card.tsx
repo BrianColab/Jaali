@@ -45,6 +45,10 @@ export function EventCard({ event }: EventCardProps) {
       </a>
 
       <div className="event-card__body">
+        {event.status === "past" ? (
+          <p className="event-card__status">This event has passed</p>
+        ) : null}
+
         <div className="event-card__topline">
           <div className="event-card__date-tile" aria-hidden="true">
             <span>{dateTile.month}</span>
