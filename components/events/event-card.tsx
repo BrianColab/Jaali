@@ -9,8 +9,18 @@ type EventCardProps = Readonly<{
   event: SiteEvent;
 }>;
 
+function getEventActionHref(event: SiteEvent): string | undefined {
+  if (!event.url || !event.url.toLowerCase().startsWith("mailto:")) {
+    return event.url;
+  }
+
+  const separator = event.url.includes("?") ? "&" : "?";
+  return `${event.url}${separator}subject=${encodeURIComponent(event.title)}`;
+}
+
 export function EventCard({ event }: EventCardProps) {
   const dateTile = formatEventDateTile(event.date);
+  const actionHref = getEventActionHref(event);
 
   return (
     <article className="event-card">
@@ -75,7 +85,7 @@ export function EventCard({ event }: EventCardProps) {
           </dl>
         ) : null}
 
-        {event.calendarFile || event.url ? (
+        {event.calendarFile || actionHref ? (
           <div className="event-card__actions">
             {event.calendarFile ? (
               <div className="event-card__calendar">
@@ -91,10 +101,10 @@ export function EventCard({ event }: EventCardProps) {
               </div>
             ) : null}
 
-            {event.url ? (
+            {actionHref ? (
               <a
                 className="event-card__action"
-                href={event.url}
+                href={actionHref}
                 target="_blank"
                 rel="noopener noreferrer"
               >
