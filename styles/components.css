@@ -4791,11 +4791,13 @@
   right: clamp(0.875rem, 2vw, 1.5rem);
   bottom: clamp(0.875rem, 2vw, 1.5rem);
   width: min(22rem, calc(100vw - 1.75rem));
-  padding: 1.25rem 3.25rem 1.25rem 1.25rem;
+  padding: 0.9rem 2.8rem 0.9rem 1rem;
   border: 1px solid rgb(15 87 98 / 24%);
-  border-left: 0.3rem solid #b22a24;
-  border-radius: 0.875rem;
-  background: rgb(255 253 249 / 97%);
+  border-left: 0.25rem solid #b22a24;
+  border-radius: 0.75rem;
+  background:
+    linear-gradient(135deg, rgb(11 105 115 / 5%), transparent 55%),
+    rgb(255 253 249 / 97%);
   box-shadow:
     0 1px 2px rgb(23 23 23 / 8%),
     0 1rem 3rem rgb(15 47 50 / 20%);
@@ -4805,11 +4807,11 @@
 
 .upcoming-event-prompt__close {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
+  top: 0.6rem;
+  right: 0.6rem;
   display: inline-grid;
-  width: 2rem;
-  height: 2rem;
+  width: 1.75rem;
+  height: 1.75rem;
   padding: 0;
   place-items: center;
   border: 1px solid rgb(16 47 50 / 18%);
@@ -4832,7 +4834,8 @@
   align-items: center;
   gap: 0.45rem;
   color: #8e241f;
-  font-size: 0.6875rem;
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.625rem;
   font-weight: 850;
   letter-spacing: 0.12em;
   line-height: 1;
@@ -4840,18 +4843,20 @@
 }
 
 .upcoming-event-prompt__title {
-  margin: 0.7rem 0 0;
+  margin: 0.45rem 0 0;
   color: #102f32;
-  font-family: var(--font-display), Georgia, serif;
-  font-size: 1.25rem;
-  font-weight: 650;
-  line-height: 1.15;
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 780;
+  letter-spacing: -0.012em;
+  line-height: 1.25;
 }
 
 .upcoming-event-prompt__date {
-  margin: 0.4rem 0 0;
+  margin: 0.25rem 0 0;
   color: #637173;
-  font-size: 0.75rem;
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.6875rem;
   font-weight: 650;
 }
 
@@ -4859,9 +4864,10 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  margin-top: 0.9rem;
+  margin-top: 0.55rem;
   color: #0b6973;
-  font-size: 0.8125rem;
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.75rem;
   font-weight: 800;
   text-decoration: none;
 }
