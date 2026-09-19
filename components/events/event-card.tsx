@@ -129,7 +129,13 @@ export function EventCard({ event }: EventCardProps) {
         ) : null}
 
         {event.status !== "past" ? (
-          <EventSocialShare title={event.title} date={event.dateDisplay} />
+          <EventSocialShare
+            title={event.title}
+            date={event.dateDisplay}
+            location={event.location}
+            address={event.address}
+            highlight={event.highlight}
+          />
         ) : null}
       </div>
     </article>

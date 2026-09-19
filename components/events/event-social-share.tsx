@@ -4,7 +4,10 @@ import { Share2 } from "lucide-react";
 import { useState } from "react";
 
 type EventSocialShareProps = Readonly<{
+  address?: string | undefined;
   date: string;
+  highlight?: string | undefined;
+  location: string;
   title: string;
 }>;
 
@@ -41,7 +44,13 @@ function InstagramIcon() {
   );
 }
 
-export function EventSocialShare({ date, title }: EventSocialShareProps) {
+export function EventSocialShare({
+  address,
+  date,
+  highlight,
+  location,
+  title,
+}: EventSocialShareProps) {
   const [status, setStatus] = useState("");
 
   function eventUrl() {
@@ -52,11 +61,37 @@ export function EventSocialShare({ date, title }: EventSocialShareProps) {
     window.open(url, "event-share", "noopener,noreferrer,width=720,height=620");
   }
 
+  function shareText() {
+    const place = address ? `${location}, ${address}` : location;
+    return [title, date, place, highlight].filter(Boolean).join("\n");
+  }
+
   async function shareToApps() {
+    const shareData: ShareData = {
+      title,
+      text: shareText(),
+      url: eventUrl(),
+    };
+
+    try {
+      const response = await fetch("/events/opengraph-image");
+      const image = new File(
+        [await response.blob()],
+        "justice-for-jaali-event.png",
+        {
+          type: "image/png",
+        },
+      );
+
+      if (navigator.canShare?.({ files: [image] })) {
+        shareData.files = [image];
+      }
+    } catch {
+      // The event details and link remain shareable if the image cannot be loaded.
+    }
+
     if (navigator.share) {
-      await navigator
-        .share({ title, text: `${title} — ${date}`, url: eventUrl() })
-        .catch(() => undefined);
+      await navigator.share(shareData).catch(() => undefined);
       return;
     }
 
@@ -84,7 +119,7 @@ export function EventSocialShare({ date, title }: EventSocialShareProps) {
           type="button"
           onClick={() =>
             openShareWindow(
-              `https://x.com/intent/post?text=${encodeURIComponent(`${title} — ${date}`)}&url=${encodeURIComponent(eventUrl())}`,
+              `https://x.com/intent/post?text=${encodeURIComponent(shareText())}&url=${encodeURIComponent(eventUrl())}`,
             )
           }
           aria-label="Share this event on X"
