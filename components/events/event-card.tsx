@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowUpRight, CalendarDays, CalendarPlus, MapPin } from "lucide-react";
 
 import { Heading, Text } from "@/components/ui/typography";
+import { EventSocialShare } from "@/components/events/event-social-share";
 import { formatEventDateTile } from "@/lib/events";
 import type { SiteEvent } from "@/types/events";
 
@@ -125,6 +126,10 @@ export function EventCard({ event }: EventCardProps) {
               </a>
             ) : null}
           </div>
+        ) : null}
+
+        {event.status !== "past" ? (
+          <EventSocialShare title={event.title} date={event.dateDisplay} />
         ) : null}
       </div>
     </article>
