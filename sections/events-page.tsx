@@ -7,7 +7,8 @@ import { buildEventJsonLd, sortEventsByDateDesc } from "@/lib/events";
 
 export function EventsPage() {
   const sortedEvents = sortEventsByDateDesc(events);
-  const [featuredEvent, ...otherEvents] = sortedEvents;
+  const featuredEvent = sortedEvents.find((event) => event.status !== "past");
+  const otherEvents = sortedEvents.filter((event) => event !== featuredEvent);
 
   return (
     <article className="content-page">

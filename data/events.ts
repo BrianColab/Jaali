@@ -30,6 +30,7 @@ export const events: readonly SiteEvent[] = [
       "Student Memorial Special — Teen Girls, honouring the late Jaali Sutherland",
     url: "mailto:reginastudentassoc@firstnationsuniversity.ca",
     actionLabel: "Contact the organizers",
+    status: "past",
   },
   {
     id: "steak-night-fundraiser-2026",

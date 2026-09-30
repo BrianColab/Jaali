@@ -31,12 +31,10 @@ export function SiteShell({ children }: SiteShellProps) {
         {children}
       </main>
       <SiteFooter />
-      {upcomingEvent ? (
-        <UpcomingEventPrompt
-          date={upcomingEvent.dateDisplay}
-          title={upcomingEvent.title}
-        />
-      ) : null}
+      <UpcomingEventPrompt
+        date={upcomingEvent?.dateDisplay}
+        title={upcomingEvent?.title}
+      />
       <ContactDrawer />
     </>
   );
