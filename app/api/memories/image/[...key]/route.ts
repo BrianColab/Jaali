@@ -28,12 +28,18 @@ export async function GET(_request: Request, { params }: RouteParams) {
     return NextResponse.json({ error: "Image not found." }, { status: 404 });
   }
 
-  const body = await object.Body.transformToByteArray();
-
-  return new NextResponse(Buffer.from(body), {
-    headers: {
-      "Content-Type": object.ContentType ?? "application/octet-stream",
-      "Cache-Control": "public, max-age=31536000, immutable",
-    },
+  const headers = new Headers({
+    "Content-Type": object.ContentType ?? "application/octet-stream",
+    "Cache-Control": "public, max-age=31536000, immutable",
   });
+
+  if (object.ContentLength !== undefined) {
+    headers.set("Content-Length", String(object.ContentLength));
+  }
+  if (object.ETag) headers.set("ETag", object.ETag);
+  if (object.LastModified) {
+    headers.set("Last-Modified", object.LastModified.toUTCString());
+  }
+
+  return new NextResponse(object.Body.transformToWebStream(), { headers });
 }
